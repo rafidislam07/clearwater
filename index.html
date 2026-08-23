@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clearwater–Largo–Seminole Market Evaluation</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="site-header__title">Clearwater–Largo–Seminole <span>Market Evaluation</span></div>
+    <nav class="site-nav">
+      <a href="#declaration">Buy Boxes</a>
+      <a href="#market">Market</a>
+      <a href="#map">Location</a>
+      <a href="#demographics">Demographics</a>
+      <a href="#property-size">Property Size</a>
+      <a href="#justification">Why 3 Boxes</a>
+      <a href="#deep-dive">Deep Dive</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- Section 1: Buy-box declaration -->
+  <section id="declaration" class="section section--hero">
+    <div class="container">
+      <p class="section-kicker">Recommendation</p>
+      <h1>Three buy boxes for the Clearwater–Largo–Seminole STR market</h1>
+      <div id="buybox-declarations" class="declarations-grid"></div>
+    </div>
+  </section>
+
+  <!-- Section 2: Market introduction -->
+  <section id="market" class="section">
+    <div class="container">
+      <p class="section-kicker">Section 2</p>
+      <h2>The Market</h2>
+      <div id="market-intro-body"></div>
+    </div>
+  </section>
+
+  <!-- Section 3: Regulations (minimal, unobtrusive) -->
+  <section id="regulations" class="section section--note">
+    <div class="container">
+      <p id="regulations-note" class="regulation-note"></p>
+    </div>
+  </section>
+
+  <!-- Section 4: Location analysis -->
+  <section id="map" class="section">
+    <div class="container">
+      <p class="section-kicker">Section 4</p>
+      <h2>Location Analysis</h2>
+      <div class="map-layout">
+        <div id="leaflet-map" class="map-canvas" role="img" aria-label="Interactive map of Clearwater, Largo, and Seminole STR listings by revenue tier"></div>
+        <aside class="map-sidebar">
+          <div id="map-legend" class="map-legend"></div>
+          <div id="map-filters" class="map-filters"></div>
+        </aside>
+      </div>
+      <div id="map-interpretation" class="section-interpretation"></div>
+    </div>
+  </section>
+
+  <!-- Section 5: Traveler demographics -->
+  <section id="demographics" class="section">
+    <div class="container">
+      <p class="section-kicker">Section 5</p>
+      <h2>Traveler Demographics</h2>
+      <div class="chart-row">
+        <div class="chart-card"><canvas id="chart-demographics-market"></canvas></div>
+        <div class="chart-card"><canvas id="chart-demographics-bedroom"></canvas></div>
+      </div>
+      <p id="demographics-interpretation" class="section-interpretation"></p>
+    </div>
+  </section>
+
+  <!-- Section 6: Property-size analysis -->
+  <section id="property-size" class="section">
+    <div class="container">
+      <p class="section-kicker">Section 6</p>
+      <h2>Property-Size Analysis</h2>
+      <div class="chart-row">
+        <div class="chart-card"><canvas id="chart-size-distribution"></canvas></div>
+        <div class="chart-card"><canvas id="chart-size-revenue"></canvas></div>
+      </div>
+      <p id="property-size-interpretation" class="section-interpretation"></p>
+    </div>
+  </section>
+
+  <!-- Section 7: Justification for the buy-box split -->
+  <section id="justification" class="section">
+    <div class="container">
+      <p class="section-kicker">Section 7</p>
+      <h2>Why Three Separate Buy Boxes</h2>
+      <ol id="justification-list" class="justification-list"></ol>
+    </div>
+  </section>
+
+  <!-- Section 8: Deep dive per buy box -->
+  <section id="deep-dive" class="section">
+    <div class="container">
+      <p class="section-kicker">Section 8</p>
+      <h2>Buy-Box Deep Dive</h2>
+      <div id="deep-dive-tabs" class="tabs"></div>
+      <div id="deep-dive-content"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Preliminary and provisional. No property has been underwritten and no acquisition decision has been made.</p>
+  </div>
+</footer>
+
+<!-- Shared lightbox: reused by every real-photo gallery on the page (see render.js openLightbox/closeLightbox). -->
+<div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Expanded image">
+  <button type="button" class="lightbox__close" aria-label="Close image" onclick="closeLightbox()">&times;</button>
+  <figure class="lightbox__figure">
+    <img id="lightbox-image" src="" alt="" />
+    <figcaption id="lightbox-caption"></figcaption>
+  </figure>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/render.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/map.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
