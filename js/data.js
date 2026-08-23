@@ -604,8 +604,8 @@ const BUY_BOXES = [
     },
 
     alexandria: {
-      designCompSetUrl: null,
-      revenueCompSetUrl: null,
+      designCompSetUrl: "https://alexandria.strsearch.com/compsets?market=9&type=design&tag=d2c379e6-1d7c-4a13-97e8-9b5d82cedab8&tab=view",
+      revenueCompSetUrl: "https://alexandria.strsearch.com/compsets?market=9&tag=193f1605-4a65-430e-9da8-5f622af041f4&tab=view",
     },
 
     // Ordered section flow, structurally aligned with 3BR's legacy A-N sequence
