@@ -8,7 +8,6 @@ let LEAFLET_MAP = null;
 let MARKER_LAYER = null;
 let ALL_LISTINGS = [];
 const ACTIVE_TIERS = new Set(["top10", "top25", "bottom75"]);
-let FEATURED_ONLY = false;
 
 function initMap() {
   LEAFLET_MAP = L.map("leaflet-map", { scrollWheelZoom: false }).setView(MAP_CONFIG.center, MAP_CONFIG.zoom);
@@ -38,7 +37,6 @@ function drawMarkers() {
   MARKER_LAYER.clearLayers();
   ALL_LISTINGS.forEach((listing) => {
     if (!ACTIVE_TIERS.has(listing.tier)) return;
-    if (FEATURED_ONLY && !listing.featuredRole) return;
     const isFeatured = !!listing.featuredRole;
     const marker = L.circleMarker([listing.lat, listing.lon], {
       radius: isFeatured ? 8 : 5,
@@ -108,17 +106,6 @@ function renderMapFilters() {
     label.appendChild(document.createTextNode(" " + MAP_CONFIG.tierLabels[tier]));
     host.appendChild(label);
   });
-  const featuredLabel = document.createElement("label");
-  featuredLabel.className = "filter-row filter-row--featured";
-  const featuredCb = document.createElement("input");
-  featuredCb.type = "checkbox";
-  featuredCb.addEventListener("change", () => {
-    FEATURED_ONLY = featuredCb.checked;
-    drawMarkers();
-  });
-  featuredLabel.appendChild(featuredCb);
-  featuredLabel.appendChild(document.createTextNode(" Show only featured 4BR buy-box comps"));
-  host.appendChild(featuredLabel);
 }
 
 function mapInterpretationHtml(payload) {

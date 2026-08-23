@@ -10,17 +10,23 @@
  * (LLM_CONTEXT.md, MANUAL_LISTING_REVIEW_LOG.md, PHASE_09_PROVISIONAL_4BR_BUY_BOXES.md,
  * PHASE_09_COMP_ROLE_SELECTION.md, the Phase 1-4/6 tables). Every 3BR figure traces to
  * Walid's supplied package (~/repos/clearwater/walid/Clearwater_Buy_Box_3BR/, integrated
- * 2026-08-23) - see webpage/assets/3br/SOURCE.md for the file-by-file mapping. Nothing
- * here is invented. Where a canonical/supplied source does not yet have an answer
- * (5BR entirely; Alexandria links for both developed boxes; Zillow candidates;
- * CapEx/underwriting), the field is explicitly null/pending/omitted - never filled
- * with placeholder prose or numbers.
+ * 2026-08-23) - see webpage/assets/3br/SOURCE.md for the file-by-file mapping. Every 5BR
+ * amenity/design figure traces to Ifraham's supplied package
+ * (~/repos/clearwater/ifraham/BuyBox_5BR/, specifically BuyBoxDetailsText.pdf's Must
+ * Haves/Automatically Add/Nice to Have-Ranked/Design Direction text, integrated
+ * 2026-08-24) - see webpage/assets/5br/SOURCE.md for the file-by-file mapping. 5BR's
+ * revenue/purchase-price/geography/regulations fields have no buy-box-specific source yet
+ * (Ifraham's package only supplied amenity/design evidence, not a comp set) and are marked
+ * pending rather than filled with invented figures; the market-wide 5BR benchmark shown in
+ * its Revenue Potential section is this project's own existing Phase 2 figure, explicitly
+ * labeled as market-wide, not a validated buy-box comp. Nothing here is invented. Where a
+ * canonical/supplied source does not yet have an answer (Alexandria links for every
+ * developed box; Zillow candidates; CapEx/underwriting), the field is explicitly
+ * null/pending/omitted - never filled with placeholder prose or numbers.
  *
- * To add 5BR content later: fill in its object in BUY_BOXES below using the same shape
- * as the 3BR/4BR entries, then flip `status` to 'developed'. No component code needs to
- * change. Two image reference shapes are supported (see render.js `renderImage`):
- * a bare property-ID string (renders a "photo pending, link to Airbnb" placeholder,
- * used by 4BR) or a `photo(...)` object with a real file path (used by 3BR).
+ * Two image reference shapes are supported (see render.js `renderImage`): a bare
+ * property-ID string (renders a "photo pending, link to Airbnb" placeholder, used by
+ * 4BR) or a `photo(...)` object with a real file path (used by 3BR and 5BR).
  */
 
 // ---------------------------------------------------------------------------
@@ -433,9 +439,9 @@ const BUY_BOXES = [
         },
         {
           title: "Pool-centered gathering",
-          property: "Pink Paradise",
-          url: "https://www.airbnb.com/rooms/568002792449614181",
-          image: photo("4br/core-comp-set/pink-paradise/pink-paradise-aerial-pool-backyard.jpg", "Aerial view of a pink-decked pool with a covered lounge area", "A branded pool deck as the property's social center."),
+          property: "Clearwater GLAM",
+          url: "https://www.airbnb.com/rooms/748850360966059896",
+          image: photo("4br/core-comp-set/clearwater-glam/clearwater-glam-pool-centered-gathering.webp", "Twilight pool with tiger and ring floats beside a covered, curtained lanai with dining and lounge seating", "The pool functions as the property's social center, surrounded by covered lounging, dining, additional seating, cohesive branding, and photographable pool styling."),
         },
         {
           title: "Real sleeping capacity",
@@ -546,16 +552,22 @@ const BUY_BOXES = [
         takeaway: "A consistent branded identity is present, but the overall product does not reach the same complete-property execution as the selected high-tier example.",
         image: photo("4br/supporting-comp-set/flamingo-oasis/flamingo-oasis-branded-interior.jpg", "Flamingo and palm mural living room with a neon sign", "Flamingo Oasis — Mid Tier revenue comp."),
       },
+      // Illustrated with a supplemental property OUTSIDE the authoritative 11-comp
+      // set (2026-08-24) - Seminole Pool House (the actual low-tier core comp,
+      // $77,057) has no verified photo, so a different, explicitly-labeled
+      // property supplies the visual only. This does NOT change the core 11,
+      // its 4/4/3 tier counts, median, or observed range - see revenueSummary/
+      // revenueComps11 above, both untouched.
       low: {
         tier: "Low Tier",
-        propertyId: "abnb_1323179023346269133",
-        nickname: "Seminole Pool House",
-        title: "Heated Pool | Game Room | Fire Pit | 8 Min to IRB",
-        url: "https://www.airbnb.com/rooms/1323179023346269133",
-        revenue: 77057,
-        reviewStatus: "validated",
-        takeaway: "This functional but comparatively basic pool area shows less complete merchandising and experience design than the higher-tier examples.",
-        image: photo("4br/revenue-tier-previews/low-seminole-pool-house.webp", "Plain rectangular pool and paver deck with a garden hose and simple patio furniture, no thematic branding", "Seminole Pool House — Low Tier revenue comp."),
+        supplementalLabel: "Supplemental low-tier visual reference — outside core 11-comp set",
+        propertyId: "abnb_661492128891671081",
+        nickname: "Heated Pool, Putting Green, Pac-Man Near Beach",
+        title: "4BR · Sleeps 9 · Largo 33778",
+        url: "https://www.airbnb.com/rooms/661492128891671081",
+        revenue: 76880,
+        takeaway: "A functional firepit photographed unlit during the day, with basic gravel placement and limited atmospheric staging — an amenity that exists but is not presented as a compelling gathering experience.",
+        image: photo("4br/revenue-tier-previews/low-pacman-firepit.webp", "Unlit stone firepit with teal Adirondack chairs in a daytime backyard with a small pool and putting green", "Heated Pool, Putting Green, Pac-Man Near Beach — supplemental low-tier visual reference, outside the core 11-comp set."),
       },
     },
     // Full 11-comp evidence set (unchanged data) — rendered only inside the expandable "View all 11 revenue comps" panel, as a compact table (no repeated images).
@@ -636,12 +648,306 @@ const BUY_BOXES = [
   {
     id: "5br",
     label: "5BR Buy Box",
-    status: "pending",
-    pendingNote:
-      "The 5BR workstream has not yet reached provisional buy-box synthesis in the canonical project files. " +
-      "5BR is currently a research workstream (see LLM_CONTEXT.md > Team Ownership), not a locked buy box. " +
-      "Market-level 5BR benchmarks exist (see Section 6) and can inform this buy box once it is developed, " +
-      "but no comp set, hero mechanism, or revenue range has been established yet.",
+    status: "developed",
+    name: "5BR Premium Private-Resort House",
+    narrative: true, // renders via BuyBox Template V.2 (see buyBoxSections / NARRATIVE_BLOCKS in render.js), same as 4BR
+    buyBoxVersion: "BuyBox Template V.2",
+    // Source: Ifraham's supplied BuyBox_5BR package (BuyBoxDetailsText.pdf: Must Haves /
+    // Automatically Add / Nice to Have - Ranked / Design Direction), integrated 2026-08-24.
+    // No revenue comp set, design-comp property roster, purchase-price candidate, or
+    // geography/ICP guidance was supplied with this package - those sections say so
+    // explicitly (see `revenueMarketBenchmark`, `acquisition`, `geographicConsiderations`,
+    // `idealLocations` below) rather than inventing figures. See webpage/assets/5br/SOURCE.md.
+    thesis:
+      "Acquire a 5-bedroom property with a large, zoneable lot and turn the backyard into a private resort - " +
+      "a pool-centered social hub, a dedicated game room, and a high-capacity sleeping mix that works for both " +
+      "large groups and families with kids.",
+    atAGlance: {
+      bedBath: "5 bedrooms / 2+ bathrooms",
+      sleeps: "14+ minimum, 16 preferred",
+      heroMechanism: "Pool-centered private-resort backyard + dedicated game room + high-capacity bunk/adult sleeping mix",
+      revenue: "Market-wide 5BR benchmark: median $160,603/yr (Phase 2 figure; buy-box-specific comp set pending)",
+      primaryRequirement: "A large, zoneable backyard capable of hosting 5+ major amenity zones around an existing pool, plus a dedicated or convertible game room",
+    },
+
+    // 1. Buy-Box Summary.
+    overview: {
+      statusBadge: "Evidence-backed amenity & design guidance - revenue comp set and acquisition underwriting pending",
+      thesis:
+        "Acquire a 5-bedroom property with a large, zoneable lot and turn the backyard into a private resort - " +
+        "a pool-centered social hub, a dedicated game room, and a high-capacity sleeping mix that works for both " +
+        "large groups and families with kids.",
+      whyItWorks:
+        "Pool prevalence is 100% across the supplied Premium cohort, and the strongest examples treat the backyard " +
+        "as a multi-zone resort (sport court, mini golf, dining, lounge, fire pit) rather than a single feature. A " +
+        "dedicated game room and a real, high-capacity sleeping mix (bunk rooms plus polished adult suites) round out " +
+        "the product - execution and zoning density matter more than any single amenity.",
+      heroImage: photo("5br/must-have/backyard/backyard-02-aerial-zoning.jpg", "Aerial dusk view of a pool, full sport court, mini golf, string lighting, and a dining patio inside one privacy-fenced backyard", "A private-resort backyard: pool, sport court, mini golf, and dining sharing one zoned, fenced lot."),
+      chips: [
+        { label: "5 bedrooms" },
+        { label: "Sleeps 14+ (16 preferred)" },
+        { label: "2+ bathrooms" },
+        { label: "Existing pool required" },
+        { label: "Dedicated game room" },
+        { label: "5+ backyard amenity zones" },
+        { label: "Pool table AUTO-add" },
+        { label: "Mini golf: top-ranked Nice-to-Have" },
+      ],
+      revenueChips: [
+        { label: "Market-wide 5BR median", value: "$160,603/yr (not buy-box-specific)" },
+      ],
+    },
+
+    // 2. Architectural Style.
+    architecturalStyle: {
+      recommended: [
+        "No single required architectural style - the supplied design examples range from an ordinary ranch to a large waterfront house.",
+        "What matters is whether the house and lot can support the pool/backyard-zoning and game-room transformation, not the exterior style.",
+      ],
+      why: "The Design Direction source material states the property does not need one architectural style; the deciding factor is whether the lot can support the resort-style transformation.",
+      avoid: ["Lots too small to support 5+ distinct backyard amenity zones around the pool."],
+      images: [
+        photo("5br/must-have/pool/pool-03.jpg", "Branded teal house and pool deck with a flamingo float and matched lounge furniture", "An ordinary single-story house made distinctive through pool/deck styling, not architecture."),
+        photo("5br/design/design-05-large-scale-resort.jpg", "Large waterfront house with a resort-style pool deck", "The same private-resort idea at a larger, more upscale scale - style varies, the amenity program doesn't."),
+      ],
+    },
+
+    // 3. Bedrooms & Bathrooms.
+    bedroomsBathrooms: {
+      targetRange: "5 bedrooms; 2+ bathrooms minimum.",
+      bathrooms: "2+ bathrooms is the floor. The source data does not support requiring 3+ - 2-bath Premium comps can still perform strongly when the rest of the product is well executed.",
+      functionalNote: "The requirement is enough functional capacity for a 14-16 guest group, not maximizing bathroom count for its own sake.",
+    },
+
+    // 4. Ideal Sleep Count.
+    sleepCount: {
+      comfortableCapacity: "14+ minimum, 16 preferred",
+      preferredConfiguration: "Combine polished king/queen adult rooms with at least one high-capacity bunk room; the bunk room should work for both large groups and families with kids.",
+      coherenceRequirement: "Capacity should come from real, dedicated beds (bunk/twin rooms), not from padding advertised sleeps - themed slides and playful layouts make the bunk room an amenity itself, not just overflow beds. Adult bedrooms should still feel polished and vacation-oriented.",
+      images: [
+        photo("5br/must-have/beds/beds-01-kids-bunk-room.jpg", "Adults and kids using a built-in slide from a bunk room", "A built-in slide turns the bunk room itself into an amenity, for kids and adults alike."),
+        photo("5br/must-have/beds/beds-02-kids-group-room.jpg", "Jungle-themed quad-bunk room with a slide", "A jungle-themed quad-bunk room with its own slide - high-capacity sleeping built for a group of kids."),
+        photo("5br/must-have/beds/beds-03-king-adult-suite.jpg", "Orange and teal tropical king bedroom suite", "A polished, vacation-themed king suite - adult rooms stay premium even as capacity scales up."),
+        photo("5br/must-have/beds/beds-04-queen-room.jpg", "Teal and pink tropical queen bedroom", "A themed queen room with a coordinated tropical palette."),
+        photo("5br/must-have/beds/beds-05-queen-room.jpg", "Purple queen bedroom with a neon wave sign", "A themed queen room using color and lighting rather than square footage to feel premium."),
+        photo("5br/must-have/beds/beds-06-queen-room.jpg", "Canopy queen bed with a tropical mural and alligator-print rug", "A canopy queen room with a tropical mural and playful accents - themed but still guest-ready."),
+      ],
+    },
+
+    // Pool - Must-Have (5BR-specific; pool is a hard requirement with its own image set).
+    mustHavePool: {
+      requirement: "Existing pool is a hard requirement - pool appears across 100% of the supplied Premium cohort.",
+      strongExecution: "Strong execution goes beyond simply having a pool: visually interesting shapes, colorful loungers/umbrellas, bright deck treatments, turf, lighting, tropical landscaping, and adjacent covered seating, so the pool photographs as the resort's centerpiece rather than a plain backyard feature.",
+      images: [
+        photo("5br/must-have/pool/pool-01-with-seating.jpg", "Dusk-lit pool with string lighting, purple umbrellas, and a full row of teal lounge chairs", "A dusk-lit pool with string lighting, umbrellas, and a full lounge-chair row along the deck."),
+        photo("5br/must-have/pool/pool-02-shape-colour.jpg", "Curved pool with a painted, colorful deck and shaped blue loungers", "A painted, curved pool deck with bold color and shaped loungers - the pool as a designed, photographable centerpiece."),
+        photo("5br/must-have/pool/pool-03.jpg", "Teal house with a shaped pool and a flamingo float", "A branded teal house and pool deck with a flamingo float and matched lounge furniture."),
+        photo("5br/must-have/pool/pool-04.jpg", "Tiki-thatched cabana beside a rectangular pool with floats", "A tiki-thatched cabana and covered lounge seating directly beside the pool, connecting the pool to a shaded social zone."),
+      ],
+    },
+
+    // 5. Backyard Size & Usability (combined Backyard + Amenity Capacity + Privacy story).
+    backyard: {
+      usableSpace: "A large, usable, private backyard capable of becoming a genuine resort environment - the acquisition requirement is enough physical space for 5+ major amenity zones, even if those amenities are added after closing.",
+      amenityZoneRequirements: "Multiple clearly defined zones around the pool (sport court, mini golf/play, outdoor dining, lounge seating, social/fire-pit areas) while retaining circulation and open space. Fencing and landscaping should make the backyard feel self-contained.",
+      images: [
+        photo("5br/must-have/backyard/backyard-01-aerial-zoning.jpg", "Aerial view of a pool, sport court, mini golf, and a fire-pit lounge in one fenced backyard", "An aerial view showing pool, sport court, mini golf, and a fire-pit lounge as distinct zones inside one fenced, private lot."),
+        photo("5br/must-have/backyard/backyard-02-aerial-zoning.jpg", "Aerial dusk view of a pool, full sport court, mini golf, string lighting, and a dining patio", "Pool, full sport court, mini golf, string lighting, and a dining patio sharing one privacy-fenced backyard at dusk."),
+        photo("5br/must-have/backyard/backyard-03-aerial-zoning.jpg", "Aerial night view of a screened pool enclosure, mini-golf run, and fire-pit circle", "A screened pool enclosure plus a separate mini-golf run and fire-pit circle - amenity zoning still works with a screened pool."),
+      ],
+    },
+
+    // Game Room / Indoor Entertainment Space - Must-Have (5BR-specific).
+    mustHaveGameRoom: {
+      requirement: "A dedicated game room or clearly convertible indoor space (garage, bonus room, secondary living area, flex room, or bunk/game hybrid) is a Must-Have.",
+      strongExecution: "Strongest execution is a complete activity room - arcade machines, foosball, air hockey, pool-table space, bold graphics, and seating - rather than a single game placed in an ordinary room. The room itself is the acquisition requirement; individual equipment can be added after closing.",
+      images: [
+        photo("5br/must-have/game-room/game-room-01.jpg", "Game room with a pool table, pinball machines, and a row of arcade cabinets", "A complete activity room: pool table, pinball, and a full row of arcade cabinets under a mural."),
+        photo("5br/must-have/game-room/game-room-02.jpg", "Superhero-themed room combining bunk beds with a slide, foosball, and air hockey", "A bunk/game hybrid - themed bunk beds with a slide sharing one room with foosball and air hockey."),
+        photo("5br/must-have/game-room/game-room-03.jpg", "Captain America-themed room with foosball, air hockey, and a TV", "A themed game room combining foosball, air hockey, and a TV - a dedicated room, not a single piece of equipment."),
+        photo("5br/must-have/game-room/game-room-04-arcade.jpg", "Illustrated graphic of game-room equipment: poker table, air hockey, pool table, arcade, shuffleboard, foosball, skeeball, pop-a-shot", "Illustrative graphic of common game-room equipment types - not a photo of an actual property."),
+      ],
+    },
+
+    // Automatically Add - features to add after acquisition when missing/feasible; their
+    // absence should not eliminate an otherwise strong property.
+    autoAdd: {
+      note: "These features should be added after acquisition when missing/feasible. Their absence should not eliminate an otherwise strong property.",
+      overviewImages: [
+        photo("5br/auto-add/auto-add-01-amenity-collage.jpg", "Aerial view combining a pool, a basketball/pickleball court, mini golf, a fire-pit lounge, and a volleyball court", "An aerial view combining a pool, a basketball/pickleball court, mini golf, a fire-pit lounge, and a volleyball court in one backyard - the AUTO items work together, not in isolation."),
+        photo("5br/auto-add/auto-add-02-amenity-group.jpg", "Illustrated icon graphic of games, a pool float, and a mini putter", "Illustrative icon graphic of the AUTO amenity category - not a photograph of an actual property."),
+      ],
+      items: [
+        { name: "Pool Heater", note: "Add to the existing pool where mechanically feasible. Extends seasonal pool usability, but its absence should not cause rejection of an otherwise strong property.", images: [] },
+        { name: "Pool Table", note: "Produced the highest Premium amenity-importance score in the analysis, but the equipment itself is easy to install compared with creating the room - so the room is Must-Have and the table is AUTO.", images: [
+          photo("5br/auto-add/auto-add-03-pool-table-game-room.jpg", "Pool table in front of a full arcade and pinball room", "A pool table anchors a full arcade/pinball room - the room is the acquisition requirement; the table itself is easy to add after closing."),
+        ] },
+        { name: "Fire Pit", note: "Create a dedicated evening social zone away from the primary pool circulation, surrounded by intentional seating and color.", images: [
+          photo("5br/auto-add/auto-add-07-firepit-outdoor-seating.jpg", "Fire pit surrounded by red and teal Adirondack chairs and scalloped umbrellas", "A fire pit surrounded by intentional color and seating - a distinct evening zone, not a standalone object."),
+          photo("5br/auto-add/auto-add-06-firepit.jpg", "People toasting glasses around a fire pit with a sport court visible behind them", "A fire pit doubling as a gathering point, with a sport court and cornhole visible just beyond it."),
+        ] },
+        { name: "Outdoor Dining", note: "Provide group-sized dining near the pool and outdoor entertainment areas, sized for a meaningful portion of a 14-16 guest group.", images: [] },
+        { name: "Outdoor Bar / Tiki Bar", note: "Add a simple bar or tiki-style gathering area where the backyard allows it, reinforcing the tropical private-resort positioning without full outdoor-kitchen capex.", images: [] },
+        { name: "BBQ Grill", note: "Provide a quality grill adjacent to outdoor dining to complete the outdoor social program at relatively low cost.", images: [] },
+        { name: "Outdoor Lounge Seating", note: "Add a separate lounge area for guests who are not swimming or dining; covered or shaded seating is preferred.", images: [
+          photo("5br/auto-add/auto-add-09-outdoor-lounge-seating.jpg", "Covered green lounge seating beside a plunge pool with a pool table visible under the patio", "Covered outdoor lounge seating beside a plunge pool, with a pool table visible under the adjoining patio."),
+          photo("5br/auto-add/auto-add-10-poolside-seating.jpg", "Tiki-thatched pavilion with sofa seating and a giant Jenga game beside the pool", "A tiki-thatched pavilion with sofa seating and a giant Jenga game beside the pool."),
+        ] },
+        { name: "Sun Loungers / Poolside Seating", note: "Provide sufficient poolside seating for a large group; coordinated bright colors can also strengthen listing photography.", images: [
+          photo("5br/auto-add/auto-add-04-beach-seats-hot-tub.jpg", "Screened pool with an in-deck spa and a row of lounge chairs at dusk", "A screened pool with an in-deck spa and a full row of lounge chairs at dusk."),
+        ] },
+        { name: "Simple Lawn / Party Games", note: "Add low-capex movable entertainment such as cornhole, giant Jenga, giant checkers, or board games to increase perceived amenity density without permanent construction.", images: [
+          photo("5br/auto-add/auto-add-05-board-games.jpg", "Stack of board games on a cabinet", "A stack of board games - a low-cost way to broaden indoor entertainment for mixed-age groups."),
+          photo("5br/auto-add/auto-add-11-lawn-games-volleyball.jpg", "Kids playing beach volleyball on a sand court bordered by turf and palms", "A sand volleyball court bordered by turf and palms - an active, low-cost outdoor activity."),
+        ] },
+        { name: "Karaoke / Simple Indoor Entertainment", note: "Add within the game-room environment as another inexpensive activity, broadening the indoor entertainment mix for adults, kids, and mixed-age groups.", images: [
+          photo("5br/auto-add/auto-add-08-karaoke.jpg", "Karaoke stage with a neon sign and disco-ball lighting", "A dedicated karaoke stage with neon signage and disco-ball lighting."),
+        ] },
+        { name: "Pack-n-Play / Travel Crib", note: "Automatically provide for families traveling with infants - very low cost and directly aligned with the family traveler profile.", images: [] },
+        { name: "Crib", note: "Provide a safe infant-sleeping option where practical - a low-cost operational addition, not an acquisition requirement.", images: [] },
+      ],
+    },
+
+    // Nice to Have - Ranked, directly from BuyBoxDetailsText.pdf's scored ranking.
+    niceToHaveRanked: {
+      note: "Ranked by the source document's importance score. Amenities with insufficient sample size are still shown, flagged as thin-data/exploratory rather than removed.",
+      items: [
+        { name: "Mini Golf", score: 0.77, revenueUplift: "+11.2%", p90Uplift: "+36.1%", n: 18, note: "The strongest supplied examples use mini golf as a designed backyard attraction - curved greens, multiple holes, landscaping, lighting, and obstacles integrated with the pool/sports zones.", images: [
+          photo("5br/nice-to-have/mini-golf/mini-golf-01.jpg", "Curved mini-golf green with a disc-golf basket and bowling pins nearby", "A curved, landscaped mini-golf green with a disc-golf basket and bowling pins nearby - multiple activities sharing one zone."),
+          photo("5br/nice-to-have/mini-golf/mini-golf-02.jpg", "Mini-golf course with rock obstacles beside a giant checkers set", "A rock-obstacle mini-golf course beside a giant checkers set and a branded mural backdrop."),
+          photo("5br/nice-to-have/mini-golf/mini-golf-03-twilight.jpg", "Twilight mini-golf course integrated with cornhole and disc golf", "A twilight mini-golf course integrated with cornhole and disc golf in one landscaped strip."),
+        ] },
+        { name: "Pickleball", score: 0.72, revenueUplift: "+22.2%", p90Uplift: "+19.4%", n: 12, note: "A particularly valuable Nice-to-Have because it requires sufficient lot size and site suitability; combining it with basketball on one hardscape footprint increases amenity density.", images: [
+          photo("5br/nice-to-have/pickleball/pickleball-01-basketball-combo.jpg", "One court lined for both pickleball and basketball, with a sand volleyball court alongside", "One hardscape court lined for both pickleball and basketball, with a sand volleyball court alongside - one footprint, multiple sports."),
+        ] },
+        { name: "Playground", score: 0.57, revenueUplift: "+16.4%", p90Uplift: "+17.2%", n: 11, note: "Best suited to the large-family positioning; works particularly well when integrated with turf, mini golf, bowling/lawn games, and the pool rather than isolated in a corner of the yard.", images: [
+          photo("5br/nice-to-have/playground/playground-01.jpg", "Wooden playset with a slide and climbing wall beside a themed play street", "A wooden playset with a slide and climbing wall beside a themed play street, next to the pool."),
+          photo("5br/nice-to-have/playground/playground-02.jpg", "Kids on ride-on cars along a painted play street", "Kids on ride-on cars along a painted play street - a low-cost, highly photogenic kids' zone."),
+          photo("5br/nice-to-have/playground/playground-03.jpg", "Climbing and monkey-bar playset", "A climbing/monkey-bar playset integrated with a play structure and slide."),
+          photo("5br/nice-to-have/playground/playground-04-lawn-bowling.jpg", "Backyard bowling lane beside a playset and pool", "A backyard bowling lane beside a playset and pool - playground-adjacent activities layered together."),
+          photo("5br/nice-to-have/playground/playground-05-mini-golf.jpg", "Mini golf lit for evening use beside a wooden playset", "Mini golf lit for evening use, directly beside a wooden playset - playground and mini golf sharing one zone."),
+          photo("5br/nice-to-have/playground/playground-06-pool-large.jpg", "Giant lawn-sized yard-pool game with oversized billiard balls", "A giant lawn-sized 'yard pool' game with oversized billiard balls - a low-cost, high-novelty backyard activity (not a swimming pool)."),
+        ] },
+        { name: "Hot Tub", score: 0.29, revenueUplift: "-3.6%", p90Uplift: "-11.2%", n: 7, note: "Visually attractive, but the Premium data does not show positive incremental performance after controlling for stronger structural configurations. Treat as additional luxury rather than a core acquisition target.", images: [
+          photo("5br/nice-to-have/hot-tub/hot-tub-01.jpg", "Indoor spa with neon signage and a living-wall backdrop", "An indoor/screened spa with neon signage and a living-wall backdrop."),
+        ] },
+        { name: "Gym", score: 0.26, revenueUplift: "-7.7%", p90Uplift: "0.0%", n: 5, note: "Potentially useful in larger or more luxury-oriented homes, but current sample support is limited with no clear independent performance premium. Lower priority than outdoor recreation.", images: [] },
+        { name: "Movie Theater", thinData: true, n: null, note: "The poolside movie example is visually compelling and can create a memorable nighttime experience, but the dataset is too thin (N<4) to assign a reliable importance score.", images: [
+          photo("5br/nice-to-have/movie-sauna-golf/movie-sauna-golf-02-movie-on-pool.jpg", "Inflatable movie screen set up over the pool at dusk", "An inflatable movie screen set up directly over the pool at dusk, with floats and popcorn styling."),
+        ] },
+        { name: "Sauna", thinData: true, n: null, note: "A potential luxury differentiator, but too sparsely represented in the Premium dataset (N<4) to support a strong acquisition conclusion.", images: [
+          photo("5br/nice-to-have/movie-sauna-golf/movie-sauna-golf-01.jpg", "Barrel sauna positioned outside the house", "A barrel sauna positioned just outside the house, with the interior visible through the open door."),
+          photo("5br/nice-to-have/movie-sauna-golf/movie-sauna-golf-03-sauna.jpg", "Second view of the barrel sauna's wood-fired interior", "A second view of the barrel sauna, showing its wood-fired interior."),
+        ] },
+        { name: "Golf Simulator", thinData: true, n: null, note: "Potentially attractive for a high-end indoor entertainment program, but there is not enough Premium-market evidence in the current dataset to rank it reliably. No image was supplied for this specific amenity.", images: [] },
+      ],
+    },
+
+    // Design Direction (source: BuyBoxDetailsText.pdf's Design Direction section).
+    designDirection: {
+      bullets: [
+        "Bright sport courts, artificial turf, and shaped mini-golf greens recur across the supplied design comps.",
+        "Colorful, coordinated furniture and umbrellas create a consistent visual identity readable from a single aerial photograph.",
+        "Tropical landscaping, strong nighttime lighting, and clearly separated amenity zones support the private-resort presentation.",
+        "No single architectural style is required - the same amenity-zoning idea appears on an ordinary ranch and on a larger, more upscale house.",
+        "Adult bedrooms stay polished and vacation-oriented even as kids'/group spaces become more playful and themed.",
+      ],
+      images: [
+        photo("5br/design/design-01-classic-design.jpg", "Screened pool, mini-golf run, and fire-pit circle lit for evening use", "A screened pool, mini-golf run, and fire-pit circle lit for evening use - a classic, less-saturated take on the same amenity-zoning idea."),
+        photo("5br/design/design-02-colour-palette.jpg", "Free-form pool, painted sport court, mini golf, and a circular fire-pit lounge", "A free-form pool, painted sport court, mini golf, and a circular fire-pit lounge, each rendered in a distinct bold color."),
+        photo("5br/design/design-03-colour-backyard.jpg", "Yellow-and-blue sport court, mini golf, sand volleyball court, and a pool-table lawn game", "A yellow-and-blue sport court, mini golf, sand volleyball court, and pool-table game sharing one saturated color scheme."),
+        photo("5br/design/design-04-colour-design.jpg", "Yellow half-court, mini golf, pool, and a themed ride-on-car track", "A yellow half-court, mini golf, pool, and themed ride-on-car track color-coordinated across the whole lot."),
+        photo("5br/design/design-05-large-scale-resort.jpg", "Large waterfront house with a resort-style pool deck", "A large waterfront house with a resort-style pool deck - the same private-resort idea at a larger, more upscale scale."),
+        photo("5br/design/design-06-evening-lighting.jpg", "Sport court, pool, mini golf, and a fire-pit lounge lit for evening use with an outdoor movie screen", "Sport court, pool, mini golf, and a fire-pit lounge lit for evening use, with an outdoor movie screen set up beside the patio."),
+      ],
+    },
+
+    // 8. Geographic Considerations - not supplied by the Ifraham 5BR package; stated
+    // plainly as pending rather than filled with invented guidance.
+    geographicConsiderations: {
+      views: "Not established in the Ifraham 5BR source material supplied for this integration.",
+      waterfront: "Not established in the Ifraham 5BR source material supplied for this integration.",
+      privacySeclusion: "Privacy is implied by the backyard's stated requirement to feel self-contained (fencing/landscaping), but no separate seclusion guidance was supplied.",
+    },
+
+    // 9. Ideal Locations - not supplied by the Ifraham 5BR package.
+    idealLocations: {
+      whatEvidenceDoesNotEstablish: "Ideal locations, view priorities, and specific demand-driver guidance have not yet been established for the 5BR workstream in the source material supplied for this integration.",
+    },
+
+    // 10. Traveler ICP - grounded directly in the Must-Haves text (bunk room framing).
+    travelerICP: {
+      primary: "Large groups and celebration parties - the buy box targets sleeps 14-16.",
+      secondary: "Families with kids: the required bunk room is explicitly designed to work for both large groups and families with children simultaneously.",
+    },
+
+    // 12. Analyst Notes.
+    analystNotes: [
+      "Pool Table has the highest Premium amenity-importance score, but it is AUTO, not Must-Have - the room is the hard-to-add acquisition requirement, the table is easy to add after closing.",
+      "Hot Tub shows a negative revenue/P90+ association in this Premium sample (-3.6% / -11.2%, N=7) - treat it as an additional luxury, not a core acquisition target, once stronger structural configurations are already in place.",
+      "Movie Theater, Sauna, and Golf Simulator all have insufficient sample size (N<4) for a reliable importance score - shown as thin-data/exploratory rather than removed.",
+      "The property does not need one specific architectural style; what matters is whether the house and lot can support the pool/backyard-zoning and game-room transformation.",
+      "No revenue comp set, design-comp property roster, or purchase-price candidate was supplied with this workstream - do not treat the market-wide 5BR benchmark below as a buy-box-specific validated figure.",
+    ],
+
+    // 13. Revenue Potential - no 5BR-specific comp set was supplied; shows the project's
+    // existing market-wide 5BR benchmark only, clearly labeled as such.
+    revenueMarketBenchmark: {
+      status: "Pending - no 5BR-specific revenue comp set or property roster has been supplied yet",
+      marketWide: {
+        median: 160603,
+        p75: 191158,
+        p90: 216961,
+        source: "Phase 2 reliable-core 5BR benchmark (n=45), market-wide across all 5BR listings - not a buy-box-specific comp set.",
+      },
+      note: "No 5BR revenue comp set, design-comp property roster, or Alexandria link was supplied with the Ifraham workstream. The figures above are the project's existing market-wide 5BR benchmarks (Section 2/6), not validated comps for this buy box.",
+    },
+
+    // STR Regulations - same market-wide deferred pattern as 3BR/4BR.
+    regulations: {
+      tier: "Verification pending",
+      permit: "Verification pending",
+      residency: "Verification pending",
+      operatingLimits: "Verification pending",
+      investorNotes: "Regulatory diligence deferred to the acquisition-screening phase (market-wide policy for this project - see Section 3).",
+    },
+
+    // 14. Purchase Price.
+    acquisition: {
+      status: "Pending - no property-level underwriting or Zillow screening yet for 5BR",
+      zillowSummary: "No Zillow candidate screen has been run for the 5BR workstream yet.",
+      nextStep: "Identify and validate a 5BR revenue/design comp set, then begin candidate screening, once the Ifraham workstream's comp evidence is available.",
+    },
+
+    alexandria: {
+      designCompSetUrl: null,
+      revenueCompSetUrl: null,
+    },
+
+    // Ordered section flow - mirrors the 4BR narrative flow's structure, with 5BR-specific
+    // sections (mustHavePool, mustHaveGameRoom, autoAdd, niceToHaveRanked, designDirection,
+    // revenueMarketBenchmark) replacing the 4BR sections that require an identified comp
+    // roster this package does not supply (designPlaybook, projections). See
+    // renderDeepDive/NARRATIVE_BLOCKS in render.js.
+    buyBoxSections: [
+      "overview",
+      "architecturalStyle",
+      "bedroomsBathrooms",
+      "sleepCount",
+      "mustHavePool",
+      "backyard",
+      "mustHaveGameRoom",
+      "autoAdd",
+      "niceToHaveRanked",
+      "designDirection",
+      "geographicConsiderations",
+      "idealLocations",
+      "travelerICP",
+      "analystNotesV2",
+      "revenueMarketBenchmark",
+      "regulations",
+      "acquisitionV2",
+    ],
   },
 ];
 

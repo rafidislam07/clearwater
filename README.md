@@ -105,13 +105,48 @@ text/link-only, since photos already appear once each in the Design Playbook).
   is showing) — self-scoping via `:has()`, with zero effect on 3BR's identical
   `.container` element when its tab is active.
 
-## Adding 5BR
+## 5BR integration (2026-08-24)
 
-Add a new object to `BUY_BOXES` in `data.js` using the exact same shape as the 3BR
-or 4BR entry (whichever comp-set shape matches the 5BR source material), then flip
-`status` to `"developed"`. No component code needs to change — `render.js` is fully
-data-driven. Fields with no source-material answer should be omitted (left
-`undefined`) rather than guessed; `ddBlock` automatically skips rows with no value.
+5BR is now `status: "developed"` (`narrative: true`, BuyBox Template V.2, same pattern
+as 4BR). Source: Ifraham's supplied `~/repos/clearwater/ifraham/BuyBox_5BR/` package
+(`BuyBoxDetailsText.pdf` for the Must Haves / Automatically Add / Nice to Have — Ranked /
+Design Direction text, `BuyBoxBR5.pdf` for the field template, and 48 images across
+`MustHave/`, `AutoAdd/`, `NiceToHave/`, `DesignBackYard/`). See `assets/5br/SOURCE.md` for
+the full file-by-file mapping.
+
+The package supplied rich amenity/design evidence but **no revenue comp set, no
+design-comp property roster, no geography/ICP guidance, and no purchase-price
+candidate** — those sections say so explicitly (pending badges, no invented figures)
+rather than being filled in. `revenueMarketBenchmark` shows only the project's existing
+market-wide 5BR benchmark (Phase 2), clearly labeled as market-wide, not a validated
+buy-box comp.
+
+Six new 5BR-specific `NARRATIVE_BLOCKS` were added to `render.js` (all additive — no
+existing 3BR/4BR block was changed except `bb2BedroomsBathroomsBlock`, which gained one
+optional `bathrooms` row that 4BR's data simply doesn't set):
+
+- `mustHavePool` / `mustHaveGameRoom` — thin wrappers around the existing generic
+  `ddBlock` helper; no new markup.
+- `autoAdd` — a labeled-placeholder-aware image-card grid (reuses
+  `.bb2-playbook-grid`/`.bb2-mechanism-card`) for the "add after acquisition, absence
+  isn't disqualifying" AUTO items.
+- `niceToHaveRanked` — rank number, score bar, revenue/P90+/N metric chips, and a
+  thumbnail gallery per amenity, sourced directly from the PDF's ranked scores; thin-data
+  amenities (N<4) are shown and flagged, never dropped.
+- `designDirection` — short bullets + an image-led gallery.
+- `revenueMarketBenchmark` — the market-wide-only revenue block described above.
+
+New CSS is additive only, under a `5BR-specific` comment block in `styles.css`
+(`.bb2-playbook-grid--auto`, `.bb2-stat-row--3`, `.bb2-rank-*`).
+
+## Adding more 5BR content later
+
+To add a 5BR-specific revenue/design comp set, geography, or purchase-price guidance
+once it exists: fill in the corresponding field in the 5BR `BUY_BOXES` entry (e.g. swap
+`revenueMarketBenchmark` for a `revenueSummary`/`revenueComps11`/`revenueTierPreview`
+shape and reuse 4BR's `bb2ProjectionsBlock` — no new render code needed). Fields with no
+source-material answer should stay omitted/pending rather than guessed; `ddBlock`
+automatically skips rows with no value.
 
 ## Adding Alexandria links
 

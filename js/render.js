@@ -421,11 +421,14 @@ function bb2ArchitecturalStyleBlock(box) {
   ], a.images);
 }
 
-// 3. Bedrooms & Bathrooms.
+// 3. Bedrooms & Bathrooms. `b.bathrooms` is optional and purely additive (currently used
+// by 5BR only) - ddBlock skips rows whose value is null, so 4BR's bedroomsBathrooms object
+// (which has no `bathrooms` field) renders exactly as before.
 function bb2BedroomsBathroomsBlock(box) {
   const b = box.bedroomsBathrooms;
   return ddBlock("Bedrooms & Bathrooms", [
     ["Target range", b.targetRange],
+    ["Bathrooms", b.bathrooms],
     ["Functional requirement", b.functionalNote],
   ], null, "compact");
 }
@@ -447,6 +450,157 @@ function bb2BackyardBlock(box) {
     ["Required usable space", b.usableSpace],
     ["Amenity-zone requirement", b.amenityZoneRequirements],
   ], b.images);
+}
+
+// Pool - Must-Have (5BR-specific: pool is its own headline must-have with a dedicated
+// image set, distinct from 4BR's flat mustHaveAmenities checklist). Reuses the generic
+// ddBlock helper - no new markup/CSS required.
+function bb2MustHavePoolBlock(box) {
+  const p = box.mustHavePool;
+  return ddBlock("Pool — Must-Have", [
+    ["Requirement", p.requirement],
+    ["Strong execution", p.strongExecution],
+  ], p.images);
+}
+
+// Game Room / Indoor Entertainment Space - Must-Have (5BR-specific, same reuse pattern
+// as bb2MustHavePoolBlock above).
+function bb2MustHaveGameRoomBlock(box) {
+  const g = box.mustHaveGameRoom;
+  return ddBlock("Game Room / Indoor Entertainment Space — Must-Have", [
+    ["Requirement", g.requirement],
+    ["Strong execution", g.strongExecution],
+  ], g.images);
+}
+
+// Automatically Add (5BR-specific) - features to add after acquisition when missing or
+// feasible; their absence should never disqualify an otherwise strong property. Reuses
+// the same image-card grid markup/CSS as the Design Playbook's mechanism cards
+// (`.bb2-playbook-grid` / `.bb2-mechanism-card`), just without a property/URL line, plus a
+// labeled placeholder (matching `imagePlaceholder`'s visual language) for the several AUTO
+// items no image was supplied for.
+function bb2AutoAddBlock(box) {
+  const a = box.autoAdd;
+  const sec = el("section", "dd-block");
+  sec.appendChild(el("h4", "dd-block__title", "Automatically Add"));
+  sec.appendChild(el("p", "dd-block__note", a.note));
+  if (a.overviewImages && a.overviewImages.length) sec.appendChild(renderImageGrid(a.overviewImages));
+  const grid = el("div", "bb2-playbook-grid bb2-playbook-grid--auto");
+  a.items.forEach((item) => {
+    const card = el("figure", "bb2-mechanism-card");
+    let rest = [];
+    if (item.images && item.images.length) {
+      // First image carries the card's main figure treatment; any additional
+      // supplied images render as a small supporting thumbnail strip after the caption.
+      const primary = item.images[0];
+      rest = item.images.slice(1);
+      const btn = el("button", "photo-figure__trigger");
+      btn.type = "button";
+      btn.setAttribute("aria-label", "Expand image: " + primary.alt);
+      const img = document.createElement("img");
+      img.src = primary.file;
+      img.alt = primary.alt;
+      img.loading = "lazy";
+      img.decoding = "async";
+      btn.appendChild(img);
+      btn.addEventListener("click", () => openLightbox(primary.file, primary.alt, primary.caption));
+      card.appendChild(btn);
+    } else {
+      const ph = el("div", "img-placeholder bb2-auto-add-card__placeholder", "");
+      ph.innerHTML = '<span class="img-placeholder__label">No image supplied</span>';
+      card.appendChild(ph);
+    }
+    const cap = el("figcaption", "bb2-mechanism-card__caption");
+    cap.innerHTML = "<strong>" + item.name + "</strong><span class='bb2-mechanism-card__note'>" + item.note + "</span>";
+    card.appendChild(cap);
+    if (rest.length) card.appendChild(renderImageGrid(rest, { small: true }));
+    grid.appendChild(card);
+  });
+  sec.appendChild(grid);
+  return sec;
+}
+
+// Nice to Have — Ranked (5BR-specific) - rank number, score bar, metric chips, and a
+// thumbnail gallery per amenity, sourced directly from the ranked scores in
+// BuyBoxDetailsText.pdf. Thin-data amenities (N<4) are still shown, flagged rather than
+// removed, per instruction.
+function bb2NiceToHaveRankedBlock(box) {
+  const n = box.niceToHaveRanked;
+  const sec = el("section", "dd-block");
+  sec.appendChild(el("h4", "dd-block__title", "Nice to Have — Ranked"));
+  if (n.note) sec.appendChild(el("p", "dd-block__note", n.note));
+  const list = el("div", "bb2-rank-list");
+  const maxScore = Math.max(...n.items.map((i) => i.score || 0));
+  n.items.forEach((item, idx) => {
+    const row = el("div", "bb2-rank-item" + (item.thinData ? " bb2-rank-item--thin" : ""));
+    row.appendChild(el("div", "bb2-rank-item__rank", String(idx + 1)));
+    const body = el("div", "bb2-rank-item__body");
+    let html = "<h6>" + item.name + "</h6>";
+    if (item.score != null) {
+      const pct = Math.round((item.score / maxScore) * 100);
+      html +=
+        "<div class='bb2-rank-item__bar-track'><div class='bb2-rank-item__bar-fill' style='width:" + pct + "%'></div></div>" +
+        "<span class='bb2-rank-item__score'>Score " + item.score.toFixed(2) + "</span>";
+    }
+    const chips = [];
+    if (item.revenueUplift) chips.push(item.revenueUplift + " revenue");
+    if (item.p90Uplift) chips.push(item.p90Uplift + " P90+");
+    if (item.n != null) chips.push("N=" + item.n);
+    if (chips.length) html += "<div class='bb2-chip-row'>" + chips.map((c) => "<span class='bb2-chip bb2-chip--metric'>" + c + "</span>").join("") + "</div>";
+    if (item.note) html += "<p class='dd-block__note'>" + item.note + "</p>";
+    body.innerHTML = html;
+    if (item.thinData) body.appendChild(pendingBadge("Thin data — exploratory, N<4"));
+    if (item.images && item.images.length) {
+      body.appendChild(renderImageGrid(item.images, { small: true }));
+    } else {
+      const ph = el("div", "img-placeholder img-placeholder--small", "");
+      ph.innerHTML = '<span class="img-placeholder__label">No image supplied</span>';
+      body.appendChild(ph);
+    }
+    row.appendChild(body);
+    list.appendChild(row);
+  });
+  sec.appendChild(list);
+  return sec;
+}
+
+// Design Direction (5BR-specific) - short bullets + an image-led gallery, reusing the
+// existing bullet-list and image-grid styling used elsewhere on the page.
+function bb2DesignDirectionBlock(box) {
+  const d = box.designDirection;
+  const sec = el("section", "dd-block");
+  sec.appendChild(el("h4", "dd-block__title", "Design Direction"));
+  const ul = el("ul", "bb2-notes-list");
+  d.bullets.forEach((b) => ul.appendChild(el("li", null, b)));
+  sec.appendChild(ul);
+  if (d.images && d.images.length) sec.appendChild(renderImageGrid(d.images));
+  return sec;
+}
+
+// Revenue Potential (5BR-specific) - no buy-box-specific comp set was supplied, so this
+// shows only the project's existing market-wide 5BR benchmark, explicitly labeled as such,
+// plus a pending badge and the Alexandria placeholder (pending, same as every other box's
+// missing link).
+function bb2RevenueMarketBenchmarkBlock(box) {
+  const r = box.revenueMarketBenchmark;
+  const sec = el("section", "dd-block dd-block--pending-price");
+  sec.appendChild(el("h4", "dd-block__title", "Revenue Potential"));
+  sec.appendChild(pendingBadge(r.status));
+  const stats = el("div", "bb2-stat-row bb2-stat-row--3");
+  [
+    ["Median (market-wide 5BR)", fmtCurrency(r.marketWide.median)],
+    ["P75", fmtCurrency(r.marketWide.p75)],
+    ["P90", fmtCurrency(r.marketWide.p90)],
+  ].forEach(([label, value]) => {
+    const stat = el("div", "bb2-stat");
+    stat.innerHTML = "<span class='bb2-stat__value'>" + value + "</span><span class='bb2-stat__label'>" + label + "</span>";
+    stats.appendChild(stat);
+  });
+  sec.appendChild(stats);
+  sec.appendChild(el("p", "dd-block__note", r.marketWide.source));
+  sec.appendChild(el("p", null, r.note));
+  sec.appendChild(alexandriaButton("Open Revenue Comp Set in Alexandria", box.alexandria.revenueCompSetUrl));
+  return sec;
 }
 
 // 6. Must-Have Amenities — compact checklist cards, not long prose per item.
@@ -520,7 +674,8 @@ function bb2TravelerICPBlock(box) {
 function bb2DesignPlaybookBlock(box) {
   const dp = box.designPlaybook;
   const sec = el("section", "dd-block");
-  sec.appendChild(el("h4", "dd-block__title", "Design — Top Designs"));
+  sec.appendChild(el("h4", "dd-block__title", "Experience & Design Playbook"));
+  sec.appendChild(el("p", "dd-block__note", "The visual, functional, and experiential elements that turn ordinary property bones into a competitive group-stay product."));
   const grid = el("div", "bb2-playbook-grid");
   dp.mechanisms.forEach((m) => {
     const card = el("figure", "bb2-mechanism-card");
@@ -587,6 +742,10 @@ function bb2TierPreviewCard(t) {
     card.appendChild(renderImage(t.image));
   }
   const body = el("div", "bb2-tier-preview-card__body");
+  // Note: `t.supplementalLabel` (set in data.js for a card illustrated by a
+  // property outside the authoritative 11-comp set) is intentionally not
+  // rendered here per instruction (2026-08-24) - kept in data.js purely as
+  // internal documentation of the card's provenance, not shown on the page.
   let html =
     "<span class='bb2-tier-preview-card__tier'>" + t.tier + "</span>" +
     "<h6>" + t.nickname + "</h6>" +
@@ -594,11 +753,11 @@ function bb2TierPreviewCard(t) {
     "<p class='bb2-tier-preview-card__revenue'>" + fmtCurrency(t.revenue) + " revenue potential</p>";
   if (t.takeaway) html += "<p class='bb2-tier-preview-card__takeaway'>" + t.takeaway + "</p>";
   if (t.missingRequirement) html += "<p class='dd-block__note'>" + t.missingRequirement + "</p>";
-  html += '<a class="comp-card__link" href="' + t.url + '" target="_blank" rel="noopener">View on Airbnb ↗</a>';
+  if (t.url) html += '<a class="comp-card__link" href="' + t.url + '" target="_blank" rel="noopener">View on Airbnb ↗</a>';
   body.innerHTML = html;
   if (t.reviewStatus === "provisional") {
     body.appendChild(pendingBadge("Dataset-only — provisional"));
-  } else {
+  } else if (t.reviewStatus === "validated") {
     body.appendChild(el("span", "badge bb2-badge--validated", "Manually reviewed"));
   }
   card.appendChild(body);
@@ -727,6 +886,13 @@ const NARRATIVE_BLOCKS = {
   projections: bb2ProjectionsBlock,
   regulations: bb2RegulationsBlock,
   acquisitionV2: acquisitionV2Block,
+  // 5BR-specific sections (see webpage/js/data.js's 5br buyBoxSections comment).
+  mustHavePool: bb2MustHavePoolBlock,
+  mustHaveGameRoom: bb2MustHaveGameRoomBlock,
+  autoAdd: bb2AutoAddBlock,
+  niceToHaveRanked: bb2NiceToHaveRankedBlock,
+  designDirection: bb2DesignDirectionBlock,
+  revenueMarketBenchmark: bb2RevenueMarketBenchmarkBlock,
 };
 
 function renderDeepDive(box) {

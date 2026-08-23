@@ -32,6 +32,7 @@ webpage-facing provenance map only.
 | core-comp-set/lost-in-paradise/lost-in-paradise-real-bed-capacity.jpg | design_comp_set/lost_in_paradise/lost-in-paradise-real-bed-capacity.png | Lost in Paradise / abnb_1503669407717600557 | Official core comp — strong visual mechanism | Jungle-themed bunk/twin bedroom with real beds | "A themed bunk/twin room providing real, dedicated sleeping capacity." | Do not claim this single photo proves comfortable occupancy for the full advertised sleeps count. |
 | core-comp-set/clearwater-glam/clearwater-glam-branded-interior.jpg | design_comp_set/clearwater_glam/clearwater-glam-branded-interior.png | Clearwater GLAM / abnb_748850360966059896 | Official core comp — strong visual mechanism | Citrus-slice mural living/hallway space with orange velvet sofas | "A citrus-mural living space illustrating how branding can transform an ordinary ranch-style interior." | None beyond the general no-revenue-claim rule. |
 | core-comp-set/clearwater-glam/clearwater-glam-pool-gathering.jpg | design_comp_set/clearwater_glam/clearwater-glam-pool-gathering.png | Clearwater GLAM / abnb_748850360966059896 | Official core comp — strong visual mechanism | Twilight pool with inflatable floats and a neon wall sign under a covered lanai | "A covered lanai and pool set up for evening group gathering." | Neon wall text is partially illegible/cropped — decorative only, not a claim-bearing element. |
+| core-comp-set/clearwater-glam/clearwater-glam-pool-centered-gathering.webp | design_comp_set/clearwater_glam/pool-centered-gathering-unique.png | Clearwater GLAM / abnb_748850360966059896 | Official core comp — Design Playbook "Pool-centered gathering" mechanism card (2026-08-24; replaces the Pink Paradise aerial that was previously used for this card — do not attribute this image to Pink Paradise) | Pool with tiger and ring inflatable floats beside a covered, curtained lanai with dining table, lounge chairs, a hanging swing, and a visible neon sign — same property/setup as clearwater-glam-pool-gathering.jpg, different time of day/angle | "The pool functions as the property's social center, surrounded by covered lounging, dining, additional seating, cohesive branding, and photographable pool styling." | Do not use to assert a specific revenue figure. Do not imply the pool area alone caused this property's revenue. |
 
 ## Supporting / bridge comp set
 
@@ -90,19 +91,24 @@ counterexamples" table above.**
 | Webpage file | Original file | Property / ID | Tier / role | Revenue potential | Visible subject | Approved caption | Caution / prohibited claim |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | revenue-tier-previews/high-pink-paradise.webp | design_comp_set/pink_paradise/revenue-page.png | Pink Paradise / abnb_568002792449614181 | High Tier — Revenue Potential's "Revenue Tiers at a Glance" preview | $163,383 | Pink-decked pool with flamingo and donut inflatable floats, a pink house, a thatched-roof cabana bar, and Adirondack-style lounge seating | "A coordinated pool deck, branded identity, and layered gathering areas show the stronger whole-property execution associated with this high-tier comp." | Do not claim the pool deck or any single visible feature independently caused this property's revenue — the caption describes whole-property execution, not a single-feature cause. Do not use to assert a specific revenue figure beyond the $163,383 recorded in the comp table. |
-| revenue-tier-previews/low-seminole-pool-house.webp | low_tier_counterexamples/low-revenue.png | Seminole Pool House / abnb_1323179023346269133 | Low Tier — Revenue Potential's "Revenue Tiers at a Glance" preview | $77,057 | Plain rectangular pool with a simple paver deck, a coiled garden hose visible poolside, and unbranded patio furniture in the background — no thematic decor or styling | "This functional but comparatively basic pool area shows less complete merchandising and experience design than the higher-tier examples." | Do not use insulting language (e.g. "ugly," "cheap," "terrible," "bad design"). Do not claim the visible presentation caused this property's $77,057 revenue outcome — the caption describes a contrast in merchandising completeness, not a cause. |
+| ~~revenue-tier-previews/low-seminole-pool-house.webp~~ (superseded 2026-08-24, no longer referenced by data.js) | low_tier_counterexamples/low-revenue.png | Seminole Pool House / abnb_1323179023346269133 | **Superseded.** Was briefly the Low Tier image in "Revenue Tiers at a Glance"; replaced the same day by the pacman-firepit row below, illustrated with a supplemental property instead. File retained on disk for the historical record but no longer linked from any page. | $77,057 | Plain rectangular pool with a simple paver deck, a coiled garden hose visible poolside, and unbranded patio furniture in the background — no thematic decor or styling | (superseded — no longer displayed) | N/A — not currently rendered. |
+| revenue-tier-previews/low-pacman-firepit.webp | low_tier_counterexamples/revenue-tier-low-pacman-firepit.png | "Heated Pool, Putting Green, Pac-Man Near Beach" / abnb_661492128891671081 — **a property OUTSIDE the authoritative 11-comp revenue set; supplemental visual reference only** | Low Tier — Revenue Potential's "Revenue Tiers at a Glance" preview (2026-08-24) | $76,880 (this property's own confirmed revenue; NOT the same as Seminole Pool House's $77,057, which remains the actual Low Tier core-comp figure in the 11-comp table) | Unlit stone firepit with a metal center pole, teal Adirondack chairs, daytime lighting, basic gravel placement around the firepit, with a small pool and putting green visible in the background | "A functional firepit photographed unlit during the day, with basic gravel placement and limited atmospheric staging — an amenity that exists but is not presented as a compelling gathering experience." | The card is explicitly labeled "Supplemental low-tier visual reference — outside core 11-comp set." Do not call this property Seminole Pool House. Do not show $77,057 for this property. Do not claim the photograph caused its $76,880 revenue. Does not change the core 11-comp set's 4/4/3 tier counts, median ($120,212), or observed range ($77,057–$163,383). |
 
 Replaces the 2026-08-24 "Low Tier (pending)" status previously recorded here:
 the requested `rafid/Clearwater_Buy_Box_4BR/revenue_comp_set/tier_preview_images/`
-path never existed, and the user instead supplied `low-revenue.png` directly
-in `low_tier_counterexamples/` with direct confirmation of its Seminole Pool
-House attribution. The webpage no longer renders a "Photo pending" placeholder
-for the Low Tier card.
+path never existed, and the user first supplied `low-revenue.png` directly in
+`low_tier_counterexamples/` with direct confirmation of its Seminole Pool
+House attribution, then — later the same day — replaced that with
+`revenue-tier-low-pacman-firepit.png`, a different, explicitly-labeled
+supplemental property outside the core 11-comp set. The webpage no longer
+renders a "Photo pending" placeholder for the Low Tier card, and no longer
+references the Seminole Pool House image.
 
-Both source PNGs were copied, not moved, and re-encoded to WebP (quality 82,
-no upscaling, original pixel dimensions preserved — 1200×800 and 720×405
-respectively, both already under the 1600px long-edge cap) following the same
-convention as the rest of this directory.
+All three source PNGs referenced in this section were copied, not moved, and
+re-encoded to WebP (quality 82, no upscaling, original pixel dimensions
+preserved — 1200×800, 720×405, and 1200×795 respectively, all already under
+the 1600px long-edge cap) following the same convention as the rest of this
+directory.
 
 ## General rules carried over from the source verification documents
 

@@ -129,7 +129,6 @@ a { color: var(--color-primary-light); }
 .legend-swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
 .legend-swatch--outlined { border: 2px solid #111827; background: transparent; }
 .legend-note { font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.5rem; }
-.filter-row--featured { border-top: 1px solid var(--color-border); margin-top: 0.6rem; padding-top: 0.6rem; }
 .map-error { color: var(--color-danger); font-size: 0.85rem; }
 
 /* ============================================================
@@ -344,6 +343,7 @@ a { color: var(--color-primary-light); }
 .bb2-tier-preview-card .photo-figure__trigger { aspect-ratio: 4 / 3; }
 .bb2-tier-preview-card__body { padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.2rem; }
 .bb2-tier-preview-card__tier { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-accent); }
+.bb2-tier-preview-card__supplemental { font-size: 0.74rem; font-weight: 700; color: var(--color-pending-text); background: var(--color-pending-bg); display: inline-block; padding: 0.15rem 0.5rem; border-radius: 5px; margin: 0.3rem 0 0.2rem; }
 .bb2-tier-preview-card__body h6 { margin: 0.1rem 0 0; font-size: 1rem; color: var(--color-primary); }
 .bb2-tier-preview-card__title { font-size: 0.8rem; color: var(--color-text-muted); margin: 0 0 0.3rem; }
 .bb2-tier-preview-card__revenue { font-size: 0.95rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.3rem; }
@@ -358,6 +358,40 @@ a { color: var(--color-primary-light); }
 .bb2-notes-list { padding-left: 1.3rem; margin: 0; }
 .bb2-notes-list li { margin-bottom: 0.65rem; font-size: 1rem; color: var(--color-text-muted); }
 .bb2-next-step { font-size: 1.02rem; }
+
+/* ============================================================
+   5BR-specific: Automatically Add grid + Nice-to-Have Ranked list
+   (additive only - no existing 3BR/4BR class is redefined here)
+   ============================================================ */
+.bb2-playbook-grid--auto { grid-template-columns: repeat(4, 1fr); margin-top: 0.5rem; }
+.bb2-auto-add-card__placeholder { height: 100%; min-height: 140px; }
+
+.bb2-stat-row--3 { grid-template-columns: repeat(3, 1fr); }
+
+.bb2-rank-list { display: flex; flex-direction: column; gap: 1.1rem; margin-top: 0.75rem; }
+.bb2-rank-item { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1.1rem; align-items: start; padding: 1.1rem 1.2rem; background: var(--brand-surface); border: 1px solid var(--color-border); border-radius: 10px; }
+.bb2-rank-item--thin { background: var(--status-pending-bg); border-style: dashed; }
+.bb2-rank-item__rank { font-size: 1.6rem; font-weight: 700; color: var(--color-primary); line-height: 1; }
+.bb2-rank-item__body { min-width: 0; }
+.bb2-rank-item__body h6 { margin: 0 0 0.5rem; font-size: 1.05rem; color: var(--color-primary); }
+.bb2-rank-item__bar-track { background: var(--color-border); border-radius: 999px; height: 8px; max-width: 320px; overflow: hidden; margin-bottom: 0.3rem; }
+.bb2-rank-item__bar-fill { background: var(--color-primary-light); height: 100%; border-radius: 999px; }
+.bb2-rank-item__score { font-size: 0.78rem; font-weight: 700; color: var(--color-text-muted); }
+.bb2-chip--metric { background: #fff; font-weight: 600; font-size: 0.8rem; padding: 0.3rem 0.7rem; }
+.bb2-rank-item .bb2-chip-row { margin-top: 0.5rem; }
+.bb2-rank-item .dd-block__note { margin: 0.5rem 0 0; }
+.bb2-rank-item .dd-block__images { margin-top: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+.bb2-rank-item .photo-figure--small { max-width: none; }
+.bb2-rank-item .img-placeholder--small { width: 160px; height: 90px; margin-top: 0.75rem; }
+
+@media (max-width: 960px) {
+  .bb2-playbook-grid--auto { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .bb2-playbook-grid--auto { grid-template-columns: 1fr; }
+  .bb2-rank-item { padding: 0.9rem 1rem; }
+}
 
 @media (max-width: 960px) {
   .bb2-hero { grid-template-columns: 1fr; }
