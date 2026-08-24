@@ -11,8 +11,11 @@ Chart.defaults.color = "#3a3f47";
 
 function renderDemographicsCharts() {
   const marketCtx = document.getElementById("chart-demographics-market");
+  if (!marketCtx) return;
+
+  const marketOptions = chartOptions("Market-wide traveler composition", true);
   new Chart(marketCtx, {
-    type: "bar",
+    type: "pie",
     data: {
       labels: ["Stayed with kids", "Group trip", "Stayed with a pet", "Other"],
       datasets: [
@@ -24,24 +27,18 @@ function renderDemographicsCharts() {
             DEMOGRAPHICS.marketWide.pet,
             DEMOGRAPHICS.marketWide.other,
           ],
-          backgroundColor: CHART_PALETTE[0],
+          backgroundColor: CHART_PALETTE,
         },
       ],
     },
-    options: chartOptions("Market-wide traveler composition", true),
-  });
-
-  const bedroomCtx = document.getElementById("chart-demographics-bedroom");
-  new Chart(bedroomCtx, {
-    type: "bar",
-    data: {
-      labels: DEMOGRAPHICS.byBedroom.map((d) => d.segment),
-      datasets: [
-        { label: "Stayed with kids", data: DEMOGRAPHICS.byBedroom.map((d) => d.kids), backgroundColor: CHART_PALETTE[0] },
-        { label: "Group trip", data: DEMOGRAPHICS.byBedroom.map((d) => d.groupTrip), backgroundColor: CHART_PALETTE[1] },
-      ],
+    options: {
+      ...marketOptions,
+      scales: undefined,
+      plugins: {
+        ...marketOptions.plugins,
+        tooltip: { callbacks: { label: (ctx) => ctx.label + ": " + Math.round(ctx.raw * 100) + "%" } },
+      },
     },
-    options: chartOptions("Family vs. group-trip share by bedroom count", true),
   });
 }
 
@@ -53,21 +50,21 @@ function renderPropertySizeCharts() {
       labels: PROPERTY_SIZE.marketDistribution.map((d) => d.segment),
       datasets: [
         {
-          label: "Share of market inventory",
-          data: PROPERTY_SIZE.marketDistribution.map((d) => d.share),
+          label: "Market inventory count",
+          data: PROPERTY_SIZE.marketDistribution.map((d) => d.n),
           backgroundColor: CHART_PALETTE[2],
         },
         {
-          label: "Share of top-quartile performers",
+          label: "Top-quartile performer count",
           data: PROPERTY_SIZE.marketDistribution.map((d) => {
             const match = PROPERTY_SIZE.topQuartileDistribution.find((t) => t.segment === d.segment);
-            return match ? match.share : 0;
+            return match ? match.n : 0;
           }),
           backgroundColor: CHART_PALETTE[1],
         },
       ],
     },
-    options: chartOptions("Bedroom-count share: market vs. top-quartile performers", true),
+    options: chartOptions("Bedroom count: market inventory vs. top-quartile performers", false),
   });
 
   const revCtx = document.getElementById("chart-size-revenue");

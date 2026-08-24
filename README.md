@@ -198,3 +198,21 @@ unanswered (property type name, evidence for bedroom/bath beyond the stated
 range, occasion demand, specific comp identities/links, STR regulation
 determination) were omitted rather than guessed, per the DOCX's own template
 structure being left blank for those rows.
+
+## Presentation notes update (2026-08-25)
+
+The attached `Notes on the presentation page.docx` corrections were applied:
+
+- Section 5 now uses a pie chart for market-wide traveler composition and a stacked
+  bedroom-count demographic chart.
+- Section 6 charts now sort bedroom counts in ascending order; the inventory/top-quartile
+  chart uses counts rather than percentages, and the median-revenue chart includes 1BR,
+  2BR, 3BR, 4BR, 5BR, and 6BR+.
+- Section 7 includes the added rationale for excluding 1BR/2BR, pursuing 5-6BR Premium,
+  and keeping 7BR+ exploratory.
+- 3BR was renamed to `3BR Large Family/Small Group House`, its pool/backyard language
+  was revised to emphasize a lagoon/free-form pool, and the supplied Zillow candidate
+  was added without underwriting claims.
+- 3BR and 5BR photo-grid rendering now avoids bottom captions for regular photo figures;
+  5BR no-image placeholders are not rendered as empty tiles, and the duplicate sauna
+  image was removed.

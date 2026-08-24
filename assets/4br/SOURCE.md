@@ -110,6 +110,27 @@ preserved — 1200×800, 720×405, and 1200×795 respectively, all already under
 the 1600px long-edge cap) following the same convention as the rest of this
 directory.
 
+## Unattributed visual reference (Experience & Design Playbook, added 2026-08-24)
+
+**⚠ Unknown attribution.** Unlike every other image in this directory, the
+source property for this image is genuinely unknown — not merely unnamed or
+pending a documentation update. It was supplied by the user directly in
+`rafid/Clearwater_Buy_Box_4BR/design_comp_set/unattributed_visual_references/`
+with no accompanying listing information.
+
+| Webpage file | Original file | Property / ID | Role | Visible subject | Approved caption | Caution / prohibited claim |
+| --- | --- | --- | --- | --- | --- | --- |
+| design-playbook/multi-zone-backyard-experience.webp | design_comp_set/unattributed_visual_references/multi-zone-backyard-experience-source-pending.png | **UNKNOWN — attribution pending.** Do not identify as Clearwater Heated Pool Family-Friendly, Tropical Family Villa, Lost in Paradise, or any other named comp. | Experience & Design Playbook — "Multi-zone backyard experience" (illustrates backyard zoning / the finished-product concept only; NOT a revenue comp and NOT part of the 11-comp revenue set) | Nighttime aerial view of a screened pool, a multi-sport (basketball/pickleball) court, a mini-golf green with flags, firepit seating, a covered dining pavilion, path lighting, and privacy fencing | "A coordinated backyard layout combines a screened pool, multi-use sport court, mini-golf area, firepit seating, covered dining, lighting, privacy fencing, and clear circulation between activity zones." | Do not attach an Airbnb link, property ID, revenue figure, or revenue tier. Do not use as proof of revenue, ROI, market location, or amenity causality. Card must display the label "Visual reference — property attribution pending." |
+
+This image replaced the "Zoned backyard entertainment" card, which previously
+used Tropical Family Villa's `tropical-family-villa-pool-backyard-ecosystem.jpg`.
+That file was **not deleted** and its role in the Backyard Size & Usability
+section is unchanged — only its Design Playbook card was replaced.
+
+Source PNG copied, not moved, and re-encoded to WebP (quality 82, no
+upscaling, original 1200×675 dimensions preserved, already under the 1600px
+long-edge cap) following the same convention as the rest of this directory.
+
 ## General rules carried over from the source verification documents
 
 - No image on this page may be used to assert a specific revenue figure, ADR, occupancy rate, or ROI — those come only from the dataset/comp tables.

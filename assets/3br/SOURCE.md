@@ -14,6 +14,7 @@ No image was cropped, stretched, or altered in content; only resolution/compress
 | architectural/architectural-03-coastal-bungalow.jpg | architectural_style/fa9b5c04-48ca-4bd4-9902-936ba14ba813.jpg |
 | backyard/backyard-01-pool-pickleball-aerial.jpg | backyard_size/29ece3fb-2475-45e4-b2aa-b125dec77f69.jpg |
 | backyard/backyard-02-pool-minigolf-aerial.jpg | backyard_size/b9a66a61-905d-4e23-bdc7-b924a7cd1ed8.jpg |
+| backyard/3br-buy-box-hero-pool-backyard.jpg | backyard_size/b9a66a61-905d-4e23-bdc7-b924a7cd1ed8.jpg (duplicate of backyard-02-pool-minigolf-aerial.jpg above, under a hero-specific filename; used as the 3BR Buy Box summary's hero image, integrated 2026-08-25) |
 | backyard/backyard-03-pool-hottub-aerial.jpg | backyard_size/d5c1376e-9cd2-4afc-beeb-2e1619240138.jpg |
 | must-have/must-have-01-lagoon-pool-waterfall.jpg | must_have_amenities/09e9d37a-dc0f-45e2-91ca-b3fe5cc70369.jpg |
 | must-have/must-have-02-screened-pool-enclosure.jpg | must_have_amenities/6a05bde8-b09d-43a4-8e0c-06a7485b407c.jpg |

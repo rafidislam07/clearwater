@@ -66,10 +66,10 @@ function photoFigure(p, opts) {
   img.alt = p.alt;
   img.loading = "lazy";
   img.decoding = "async";
+  if (p.focus) img.style.objectPosition = p.focus;
   btn.appendChild(img);
   btn.addEventListener("click", () => openLightbox(p.file, p.alt, p.caption));
   fig.appendChild(btn);
-  if (p.caption) fig.appendChild(el("figcaption", null, p.caption));
   return fig;
 }
 
@@ -318,25 +318,75 @@ function revenueTierCard(box, tier) {
 // legacy A-N flow and the narrative flow (see NARRATIVE_BLOCKS below) render it
 // identically. `box.provisionalNote` and `box.atAGlance.geography` are optional
 // and purely additive - 3BR has neither, so its output is byte-for-byte unchanged.
+// `box.overview.heroImage` is also optional and purely additive: when present
+// (currently 3BR only) identity renders inside a split hero card - image left,
+// content right - via identityHeroBlock below, instead of this verbose version.
 function identityBlock(box) {
-  const idSec = el("section", "dd-block dd-block--identity");
-  idSec.innerHTML =
+  if (box.overview && box.overview.heroImage) return identityHeroBlock(box);
+
+  const body = el("div", "dd-block__identity-body");
+  body.innerHTML =
     '<div class="dd-block__eyebrow">' + box.label + "</div>" +
     "<h3>" + box.name + "</h3>" +
     "<p class='deep-dive__thesis'>" + box.thesis + "</p>" +
     (box.whyItWorks ? "<p class='deep-dive__why-it-works'><strong>Why this buy box works:</strong> " + box.whyItWorks + "</p>" : "");
-  if (box.provisionalNote) idSec.appendChild(pendingBadge(box.provisionalNote));
+  if (box.provisionalNote) body.appendChild(pendingBadge(box.provisionalNote));
   const specs = el("div", "spec-grid");
   specs.appendChild(specRow("Bed / Bath", box.atAGlance.bedBath));
   specs.appendChild(specRow("Comfortable sleeps", box.atAGlance.sleeps));
   specs.appendChild(specRow("Hero mechanism", box.atAGlance.heroMechanism));
   specs.appendChild(specRow("Preliminary revenue", box.atAGlance.revenue));
   if (box.atAGlance.geography) specs.appendChild(specRow("Geography", box.atAGlance.geography));
-  idSec.appendChild(specs);
+  body.appendChild(specs);
   const coreList = el("ul", "core-characteristics");
   box.coreCharacteristics.forEach((c) => coreList.appendChild(el("li", null, c)));
-  idSec.appendChild(el("h4", null, "Core characteristics"));
-  idSec.appendChild(coreList);
+  body.appendChild(el("h4", null, "Core characteristics"));
+  body.appendChild(coreList);
+
+  const idSec = el("section", "dd-block dd-block--identity");
+  idSec.appendChild(body);
+  return idSec;
+}
+
+// Hero-card variant of identityBlock, used only when `box.overview.heroImage`
+// is set (currently 3BR only). Reuses the same `.bb2-hero`/`.bb2-hero__*`
+// classes the narrative flow's bb2OverviewBlock uses for 4BR/5BR so all three
+// buy-box summaries share one visual treatment (fixed desktop height, image
+// filling the left column, same media:content column ratio and border radius -
+// see the `.dd-block--identity.bb2-hero` rules in styles.css). Every field
+// identityBlock rendered (eyebrow, name, thesis, why-it-works, at-a-glance
+// specs, core characteristics) is still rendered here - the spec-grid and
+// core-characteristics list just get a `--compact` variant (tighter type/
+// padding, same 2-column layout) instead of the taller default sizing, so the
+// card fits the shared hero height without losing or rewriting any information.
+function identityHeroBlock(box) {
+  const idSec = el("section", "dd-block dd-block--identity bb2-hero");
+  const media = el("div", "bb2-hero__media");
+  media.appendChild(renderImage(box.overview.heroImage));
+
+  const body = el("div", "bb2-hero__body dd-block__identity-body");
+  body.innerHTML =
+    '<div class="dd-block__eyebrow">' + box.label + "</div>" +
+    "<h3>" + box.name + "</h3>" +
+    "<p class='deep-dive__thesis'>" + box.thesis + "</p>" +
+    (box.whyItWorks ? "<p class='deep-dive__why-it-works'><strong>Why this buy box works:</strong> " + box.whyItWorks + "</p>" : "");
+  if (box.provisionalNote) body.appendChild(pendingBadge(box.provisionalNote));
+
+  const specs = el("div", "spec-grid spec-grid--compact");
+  specs.appendChild(specRow("Bed / Bath", box.atAGlance.bedBath));
+  specs.appendChild(specRow("Comfortable sleeps", box.atAGlance.sleeps));
+  specs.appendChild(specRow("Hero mechanism", box.atAGlance.heroMechanism));
+  specs.appendChild(specRow("Preliminary revenue", box.atAGlance.revenue));
+  if (box.atAGlance.geography) specs.appendChild(specRow("Geography", box.atAGlance.geography));
+  body.appendChild(specs);
+
+  body.appendChild(el("h4", "identity-hero__characteristics-label", "Core characteristics"));
+  const coreList = el("ul", "core-characteristics core-characteristics--compact");
+  box.coreCharacteristics.forEach((c) => coreList.appendChild(el("li", null, c)));
+  body.appendChild(coreList);
+
+  idSec.appendChild(media);
+  idSec.appendChild(body);
   return idSec;
 }
 
@@ -353,6 +403,16 @@ function purchasePriceBlock(box) {
     priceSec.appendChild(pendingBadge("Candidate, CapEx, and underwriting pending"));
   }
   priceSec.appendChild(el("p", null, box.purchasePrice.note));
+  if (box.purchasePrice.zillowListing) {
+    const z = box.purchasePrice.zillowListing;
+    const zillow = el("div", "zillow-listing-card");
+    zillow.innerHTML =
+      "<h5>Zillow candidate supplied</h5>" +
+      "<p><strong>" + z.name + "</strong></p>" +
+      '<a class="comp-card__link" href="' + z.url + '" target="_blank" rel="noopener">View on Zillow ↗</a>' +
+      (z.note ? "<p class='dd-block__note'>" + z.note + "</p>" : "");
+    priceSec.appendChild(zillow);
+  }
   if (box.purchasePrice.zillowStatus && box.purchasePrice.zillowStatus.length) {
     priceSec.appendChild(el("p", "needed-fields-list__label", "Acquisition / Zillow status:"));
     const zillowList = el("ul", "needed-fields-list");
@@ -375,6 +435,9 @@ function analystNotesBlock(box) {
     note.innerHTML = "<h5>" + n.heading + "</h5><p>" + n.body + "</p>";
     notesSec.appendChild(note);
   });
+  if (box.analystImages && box.analystImages.length) {
+    notesSec.appendChild(renderImageGrid(box.analystImages, { small: true }));
+  }
   return notesSec;
 }
 
@@ -487,29 +550,24 @@ function bb2AutoAddBlock(box) {
   if (a.overviewImages && a.overviewImages.length) sec.appendChild(renderImageGrid(a.overviewImages));
   const grid = el("div", "bb2-playbook-grid bb2-playbook-grid--auto");
   a.items.forEach((item) => {
+    if (!item.images || !item.images.length) return;
     const card = el("figure", "bb2-mechanism-card");
     let rest = [];
-    if (item.images && item.images.length) {
-      // First image carries the card's main figure treatment; any additional
-      // supplied images render as a small supporting thumbnail strip after the caption.
-      const primary = item.images[0];
-      rest = item.images.slice(1);
-      const btn = el("button", "photo-figure__trigger");
-      btn.type = "button";
-      btn.setAttribute("aria-label", "Expand image: " + primary.alt);
-      const img = document.createElement("img");
-      img.src = primary.file;
-      img.alt = primary.alt;
-      img.loading = "lazy";
-      img.decoding = "async";
-      btn.appendChild(img);
-      btn.addEventListener("click", () => openLightbox(primary.file, primary.alt, primary.caption));
-      card.appendChild(btn);
-    } else {
-      const ph = el("div", "img-placeholder bb2-auto-add-card__placeholder", "");
-      ph.innerHTML = '<span class="img-placeholder__label">No image supplied</span>';
-      card.appendChild(ph);
-    }
+    // First image carries the card's main figure treatment; any additional
+    // supplied images render as a small supporting thumbnail strip after the caption.
+    const primary = item.images[0];
+    rest = item.images.slice(1);
+    const btn = el("button", "photo-figure__trigger");
+    btn.type = "button";
+    btn.setAttribute("aria-label", "Expand image: " + primary.alt);
+    const img = document.createElement("img");
+    img.src = primary.file;
+    img.alt = primary.alt;
+    img.loading = "lazy";
+    img.decoding = "async";
+    btn.appendChild(img);
+    btn.addEventListener("click", () => openLightbox(primary.file, primary.alt, primary.caption));
+    card.appendChild(btn);
     const cap = el("figcaption", "bb2-mechanism-card__caption");
     cap.innerHTML = "<strong>" + item.name + "</strong><span class='bb2-mechanism-card__note'>" + item.note + "</span>";
     card.appendChild(cap);
@@ -550,13 +608,7 @@ function bb2NiceToHaveRankedBlock(box) {
     if (item.note) html += "<p class='dd-block__note'>" + item.note + "</p>";
     body.innerHTML = html;
     if (item.thinData) body.appendChild(pendingBadge("Thin data — exploratory, N<4"));
-    if (item.images && item.images.length) {
-      body.appendChild(renderImageGrid(item.images, { small: true }));
-    } else {
-      const ph = el("div", "img-placeholder img-placeholder--small", "");
-      ph.innerHTML = '<span class="img-placeholder__label">No image supplied</span>';
-      body.appendChild(ph);
-    }
+    if (item.images && item.images.length) body.appendChild(renderImageGrid(item.images, { small: true }));
     row.appendChild(body);
     list.appendChild(row);
   });
@@ -654,10 +706,14 @@ function bb2GeographicConsiderationsBlock(box) {
 // 9. Ideal Locations.
 function bb2IdealLocationsBlock(box) {
   const i = box.idealLocations;
+  if (i.locationPriority) {
+    return ddBlock("Ideal Locations", [
+      ["Location priority", i.locationPriority],
+    ], null, "compact");
+  }
   return ddBlock("Ideal Locations", [
     ["Recommended", i.recommended],
     ["Demand drivers nearby", i.demandDrivers],
-    ["What the evidence does not yet establish", i.whatEvidenceDoesNotEstablish],
   ], null, "compact");
 }
 
@@ -693,9 +749,14 @@ function bb2DesignPlaybookBlock(box) {
     const cap = el("figcaption", "bb2-mechanism-card__caption");
     // `m.property` is omitted entirely (not just left blank) when a source property
     // has not been verified - no "attribution pending" text is ever shown to the client.
+    // `m.provenanceLabel` is the opposite case made explicit: a small, clearly-marked
+    // label for a card whose source property is genuinely unknown (not just
+    // unnamed) - shown instead of a property/link line, never alongside one.
     cap.innerHTML =
       "<strong>" + m.title + "</strong>" +
-      (m.property ? '<span class="bb2-mechanism-card__property">' + m.property + (m.url ? ' · <a href="' + m.url + '" target="_blank" rel="noopener">View on Airbnb ↗</a>' : "") + "</span>" : "") +
+      (m.provenanceLabel
+        ? "<span class='bb2-mechanism-card__provenance-pending'>" + m.provenanceLabel + "</span>"
+        : (m.property ? '<span class="bb2-mechanism-card__property">' + m.property + (m.url ? ' · <a href="' + m.url + '" target="_blank" rel="noopener">View on Airbnb ↗</a>' : "") + "</span>" : "")) +
       "<span class='bb2-mechanism-card__note'>" + m.image.caption + "</span>";
     card.appendChild(cap);
     grid.appendChild(card);
@@ -964,29 +1025,27 @@ function renderDeepDive(box) {
   // F. Must-have amenities
   const mustSec = el("section", "dd-block");
   mustSec.appendChild(el("h4", "dd-block__title", "Must-Have Amenities"));
+  const mustList = el("ul", "bb2-checklist bb2-checklist--grid bb2-checklist--check");
+  const mustImages = [];
   box.mustHaveAmenities.forEach((a) => {
-    const row = el("div", "amenity-row");
-    row.innerHTML =
-      "<h5>" + a.name + "</h5>" +
-      "<p><strong>Why required:</strong> " + a.why + "</p>" +
-      "<p><strong>Strong execution looks like:</strong> " + a.strongExecution + "</p>";
-    if (a.images && a.images.length) {
-      row.appendChild(renderImageGrid(a.images, { small: true }));
-    }
-    mustSec.appendChild(row);
+    mustList.appendChild(el("li", null, "<strong>" + a.name + ":</strong> " + a.why + " " + a.strongExecution));
+    if (a.images && a.images.length) mustImages.push(...a.images);
   });
+  mustSec.appendChild(mustList);
+  if (mustImages.length) mustSec.appendChild(renderImageGrid(mustImages, { small: true }));
   root.appendChild(mustSec);
 
   // G. Nice-to-have amenities
   const niceSec = el("section", "dd-block");
   niceSec.appendChild(el("h4", "dd-block__title", "Nice-to-Have Amenities"));
   const niceList = el("ul", "nice-to-have-list");
+  const niceImages = [];
   box.niceToHaveAmenities.forEach((a) => {
-    const item = el("li", null, "<strong>" + a.name + ":</strong> " + a.evidence);
-    if (a.images && a.images.length) item.appendChild(renderImageGrid(a.images, { small: true }));
-    niceList.appendChild(item);
+    niceList.appendChild(el("li", null, "<strong>" + a.name + ":</strong> " + a.evidence));
+    if (a.images && a.images.length) niceImages.push(...a.images);
   });
   niceSec.appendChild(niceList);
+  if (niceImages.length) niceSec.appendChild(renderImageGrid(niceImages, { small: true }));
   root.appendChild(niceSec);
 
   // H. Geographic considerations
@@ -1006,7 +1065,7 @@ function renderDeepDive(box) {
       ["Recommended", box.idealLocations.recommended],
       ["Demand drivers nearby", box.idealLocations.demandDrivers],
       ["What the evidence establishes", box.idealLocations.whatEvidenceEstablishes],
-      ["What it does not establish", box.idealLocations.whatEvidenceDoesNotEstablish],
+      ["Additional guidance", box.idealLocations.additionalGuidance],
     ])
   );
 
@@ -1032,7 +1091,7 @@ function renderDeepDive(box) {
     // Anonymous supplied photography illustrating the design pattern, no identified
     // listing (3BR path) — captions describe only what the photo itself shows.
     designSec.appendChild(
-      el("p", "dd-block__note", "No specific comp identities or Airbnb links were supplied for this design set — every photo below is representative visual pattern evidence only.")
+      el("p", "dd-block__note", "The photos below are visual pattern evidence for the design direction. Revenue evidence remains separate in the Revenue Potential section.")
     );
     designSec.appendChild(renderImageGrid(box.designPhotos));
   }

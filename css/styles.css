@@ -136,6 +136,8 @@ a { color: var(--color-primary-light); }
    ============================================================ */
 .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.25rem; }
 .chart-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 1rem; height: 300px; }
+.chart-card--image { height: auto; min-height: 300px; display: flex; align-items: center; justify-content: center; }
+.chart-image { display: block; width: 100%; height: auto; max-height: 360px; object-fit: contain; border-radius: 6px; }
 
 /* ============================================================
    Section 7: justification
@@ -247,9 +249,52 @@ a { color: var(--color-primary-light); }
   margin: 1.5rem 0 2rem;
   box-shadow: var(--shadow);
 }
+/* 3BR's identity card (`.dd-block.dd-block--identity`) reuses `.bb2-hero` directly
+   (see identityBlock in render.js), rather than duplicating the hero-card rules
+   above for a third time. `.dd-block` applies its own section-level padding,
+   which would double up against `.bb2-hero__body`'s padding and pad the image
+   for no reason - override it back to 0 here. */
+.dd-block--identity.bb2-hero { padding: 0; }
 .bb2-hero__media { min-height: 320px; }
 .bb2-hero__media .photo-figure, .bb2-hero__media .photo-figure__trigger { height: 100%; aspect-ratio: auto; border-radius: 0; border: none; }
 .bb2-hero__body { padding: 2.25rem 2.5rem; display: flex; flex-direction: column; justify-content: center; gap: 1rem; }
+
+/* 3BR's identity hero (`.dd-block--identity.bb2-hero`, see identityHeroBlock in
+   render.js) is the only hero card that ever holds a real, natural-dimensioned
+   photo instead of the placeholder box 4BR/5BR use - left unconstrained it grows
+   to whatever height the (much longer) identity content needs. Give it the same
+   fixed desktop height and image-fill behavior as the 4BR/5BR hero without
+   touching the shared `.bb2-hero`/`.bb2-hero__media` rules those cards use, so
+   this is scoped to 3BR only. 830px matches 4BR's own rendered hero height at
+   the shared 1400px deep-dive container width (measured directly in-browser). */
+.dd-block--identity.bb2-hero { height: 830px; }
+.dd-block--identity.bb2-hero .bb2-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dd-block--identity.bb2-hero .bb2-hero__body { padding: 1.5rem 2rem; gap: 0.45rem; overflow-y: auto; }
+.dd-block--identity.bb2-hero .dd-block__eyebrow { font-size: 0.78rem; }
+.dd-block--identity.bb2-hero .bb2-hero__body h3 { font-size: 1.55rem; margin: 0.1rem 0 0.2rem; }
+.dd-block--identity.bb2-hero .deep-dive__thesis { font-size: 0.92rem; line-height: 1.4; margin: 0; color: var(--color-text-muted); }
+.dd-block--identity.bb2-hero .deep-dive__why-it-works { font-size: 0.82rem; line-height: 1.4; padding: 0.55rem 0.75rem; margin: 0.15rem 0 0; }
+
+/* Compact variants of the shared spec-grid/core-characteristics components
+   (see specRow/identityHeroBlock in render.js) - same 2-column layout, tighter
+   type and padding so all five at-a-glance specs and all twelve core
+   characteristics still render in full, just within the fixed hero height. */
+.spec-grid--compact { gap: 0.4rem; margin: 0.4rem 0; }
+.spec-grid--compact .spec-row { padding: 0.4rem 0.6rem; }
+.spec-grid--compact .spec-row__label { font-size: 0.66rem; }
+.spec-grid--compact .spec-row__value { font-size: 0.82rem; }
+.identity-hero__characteristics-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; color: var(--color-primary); margin: 0.2rem 0 0.3rem; }
+.core-characteristics--compact { column-gap: 1.25rem; }
+.core-characteristics--compact li { font-size: 0.78rem; margin-bottom: 0.14rem; }
+
+@media (max-width: 960px) {
+  .dd-block--identity.bb2-hero { height: auto; }
+  .dd-block--identity.bb2-hero .bb2-hero__body { overflow-y: visible; }
+}
 .bb2-hero__status { align-self: flex-start; }
 .bb2-hero__title { font-size: 2.1rem; margin: 0.1rem 0 0.3rem; }
 .bb2-hero__thesis { font-size: 1.12rem; color: var(--color-text-muted); margin: 0; }
@@ -320,6 +365,7 @@ a { color: var(--color-primary-light); }
 .bb2-mechanism-card__caption { padding: 1.1rem 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; }
 .bb2-mechanism-card__caption strong { font-size: 1.08rem; color: var(--color-primary); }
 .bb2-mechanism-card__property { font-size: 0.86rem; color: var(--color-text-muted); }
+.bb2-mechanism-card__provenance-pending { font-size: 0.76rem; font-weight: 700; color: var(--color-pending-text); background: var(--color-pending-bg); display: inline-block; padding: 0.1rem 0.45rem; border-radius: 5px; margin: 0.3rem 0 0.15rem; }
 .bb2-mechanism-card__note { font-size: 0.9rem; color: var(--color-text-muted); }
 
 .bb2-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 1.1rem 0 1.4rem; }

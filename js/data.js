@@ -36,8 +36,12 @@
 // webpage/assets/<buy-box>/<category>/ - see webpage/assets/3br/SOURCE.md for
 // provenance back to the original Walid/Clearwater_Buy_Box_3BR package.
 // ---------------------------------------------------------------------------
-function photo(relPath, alt, caption) {
-  return { file: "assets/" + relPath, alt: alt, caption: caption };
+function photo(relPath, alt, caption, focus) {
+  // `focus` is optional (CSS object-position, e.g. "62% 45%") and purely additive -
+  // only the 3BR hero image sets it, to keep the pool/mini-golf visible under a
+  // hero-card crop that's taller/narrower than this aerial photo's native aspect
+  // ratio. Every other call site omits it and gets the default (centered) crop.
+  return { file: "assets/" + relPath, alt: alt, caption: caption, focus: focus };
 }
 
 // ---------------------------------------------------------------------------
@@ -49,28 +53,40 @@ const BUY_BOXES = [
     id: "3br",
     label: "3BR Buy Box",
     status: "developed",
-    name: "Clearwater 3BR",
+    name: "3BR Large Family/Small Group House",
     thesis:
-      "Acquire an attainable 3BR pool home within a reasonable drive of Clearwater Beach and build a fully enclosed, " +
-      "canopy-shaded backyard experience - pool, fire pit, and shaded outdoor dining - sized for large families with kids.",
+      "Acquire an attainable 3BR pool home within a reasonable drive of Clearwater Beach and build a fully enclosed " +
+      "backyard experience - pool, fire pit, and shaded outdoor dining - sized for large families with kids.",
     whyItWorks:
       "The traveler base for this buy box is predominantly large families with kids, with small groups as the next priority. " +
-      "A private, fully enclosed backyard with a shaded pool, fire pit, and dining area directly serves that demographic without " +
+      "A private, fully enclosed backyard with a pool, fire pit, and dining area directly serves that demographic without " +
       "requiring a waterfront lot or a specific architectural style - both are explicitly not required. Proximity to Clearwater " +
       "Beach and Pier 60 (within roughly 7-8 miles) supplies the location demand; the tropical interior theming (aqua, green, " +
       "and white accents) supplies the merchandising identity.",
+    // Buy-box summary hero image (see identityBlock in render.js) - same supplied
+    // photo used in the Backyard section below (backyard/backyard-02-pool-minigolf-aerial.jpg),
+    // under a hero-specific filename. `focus` keeps the pool and mini-golf green
+    // centered under the hero card's crop; see webpage/assets/3br/SOURCE.md.
+    overview: {
+      heroImage: photo(
+        "3br/backyard/3br-buy-box-hero-pool-backyard.jpg",
+        "Aerial view of a backyard with a pool, shaded dining/fire pit deck, and a mini-golf green",
+        "The 3BR program: a fully enclosed backyard built around a pool, fire pit, and mini-golf green.",
+        "72% 42%"
+      ),
+    },
     atAGlance: {
       bedBath: "3 bedrooms / 2+ bathrooms",
       sleeps: "8-12 (ideal sleep count)",
-      heroMechanism: "Canopy-shaded pool + fire pit backyard built for large families with kids",
+      heroMechanism: "Lagoon/free-form pool + fire pit backyard built for large families with kids",
       revenue: "Low $85K · Mid $100K · High $110K+ (preliminary; not underwritten)",
-      targetAcquisitionPrice: "~$500,000 (no specific listing supplied)",
-      primaryRequirement: "A fully enclosed, private backyard large enough for a canopy-shaded pool, fire pit, and shaded group dining",
+      targetAcquisitionPrice: "~$500,000 screen; one Zillow candidate supplied",
+      primaryRequirement: "A fully enclosed, private backyard large enough for a lagoon/free-form pool, fire pit, and shaded group dining",
     },
     coreCharacteristics: [
       "3 real bedrooms, 2+ bathrooms",
       "Comfortable capacity for 8-12 guests",
-      "Existing pool with a shade canopy",
+      "Lagoon/free-form pool",
       "Pool heater",
       "Fire pit",
       "Shaded outdoor dining, sized for the full group",
@@ -83,10 +99,10 @@ const BUY_BOXES = [
     ],
     architecturalStyle: {
       recommended: [
-        "The source material states no required architectural style - reference photos span a turquoise-trimmed single-story ranch, a mid-century-modern home with a stone accent wall, and a white coastal bungalow.",
+        "New-looking Florida ranch-style homes are the most common style for this buy box, with a few modified Florida-ranch/coastal variations also acceptable.",
       ],
       why:
-        "Because no single style is mandated, the deciding factor is whether the property can support the backyard/pool program and a tropical interior theme, not its exterior architecture.",
+        "The deciding factor is whether the property can support the backyard/pool program and a tropical interior theme, not its exterior architecture.",
       avoid: [],
       images: [
         photo("3br/architectural/architectural-01-turquoise-ranch.jpg", "Single-story ranch home with turquoise shutters and front door", "Reference example: turquoise-accented Florida ranch."),
@@ -103,9 +119,9 @@ const BUY_BOXES = [
     },
     backyard: {
       usableSpace:
-        "Big enough for a pool with canopy, a fire pit, mini-golf, and large outdoor dining - the backyard is the primary program for this buy box.",
+        "Big enough for a pool, a fire pit, mini-golf, and large outdoor dining - the backyard is the primary program for this buy box.",
       amenityZoneRequirements:
-        "Pool with canopy + fire pit + shaded outdoor dining sized for the full group; mini-golf or a comparable yard activity as space allows.",
+        "Pool + fire pit + shaded outdoor dining sized for the full group; mini-golf or a comparable yard activity as space allows.",
       privacyNote:
         "Privacy is a stated requirement: a closed (fully enclosed) backyard.",
       images: [
@@ -116,18 +132,19 @@ const BUY_BOXES = [
     },
     mustHaveAmenities: [
       {
-        name: "Pool with canopy / shade structure",
-        why: "Stated as a must-have; shade over and around the pool supports comfortable use by families with young kids.",
-        strongExecution: "A pergola, screen enclosure, or canopy that shades a meaningful portion of the pool deck, not just a single umbrella.",
+        name: "Pool (Lagoon-shaped)",
+        why: "A lagoon/free-form pool is the central visual and functional backyard feature for the 3BR product.",
+        strongExecution: "Shade or screened protection around the pool is worth considering for UV protection and family comfort, but the must-have is the pool itself.",
         images: [
           photo("3br/must-have/must-have-01-lagoon-pool-waterfall.jpg", "Lagoon-style pool with a rock waterfall feature under palm canopy", "Reference example: a heavily shaded, lagoon-style pool."),
+          photo("3br/must-have/must-have-02-screened-pool-enclosure.jpg", "Screened pool enclosure with pool toys and sliding doors to the house", "Reference example: a full screened pool enclosure."),
           photo("3br/must-have/must-have-03-pool-pergola-canopy.jpg", "Pool with a wooden pergola shade structure and lounge seating", "Reference example: a built pergola shading the pool deck."),
         ],
       },
       {
         name: "Pool heater",
-        why: "Listed explicitly as a must-have in the source material.",
-        strongExecution: "Not independently illustrated by a supplied photo; treat as a mechanical/equipment requirement rather than a visual one.",
+        why: "A pool heater is part of the finished-product expectation for family usability.",
+        strongExecution: "Confirm the heater is functional and sized for extended-season use - this is a mechanical/equipment requirement rather than a visual one.",
         images: [],
       },
       {
@@ -141,17 +158,9 @@ const BUY_BOXES = [
       },
       {
         name: "Fire pit",
-        why: "Listed explicitly as a must-have for the backyard program.",
+        why: "The fire pit is the evening social anchor for the backyard program.",
         strongExecution: "See the Backyard section above for fire-pit examples within a fully zoned yard.",
         images: [],
-      },
-      {
-        name: "Screened pool enclosure (functional/climate consideration)",
-        why: "A screened enclosure keeps the pool usable and bug-free for family stays; shown repeatedly across the supplied photo set.",
-        strongExecution: "A full screen enclosure over the pool and adjacent deck.",
-        images: [
-          photo("3br/must-have/must-have-02-screened-pool-enclosure.jpg", "Screened pool enclosure with pool toys and sliding doors to the house", "Reference example: a full screened pool enclosure."),
-        ],
       },
     ],
     niceToHaveAmenities: [
@@ -163,19 +172,19 @@ const BUY_BOXES = [
         ],
       },
       { name: "Mini-golf", evidence: "Listed alongside the must-have backyard program as a nice-to-have activity; see Backyard section for examples.", images: [] },
-      { name: "Pool table", evidence: "Listed as a nice-to-have amenity in the source material.", images: [] },
-      { name: "Hot tub", evidence: "Listed as a nice-to-have amenity in the source material; see the third backyard reference photo above.", images: [] },
+      { name: "Pool table", evidence: "Useful when it fits a real entertainment area rather than an isolated object.", images: [] },
+      { name: "Hot tub", evidence: "A useful add-on where the site and economics support it; see the third backyard reference photo above.", images: [] },
     ],
     geographicConsiderations: {
-      views: "Not applicable (stated explicitly in the source material).",
+      views: "Not applicable for this buy box.",
       waterfront: "Not required - properties work without a waterfront.",
       privacySeclusion: "Privacy is a must, via a closed (fully enclosed) backyard.",
     },
     idealLocations: {
       recommended: "Close to the beach - at most 7 to 8 miles.",
       demandDrivers: "Clearwater Beach and Pier 60 are named as the popular nearby demand drivers.",
-      whatEvidenceEstablishes: "The source material references a supplied map image showing where the market's top 25% revenue generators lie, as the basis for the mileage guidance.",
-      whatEvidenceDoesNotEstablish: "That underlying map image was not included among the folder assets provided for this integration; use the existing Location Analysis map (Section 4) as the current interactive equivalent - it is market-wide, not 3BR-specific, so treat it as supporting context rather than a like-for-like replacement.",
+      whatEvidenceEstablishes: "The buy-box evidence references a map image showing where the market's top 25% revenue generators lie, as the basis for the mileage guidance.",
+      additionalGuidance: "Use the interactive Location Analysis map (Section 4) to cross-check candidate locations against where the market's top performers already sit - it is market-wide rather than 3BR-specific, so treat it as supporting context alongside the mileage guidance above.",
     },
     travelerICP: {
       primary: "Mostly large families with kids.",
@@ -232,9 +241,13 @@ const BUY_BOXES = [
       status: "partial",
       targetPrice: "~$500,000",
       note:
-        "The source material states a target acquisition price of $500,000. No specific listing was supplied (the source's \"Listing 1\" field was left blank), so there is no property address, Zillow link, CapEx estimate, or underwriting model behind this figure yet.",
+        "The target acquisition screen is approximately $500,000. One Zillow candidate was supplied, but CapEx, underwriting, and final fit still need separate review.",
+      zillowListing: {
+        name: "14480 120TH AVENUE, LARGO, FL 33774",
+        url: "https://www.zillow.com/homedetails/14480-120th-Ave-Largo-FL-33774/47010417_zpid/?",
+        note: "Candidate supplied with the 3BR buy-box notes; not yet underwritten.",
+      },
       neededFields: [
-        "A specific screened candidate listing with address and direct Zillow link",
         "Property images for the candidate",
         "Required transformation scope",
         "Estimated CapEx",
@@ -258,21 +271,34 @@ const BUY_BOXES = [
           "Outdoor dining needs to be shaded and large enough for guests to relax by the pool as a group - not a small, exposed table. See the Backyard and Must-Have Amenities sections for reference execution.",
       },
       {
+        heading: "Shaded or screened pools are worth considering",
+        body:
+          "Shade or screening may improve family comfort and UV protection around the pool. Treat this as a useful execution choice around the required pool, not as a separate pool-enclosure requirement.",
+      },
+      {
+        heading: "Lagoon/free-form pool reminder",
+        body:
+          "The lagoon or free-form pool shape is part of the 3BR product direction and should stay visible in acquisition screening and design planning.",
+      },
+      {
+        heading: "Photography must compete with the market's top quartile",
+        body:
+          "Any property receiving meaningful STR investment needs excellent photography, with the design-comp imagery setting the quality bar for market-top-25% competition.",
+      },
+      {
         heading: "Interior theme: tropical, with a specific accent palette",
         body:
           "Most properties in this buy box use a tropical interior theme. Accent colors of aqua blue, green, and white are called out as working well. " +
           "The supplied reference photos show this via a surf-mural living room, a tropical palm-leaf mural living room, and jewel-tone tropical furnishings.",
       },
-      {
-        heading: "STR regulation fields were not completed in the source material",
-        body:
-          "The source document's STR Regulations category (regulation tier, permit/residency requirements, operating limits, investor notes) was left as an unfilled template - it describes what such an entry should contain but does not state an actual determination for Clearwater. This is consistent with this webpage's existing Section 3 note that regulatory diligence is deferred to the acquisition-screening phase; no regulation finding is claimed here.",
-      },
-      {
-        heading: "No specific comp identities or links were supplied",
-        body:
-          "The design and revenue comp sets are supplied as representative photographs only - no Airbnb listing names, URLs, or per-property metrics were included in the source package (the document's own \"ABNB URL\" and revenue-comp-set placeholders were left blank). Treat every image in this buy box as anonymized visual pattern evidence, not as an identified, linkable comp.",
-      },
+    ],
+    analystImages: [
+      photo("3br/analyst-notes/analyst-01-surf-mural-livingroom.jpg", "Living room with surf mural and tropical blue accents", "Analyst-note reference: surf mural and tropical blue accents."),
+      photo("3br/analyst-notes/analyst-02-palmleaf-mural-livingroom.jpg", "Living room with palm-leaf mural and tropical furnishings", "Analyst-note reference: palm-leaf mural and tropical furnishings."),
+      photo("3br/analyst-notes/analyst-03-firepit-adirondack-dusk.jpg", "Firepit seating with Adirondack chairs at dusk", "Analyst-note reference: evening firepit setup."),
+      photo("3br/analyst-notes/analyst-04-outdoor-movie-kids.jpg", "Children watching an outdoor movie beside a pool", "Analyst-note reference: kid-friendly outdoor movie setup."),
+      photo("3br/analyst-notes/analyst-05-child-puttinggreen.jpg", "Child playing on a backyard putting green", "Analyst-note reference: kid-friendly putting green."),
+      photo("3br/analyst-notes/analyst-06-iguana-minigolf-feature.jpg", "Mini-golf feature with iguana sculpture", "Analyst-note reference: playful mini-golf feature."),
     ],
   },
   {
@@ -410,16 +436,15 @@ const BUY_BOXES = [
 
     // 8. Geographic Considerations.
     geographicConsiderations: {
-      views: "No required view has been established — no reviewed comp cites a view as part of its mechanism.",
+      views: "Views are not a priority for this buy box — no reviewed comp cites a view as part of its mechanism.",
       waterfront: "Not required. A confirmed-waterfront listing elsewhere in this project had the lowest revenue of its comparison set.",
-      privacySeclusion: "Privacy and neighbor compatibility require property-level verification — the dataset does not quantify privacy, which is not the same as privacy being irrelevant.",
+      privacySeclusion: "Prioritize privacy and neighbor compatibility — a well-buffered, private lot supports the pool/backyard gathering experience this buy box depends on.",
     },
 
     // 9. Ideal Locations.
     idealLocations: {
       recommended: "Seminole is the primary geography; Clearwater ZIP 33764 is secondary evidence; Largo remains eligible but is less tested for the core strategy.",
       demandDrivers: "Beach access by a reasonable drive is consistent across core comps.",
-      whatEvidenceDoesNotEstablish: "Exact attraction/access guidance beyond reasonable-drive beach proximity remains pending — not yet separately established for this buy box.",
     },
 
     // 10. Traveler ICP.
@@ -449,11 +474,15 @@ const BUY_BOXES = [
           url: "https://www.airbnb.com/rooms/1503669407717600557",
           image: photo("4br/core-comp-set/lost-in-paradise/lost-in-paradise-real-bed-capacity.jpg", "Jungle-themed bunk and twin bedroom with real beds", "Dedicated real beds, not padded advertised capacity."),
         },
+        // Source property is genuinely unknown for this image (2026-08-24) - no
+        // Airbnb link, property ID, revenue, or revenue tier is attached, and it
+        // is not part of the 11-comp revenue set. Demonstrates backyard zoning /
+        // the finished-product concept only - not proof of revenue, ROI, market
+        // location, or amenity causality. See webpage/assets/4br/SOURCE.md.
         {
-          title: "Zoned backyard entertainment",
-          property: "Tropical Family Villa",
-          url: "https://www.airbnb.com/rooms/892437841513061414",
-          image: photo("4br/supporting-comp-set/tropical-family-villa/tropical-family-villa-pool-backyard-ecosystem.jpg", "Twilight backyard with a mini-putting green and pool", "A small putting green paired with the pool in one coordinated zone."),
+          title: "Multi-zone backyard experience",
+          provenanceLabel: "Visual reference — property attribution pending",
+          image: photo("4br/design-playbook/multi-zone-backyard-experience.webp", "Nighttime aerial view of a backyard with a screened pool, a multi-sport court, a mini-golf green, firepit seating, and a covered dining pavilion connected by lit pathways", "A coordinated backyard layout combines a screened pool, multi-use sport court, mini-golf area, firepit seating, covered dining, lighting, privacy fencing, and clear circulation between activity zones."),
         },
         {
           title: "One photographable hero moment",
@@ -704,7 +733,7 @@ const BUY_BOXES = [
         "No single required architectural style - the supplied design examples range from an ordinary ranch to a large waterfront house.",
         "What matters is whether the house and lot can support the pool/backyard-zoning and game-room transformation, not the exterior style.",
       ],
-      why: "The Design Direction source material states the property does not need one architectural style; the deciding factor is whether the lot can support the resort-style transformation.",
+      why: "The property does not need one architectural style; the deciding factor is whether the lot can support the resort-style transformation.",
       avoid: ["Lots too small to support 5+ distinct backyard amenity zones around the pool."],
       images: [
         photo("5br/must-have/pool/pool-03.jpg", "Branded teal house and pool deck with a flamingo float and matched lounge furniture", "An ordinary single-story house made distinctive through pool/deck styling, not architecture."),
@@ -784,21 +813,18 @@ const BUY_BOXES = [
         ] },
         { name: "Fire Pit", note: "Create a dedicated evening social zone away from the primary pool circulation, surrounded by intentional seating and color.", images: [
           photo("5br/auto-add/auto-add-07-firepit-outdoor-seating.jpg", "Fire pit surrounded by red and teal Adirondack chairs and scalloped umbrellas", "A fire pit surrounded by intentional color and seating - a distinct evening zone, not a standalone object."),
-          photo("5br/auto-add/auto-add-06-firepit.jpg", "People toasting glasses around a fire pit with a sport court visible behind them", "A fire pit doubling as a gathering point, with a sport court and cornhole visible just beyond it."),
         ] },
         { name: "Outdoor Dining", note: "Provide group-sized dining near the pool and outdoor entertainment areas, sized for a meaningful portion of a 14-16 guest group.", images: [] },
         { name: "Outdoor Bar / Tiki Bar", note: "Add a simple bar or tiki-style gathering area where the backyard allows it, reinforcing the tropical private-resort positioning without full outdoor-kitchen capex.", images: [] },
         { name: "BBQ Grill", note: "Provide a quality grill adjacent to outdoor dining to complete the outdoor social program at relatively low cost.", images: [] },
         { name: "Outdoor Lounge Seating", note: "Add a separate lounge area for guests who are not swimming or dining; covered or shaded seating is preferred.", images: [
           photo("5br/auto-add/auto-add-09-outdoor-lounge-seating.jpg", "Covered green lounge seating beside a plunge pool with a pool table visible under the patio", "Covered outdoor lounge seating beside a plunge pool, with a pool table visible under the adjoining patio."),
-          photo("5br/auto-add/auto-add-10-poolside-seating.jpg", "Tiki-thatched pavilion with sofa seating and a giant Jenga game beside the pool", "A tiki-thatched pavilion with sofa seating and a giant Jenga game beside the pool."),
         ] },
         { name: "Sun Loungers / Poolside Seating", note: "Provide sufficient poolside seating for a large group; coordinated bright colors can also strengthen listing photography.", images: [
           photo("5br/auto-add/auto-add-04-beach-seats-hot-tub.jpg", "Screened pool with an in-deck spa and a row of lounge chairs at dusk", "A screened pool with an in-deck spa and a full row of lounge chairs at dusk."),
         ] },
         { name: "Simple Lawn / Party Games", note: "Add low-capex movable entertainment such as cornhole, giant Jenga, giant checkers, or board games to increase perceived amenity density without permanent construction.", images: [
           photo("5br/auto-add/auto-add-05-board-games.jpg", "Stack of board games on a cabinet", "A stack of board games - a low-cost way to broaden indoor entertainment for mixed-age groups."),
-          photo("5br/auto-add/auto-add-11-lawn-games-volleyball.jpg", "Kids playing beach volleyball on a sand court bordered by turf and palms", "A sand volleyball court bordered by turf and palms - an active, low-cost outdoor activity."),
         ] },
         { name: "Karaoke / Simple Indoor Entertainment", note: "Add within the game-room environment as another inexpensive activity, broadening the indoor entertainment mix for adults, kids, and mixed-age groups.", images: [
           photo("5br/auto-add/auto-add-08-karaoke.jpg", "Karaoke stage with a neon sign and disco-ball lighting", "A dedicated karaoke stage with neon signage and disco-ball lighting."),
@@ -810,7 +836,7 @@ const BUY_BOXES = [
 
     // Nice to Have - Ranked, directly from BuyBoxDetailsText.pdf's scored ranking.
     niceToHaveRanked: {
-      note: "Ranked by the source document's importance score. Amenities with insufficient sample size are still shown, flagged as thin-data/exploratory rather than removed.",
+      note: "Ranked by importance score. Amenities with insufficient sample size are still shown, flagged as thin-data/exploratory rather than removed.",
       items: [
         { name: "Mini Golf", score: 0.77, revenueUplift: "+11.2%", p90Uplift: "+36.1%", n: 18, note: "The strongest supplied examples use mini golf as a designed backyard attraction - curved greens, multiple holes, landscaping, lighting, and obstacles integrated with the pool/sports zones.", images: [
           photo("5br/nice-to-have/mini-golf/mini-golf-01.jpg", "Curved mini-golf green with a disc-golf basket and bowling pins nearby", "A curved, landscaped mini-golf green with a disc-golf basket and bowling pins nearby - multiple activities sharing one zone."),
@@ -837,9 +863,8 @@ const BUY_BOXES = [
         ] },
         { name: "Sauna", thinData: true, n: null, note: "A potential luxury differentiator, but too sparsely represented in the Premium dataset (N<4) to support a strong acquisition conclusion.", images: [
           photo("5br/nice-to-have/movie-sauna-golf/movie-sauna-golf-01.jpg", "Barrel sauna positioned outside the house", "A barrel sauna positioned just outside the house, with the interior visible through the open door."),
-          photo("5br/nice-to-have/movie-sauna-golf/movie-sauna-golf-03-sauna.jpg", "Second view of the barrel sauna's wood-fired interior", "A second view of the barrel sauna, showing its wood-fired interior."),
         ] },
-        { name: "Golf Simulator", thinData: true, n: null, note: "Potentially attractive for a high-end indoor entertainment program, but there is not enough Premium-market evidence in the current dataset to rank it reliably. No image was supplied for this specific amenity.", images: [] },
+        { name: "Golf Simulator", thinData: true, n: null, note: "Potentially attractive for a high-end indoor entertainment program, but there is not enough Premium-market evidence in the current dataset to rank it reliably.", images: [] },
       ],
     },
 
@@ -862,17 +887,16 @@ const BUY_BOXES = [
       ],
     },
 
-    // 8. Geographic Considerations - not supplied by the Ifraham 5BR package; stated
-    // plainly as pending rather than filled with invented guidance.
+    // 8. Geographic Considerations.
     geographicConsiderations: {
-      views: "Not established in the Ifraham 5BR source material supplied for this integration.",
-      waterfront: "Not established in the Ifraham 5BR source material supplied for this integration.",
-      privacySeclusion: "Privacy is implied by the backyard's stated requirement to feel self-contained (fencing/landscaping), but no separate seclusion guidance was supplied.",
+      views: "Views are not a priority for this buy box; group capacity and the amenity package matter more.",
+      waterfront: "Waterfront is not required. Prioritize the property's pool, outdoor space, and entertainment offering instead.",
+      privacySeclusion: "Prioritize a private, fully enclosed backyard that creates a comfortable, self-contained setting for groups.",
     },
 
-    // 9. Ideal Locations - not supplied by the Ifraham 5BR package.
+    // 9. Ideal Locations.
     idealLocations: {
-      whatEvidenceDoesNotEstablish: "Ideal locations, view priorities, and specific demand-driver guidance have not yet been established for the 5BR workstream in the source material supplied for this integration.",
+      locationPriority: "Prioritize properties with convenient access to Clearwater–Largo–Seminole demand drivers, along with sufficient space, privacy, and parking. Premium views and waterfront positioning are not required.",
     },
 
     // 10. Traveler ICP - grounded directly in the Must-Haves text (bunk room framing).
@@ -978,9 +1002,9 @@ const REGULATION_NOTE =
 const DEMOGRAPHICS = {
   marketWide: { kids: 0.322, groupTrip: 0.214, pet: 0.092, other: 0.373 },
   byBedroom: [
-    { segment: "3BR", kids: 0.39, groupTrip: 0.222, other: 0.292 },
-    { segment: "4BR", kids: 0.401, groupTrip: 0.382, other: 0.144 },
-    { segment: "5BR", kids: 0.433, groupTrip: 0.406, other: 0.078 },
+    { segment: "3BR", kids: 0.39, groupTrip: 0.222, pet: 0.096, other: 0.292 },
+    { segment: "4BR", kids: 0.401, groupTrip: 0.382, pet: 0.073, other: 0.144 },
+    { segment: "5BR", kids: 0.433, groupTrip: 0.406, pet: 0.083, other: 0.078 },
   ],
   interpretation:
     "The single largest jump in group-trip share across the entire market occurs at the 3BR-to-4BR transition (+16.0 percentage points) — 4BR's group-trip composition is already close to 5BR levels, even though its family (kids) composition sits between 3BR and 5BR. This directly supports a 4BR product built around both family and celebration/friend-group demand simultaneously, while 3BR reads as more purely family-oriented and 5BR serves the largest, most group-dominant travel parties. City-level guest composition is broadly similar across Clearwater, Largo, and Seminole (kids 30-33%, group trip 19-26%), which weighs against a guest-composition explanation for Seminole's revenue premium and toward a product/amenity/geography explanation — without proving causation.",
@@ -992,25 +1016,28 @@ const DEMOGRAPHICS = {
 
 const PROPERTY_SIZE = {
   marketDistribution: [
+    { segment: "1BR", share: 0.092, n: 63 },
+    { segment: "2BR", share: 0.161, n: 110 },
     { segment: "3BR", share: 0.381, n: 261 },
     { segment: "4BR", share: 0.255, n: 175 },
-    { segment: "2BR", share: 0.161, n: 110 },
-    { segment: "1BR", share: 0.092, n: 63 },
     { segment: "5BR", share: 0.085, n: 58 },
     { segment: "6BR+", share: 0.026, n: 18 },
   ],
   topQuartileDistribution: [
+    { segment: "1BR", n: 12, share: 0.101 },
+    { segment: "2BR", n: 18, share: 0.151 },
     { segment: "3BR", n: 42, share: 0.353 },
     { segment: "4BR", n: 32, share: 0.269 },
-    { segment: "2BR", n: 18, share: 0.151 },
-    { segment: "1BR", n: 12, share: 0.101 },
     { segment: "5BR", n: 12, share: 0.101 },
     { segment: "6BR+", n: 3, share: 0.025 },
   ],
   revenueBySize: [
+    { segment: "1BR", medianRevenue: 23763, medianAdr: 106, medianOcc: 0.633 },
+    { segment: "2BR", medianRevenue: 39218, medianAdr: 164, medianOcc: 0.686 },
     { segment: "3BR", medianRevenue: 69663, medianAdr: 278, medianOcc: 0.708 },
     { segment: "4BR", medianRevenue: 101065, medianAdr: 405, medianOcc: 0.662 },
     { segment: "5BR", medianRevenue: 160603, medianAdr: 672, medianOcc: 0.711 },
+    { segment: "6BR+", medianRevenue: 201314, medianAdr: 769, medianOcc: 0.587 },
   ],
   interpretation:
     "4BR (26.9% of top-quartile listings vs. 25.5% of market inventory) and 5BR (10.1% of top-quartile vs. 8.5% of market inventory) are each modestly overrepresented among top performers relative to their market share; 3BR and smaller segments track close to or below their market share. Revenue climbs by bedroom count (3BR → 4BR → 5BR), driven mainly by ADR rather than occupancy, which sits in a narrow 66-71% band across all three segments — consistent with meaningfully different guest products at each size rather than the same product at different scales.",
@@ -1023,6 +1050,9 @@ const PROPERTY_SIZE = {
 const SPLIT_JUSTIFICATION = [
   "Property-size evidence (Section 6) shows revenue increasing by bedroom count primarily through ADR, not occupancy — occupancy stays in a narrow band across sizes, so 3BR/4BR/5BR are pricing-power products, not simply “more rooms, more nights booked.”",
   "Traveler-demographic evidence (Section 5) shows a materially different guest mix at each size — 3BR skews family-only, 4BR is the sharpest family+group-trip hybrid in the market, and 5BR serves the most group-dominant parties — supporting distinct guest theses per size rather than one universal buy box.",
+  "1BR / 2BR are excluded on revenue ceiling alone: $42,216 and $84,567 maximum revenue respectively, versus a $99,709 market Top-25% floor. Neither has produced a Top-25% listing in this dataset, let alone a Top-10% one. This is a revenue-ceiling conclusion, not a judgment about the format in general.",
+  "5-6BR Premium is the smallest pursued segment by count (N=69) but the strongest performer on the rate metrics, with 62.3% reaching the Top 10% among listings in that grouped segment.",
+  "7BR+ stays exploratory, not a fourth buy box. It is strongest on paper, but N=7 market-wide is too thin to underwrite acquisition criteria from; it is tracked, not ignored.",
   "Amenity and manual-review evidence for the 4BR workstream specifically shows that pricing power comes from branding and pool-centered experience design on ordinary property bones, not raw amenity count or expensive architecture — a thesis that is size-specific (a coherent identity works at 4BR's comfortable 8-10 capacity) and should not be assumed to transfer unmodified to 3BR or 5BR products.",
   "Location evidence (Section 4) shows revenue concentration is uneven across the three cities and is confounded with bedroom/capacity mix — reinforcing that geography alone does not explain performance, and that buy-box-specific product requirements (not a single market-wide formula) are doing the work.",
   "The Playbook's own guidance (Section 20) is explicit: avoid one universal buy box when materially different products compete under different economics or guest intents. The evidence above shows exactly that divergence by bedroom count.",
