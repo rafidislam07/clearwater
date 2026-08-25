@@ -742,7 +742,6 @@ const BUY_BOXES = [
     // 14. Purchase Price.
     acquisition: {
       status: "Pending property-level underwriting",
-      zillowSummary: "First-pass Zillow screening (2026-08-23) retained 15 listings and flagged 5 priority candidates for deeper review — screening decisions only, not purchase recommendations.",
       nextStep: "Full underwriting (purchase price, CapEx, cash-on-cash return) begins once a specific candidate is selected.",
     },
 

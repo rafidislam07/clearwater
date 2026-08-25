@@ -1043,7 +1043,9 @@ function acquisitionV2Block(box) {
   const sec = el("section", "dd-block dd-block--pending-price");
   sec.appendChild(el("h4", "dd-block__title", "Purchase Price"));
   sec.appendChild(pendingBadge(acq.status));
-  sec.appendChild(el("p", null, acq.zillowSummary));
+  if (acq.zillowSummary) {
+    sec.appendChild(el("p", null, acq.zillowSummary));
+  }
   if (acq.zillowCandidates && acq.zillowCandidates.length) {
     const list = el("ul", "bb2-zillow-candidates");
     acq.zillowCandidates.forEach((c) => {
