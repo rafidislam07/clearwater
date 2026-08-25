@@ -1043,9 +1043,7 @@ function acquisitionV2Block(box) {
   const sec = el("section", "dd-block dd-block--pending-price");
   sec.appendChild(el("h4", "dd-block__title", "Purchase Price"));
   sec.appendChild(pendingBadge(acq.status));
-  if (acq.zillowSummary) {
-    sec.appendChild(el("p", null, acq.zillowSummary));
-  }
+  sec.appendChild(el("p", null, acq.zillowSummary));
   if (acq.zillowCandidates && acq.zillowCandidates.length) {
     const list = el("ul", "bb2-zillow-candidates");
     acq.zillowCandidates.forEach((c) => {
@@ -1271,7 +1269,9 @@ function renderDeepDive(box) {
     designSec.appendChild(
       el("p", "dd-block__note", "The photos below are visual pattern evidence for the design direction. Revenue evidence remains separate in the Revenue Potential section.")
     );
-    designSec.appendChild(renderImageGrid(box.designPhotos));
+    const designGrid = renderImageGrid(box.designPhotos);
+    designGrid.classList.add("dd-block__images--design-large");
+    designSec.appendChild(designGrid);
   }
   designSec.appendChild(alexandriaButton("Open Design Comp Set in Alexandria", box.alexandria.designCompSetUrl));
   root.appendChild(designSec);

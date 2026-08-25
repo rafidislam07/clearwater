@@ -475,6 +475,7 @@ a { color: var(--color-primary-light); }
   .bb2-playbook-grid { grid-template-columns: repeat(2, 1fr); }
   .bb2-stat-row { grid-template-columns: repeat(2, 1fr); }
   .bb2-tier-preview-grid { grid-template-columns: 1fr 1fr; }
+  .dd-block__images--design-large { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 600px) {
@@ -483,6 +484,7 @@ a { color: var(--color-primary-light); }
   .bb2-hero__body { padding: 1.5rem 1.5rem; }
   .bb2-hero__title { font-size: 1.6rem; }
   .bb2-playbook-grid { grid-template-columns: 1fr; }
+  .dd-block__images--design-large { grid-template-columns: 1fr; }
   .bb2-stat-row { grid-template-columns: 1fr 1fr; }
   .bb2-comp-table th, .bb2-comp-table td { font-size: 0.85rem; padding: 0.45rem 0.55rem; }
   .bb2-tier-preview-grid { grid-template-columns: 1fr; }
@@ -495,6 +497,12 @@ a { color: var(--color-primary-light); }
    Real-photo galleries (photo-figure) + shared lightbox
    ============================================================ */
 .dd-block__images { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+/* 3BR's "Design — Top Designs" gallery (identityBlock's K section, designPhotos
+   path only) - bigger cards matching 4BR's bb2-playbook-grid sizing, instead of
+   the generic auto-fit-200px grid every other `.dd-block__images` gallery on this
+   page (Architectural Style, Backyard, etc.) still uses. */
+.dd-block__images--design-large { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.dd-block__images--design-large .photo-figure__trigger { aspect-ratio: 4 / 3; }
 .photo-figure { margin: 0; display: flex; flex-direction: column; background: var(--brand-surface); border-radius: 8px; overflow: hidden; border: 1px solid var(--color-border); }
 .photo-figure--small { max-width: 220px; }
 /* Ideal Sleep Count's bed photos use the `--small` treatment but read a little
