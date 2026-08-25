@@ -247,6 +247,15 @@ const BUY_BOXES = [
         url: "https://www.zillow.com/homedetails/14480-120th-Ave-Largo-FL-33774/47010417_zpid/?",
         note: "Candidate supplied with the 3BR buy-box notes; not yet underwritten.",
       },
+      neededFields: [
+        "Property images for the candidate",
+        "Required transformation scope",
+        "Estimated CapEx",
+        "Matching revenue tier assignment",
+        "Underwriting assumptions (financing, operating expense ratio, management fee, etc.)",
+        "Cash-on-cash return calculation",
+        "Investment verdict",
+      ],
     },
     analystNotes: [
       {
