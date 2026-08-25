@@ -316,7 +316,7 @@ const BUY_BOXES = [
     thesis:
       "Acquire an attainable 4BR pool home and use coherent branding, gathering space, and entertainment design to create pricing power — without resort-scale construction.",
     atAGlance: {
-      bedBath: "4 bedrooms / 2-2.5 bathrooms",
+      bedBath: "4 bedrooms / 2+ bathrooms (2.5-3 preferred)",
       sleeps: "Sleeps 10-13, with credible real-bed capacity",
       heroMechanism: "Existing pool/backyard gathering zone + one coherent, photographable identity",
       revenue: "Base $118K-$125K · Strong execution $135K-$140K · Upside $150K-$165K (preliminary; not underwritten)",
@@ -472,11 +472,14 @@ const BUY_BOXES = [
           url: "https://www.airbnb.com/rooms/748850360966059896",
           image: photo("4br/core-comp-set/clearwater-glam/clearwater-glam-branded-interior.jpg", "Citrus-slice mural living space with orange velvet sofas", "A citrus-mural living space transforming plain ranch-style bones."),
         },
+        // Swapped 2026-08-25 for sun-lounger.avif, per instruction - previously
+        // Clearwater GLAM's clearwater-glam-pool-centered-gathering.webp (still used
+        // unchanged in the Comp-Set Visual Comparison's Pool & Backyard High tier).
+        // No source-listing documentation was supplied for the replacement, so no
+        // `property`/`url` fields are attached - see assets/4br/SOURCE.md.
         {
           title: "Pool-centered gathering",
-          property: "Clearwater GLAM",
-          url: "https://www.airbnb.com/rooms/748850360966059896",
-          image: photo("4br/core-comp-set/clearwater-glam/clearwater-glam-pool-centered-gathering.webp", "Twilight pool with tiger and ring floats beside a covered, curtained lanai with dining and lounge seating", "The pool functions as the property's social center, surrounded by covered lounging, dining, additional seating, cohesive branding, and photographable pool styling."),
+          image: photo("4br/hightier-additions/sun-lounger.avif", "Covered cabana with group-scale seating beside a pool", "A covered cabana with group-scale seating extends the pool area into a comfortable outdoor living zone."),
         },
         // Source property is genuinely unknown for this image (2026-08-24) - no
         // Airbnb link, property ID, revenue, or revenue tier is attached, and it
@@ -543,6 +546,98 @@ const BUY_BOXES = [
           photo("4br/premium-references/tiki/tiki-karaoke-entertainment-stage.jpg", "Dedicated karaoke stage with disco-ball lighting and a neon sign", "Tiki — a purpose-built karaoke stage, not a converted space."),
         ],
       },
+    },
+
+    // 11b. Comp-Set Visual Comparison (2026-08-25) — High/Mid/Low photo comparison
+    // across two categories, reusing the site's existing verified 4BR photography
+    // rather than duplicating the Design Playbook prose. Every remaining High/Mid
+    // image below belongs to one of the 11 core revenue comps at its actual
+    // revenueComps11 tier (Clearwater GLAM/Movie Oasis/Lost in Paradise = High;
+    // Flamingo Oasis/Tropical Family Villa = Mid), PLUS several user-supplied,
+    // unattributed images: two added to Pool & Backyard's Mid tier (firepit.avif,
+    // corn-hole.avif — see assets/4br/SOURCE.md "Comp-Set Visual Comparison — Mid
+    // Tier additions"; no property/revenue claim attached), three more added to
+    // its Low tier (dining.avif, firepit.avif, corn-hole.avif from
+    // lowtier-additions/ — same "Low Tier additions" table), one added to
+    // Interior & Branding's Mid tier (interior-branding-living-room.avif, also
+    // from midtier-additions/), and one that REPLACED Pink Paradise's photo in
+    // Pool & Backyard's High tier (nice-pool.jpeg from hightier-additions/ — see
+    // "High Tier swap" in SOURCE.md; Pink Paradise's photo is untouched elsewhere
+    // on the page). None of the 3
+    // real Low-tier revenue comps (Mermaid Cove, Clearwater Heated Pool
+    // Family-Friendly, Seminole Pool House) has a verified photo, so the Low
+    // column also reuses the same supplemental counterexample property already
+    // shown in designPlaybook.weakExecution (abnb_43358269, "4 Bedroom and Private
+    // Pool Near Clearwater") — outside the core 11-comp set, same substitution
+    // pattern already used for revenueTierPreview.low. This is documented here,
+    // not shown on the page (bb2TierCompareColumn renders no property/tier-source
+    // label).
+    compSetVisualComparison: {
+      intro: "A High / Mid / Low photo comparison across two categories, using the core 4BR revenue comp set's own photography. These are qualitative image observations, not causal conclusions.",
+      categories: [
+        {
+          key: "poolBackyard",
+          title: "Pool & Backyard Execution",
+          interpretation: "Every tier has a pool, but execution differs — coordinated pool decks and defined backyard activity zones at the top vs. a plain, unbranded pool at the bottom.",
+          tiers: {
+            high: [
+              // Swapped 2026-08-25 for nice-pool.jpeg (below), per instruction - previously
+              // photo("4br/core-comp-set/pink-paradise/pink-paradise-aerial-pool-backyard.jpg", ...).
+              // That Pink Paradise image is untouched elsewhere on the page (Revenue Tiers at a
+              // Glance still uses it); only this card's image changed. No source-listing
+              // documentation was supplied for the replacement, so no `property` field is
+              // attached and no property-specific revenue claim is implied. See assets/4br/SOURCE.md.
+              { images: [photo("4br/hightier-additions/nice-pool.jpeg", "Backyard pool", "A well-presented pool and deck area.")] },
+              { images: [photo("4br/core-comp-set/clearwater-glam/clearwater-glam-pool-centered-gathering.webp", "Twilight pool with tiger and ring floats beside a covered, curtained lanai with dining and lounge seating", "The pool functions as the property's social center, surrounded by covered lounging, dining, additional seating, cohesive branding, and photographable pool styling.")] },
+              { images: [photo("4br/core-comp-set/lost-in-paradise/lost-in-paradise-backyard-zoning.jpg", "Aerial view of pool, spa, and putting green zones at Lost in Paradise", "Coordinated backyard zoning — Lost in Paradise.")] },
+              { images: [photo("4br/supporting-comp-set/movie-oasis/movie-oasis-outdoor-movie-firepit.jpg", "Covered outdoor movie screen, firepit, and lounge seating at dusk", "Movie screen, firepit, and pool sharing one backyard zone.")] },
+            ],
+            mid: [
+              { images: [photo("4br/supporting-comp-set/flamingo-oasis/flamingo-oasis-diy-lawn-bowling.jpg", "DIY mat-based backyard lawn-bowling lane beside a mini-putting green", "A DIY, mat-based lawn-bowling lane — inexpensive, not structural.")] },
+              { images: [photo("4br/supporting-comp-set/tropical-family-villa/tropical-family-villa-pool-backyard-ecosystem.jpg", "Twilight backyard with a mini-putting green and pool", "A pool paired with a defined activity zone — Tropical Family Villa.")] },
+              // User-supplied (2026-08-25) from rafid/Clearwater_Buy_Box_4BR/midtier/ - no
+              // source-listing documentation was supplied, so per the same convention as the
+              // design-playbook product-stack images, no `property` field is attached and no
+              // property-specific revenue claim is implied. See assets/4br/SOURCE.md.
+              { images: [photo("4br/midtier-additions/firepit.avif", "Backyard firepit with seating", "A firepit and seating area — a low-cost gathering feature.")] },
+              { images: [photo("4br/midtier-additions/corn-hole.avif", "Cornhole boards set up in a backyard", "A cornhole setup — an inexpensive, portable backyard activity.")] },
+            ],
+            low: [
+              { images: [photo("4br/low-tier-counterexamples/low-tier-underprogrammed-pool.jpg", "Basic residential pool with a plain concrete deck", "A functional pool, plainly presented.")] },
+              // User-supplied (2026-08-25) from rafid/Clearwater_Buy_Box_4BR/lowtier/ - no
+              // source-listing documentation was supplied, so per the same convention as the
+              // midtier-additions images above, no `property` field is attached and no
+              // property-specific revenue claim is implied. See assets/4br/SOURCE.md.
+              { images: [photo("4br/lowtier-additions/dining.avif", "Backyard dining area", "A basic outdoor dining setup.")] },
+              { images: [photo("4br/lowtier-additions/firepit.avif", "Backyard firepit with seating", "A plain firepit and seating area.")] },
+              { images: [photo("4br/lowtier-additions/corn-hole.avif", "Cornhole boards set up in a backyard", "A cornhole setup with minimal staging.")] },
+            ],
+          },
+        },
+        {
+          key: "interiorBranding",
+          title: "Interior & Branding",
+          interpretation: "Coherent, photographable branding versus a generic, unbranded living space with no identity.",
+          tiers: {
+            high: [
+              { images: [photo("4br/core-comp-set/pink-paradise/pink-paradise-branded-living-room.jpg", "Branded pink and tropical living room with banana-leaf wallpaper", "The same house, made distinctive through coherent branding — differentiation through execution, not architectural luxury.")] },
+              { images: [photo("4br/core-comp-set/clearwater-glam/clearwater-glam-branded-interior.jpg", "Citrus-slice mural living space with orange velvet sofas", "A citrus-mural living space transforming plain ranch-style bones.")] },
+            ],
+            mid: [
+              { images: [photo("4br/supporting-comp-set/flamingo-oasis/flamingo-oasis-branded-interior.jpg", "Flamingo and palm mural living room with a neon sign", "Flamingo Oasis — Mid Tier revenue comp.")] },
+              // User-supplied (2026-08-25) from rafid/Clearwater_Buy_Box_4BR/midtier/ - no
+              // source-listing documentation was supplied, so per the same convention as the
+              // other midtier-additions images, no `property` field is attached and no
+              // property-specific revenue claim is implied. See assets/4br/SOURCE.md.
+              { images: [photo("4br/midtier-additions/interior-branding-living-room.avif", "Living room interior", "A living room with some styling, but a less coordinated identity than the top tier.")] },
+            ],
+            low: [
+              { images: [photo("4br/low-tier-counterexamples/low-tier-nominal-game-room.jpg", "Foosball table and cornhole boards in a wood-paneled multipurpose room", "A game area with no dedicated identity.")] },
+              { images: [photo("4br/low-tier-counterexamples/low-tier-generic-living-room.jpg", "Generic living room with a brown leather sectional and a wall-mounted TV", "A functional, unbranded living room.")] },
+            ],
+          },
+        },
+      ],
     },
 
     // 13. Revenue Potential — compact summary up front; full 11-comp evidence lives in the expandable panel.
@@ -746,6 +841,7 @@ const BUY_BOXES = [
       "idealLocations",
       "travelerICP",
       "designPlaybook",
+      "compSetVisualComparison",
       "analystNotesV2",
       "projections",
       "regulations",
@@ -773,7 +869,7 @@ const BUY_BOXES = [
       bedBath: "5 bedrooms / 2+ bathrooms",
       sleeps: "14+ minimum, 16 preferred",
       heroMechanism: "Pool-centered private-resort backyard + dedicated game room + high-capacity bunk/adult sleeping mix",
-      revenue: "Market-wide 5BR benchmark: median $160,603/yr (Phase 2 figure; buy-box-specific comp set pending)",
+      revenue: "Market-wide 5BR benchmark: median $160,603/yr",
       primaryRequirement: "A large, zoneable backyard capable of hosting 5+ major amenity zones around an existing pool, plus a dedicated or convertible game room",
     },
 
@@ -801,7 +897,7 @@ const BUY_BOXES = [
         { label: "Mini golf: top-ranked Nice-to-Have" },
       ],
       revenueChips: [
-        { label: "Market-wide 5BR median", value: "$160,603/yr (not buy-box-specific)" },
+        { label: "Market-wide 5BR median", value: "$160,603/yr" },
       ],
     },
 
@@ -1253,9 +1349,9 @@ const MARKET_INTRO = {
   boundaries:
     "Three adjacent Pinellas County, Florida cities: Clearwater, Largo, and Seminole. Geography here is described by city/ZIP/coordinate cluster, never by loose Airbnb marketing labels.",
   composition:
-    "685 actual STR listings in the cleaned dataset (465 reliable-core listings used for primary analysis). Bedroom mix skews toward 3BR (38.1% of the market) and 4BR (25.5%), with 2BR, 1BR, 5BR, and 6BR+ making up the remainder.",
+    "685 actual STR listings in the cleaned dataset. Bedroom mix skews toward 3BR (38.1% of the market) and 4BR (25.5%), with 2BR, 1BR, 5BR, and 6BR+ making up the remainder.",
   revenueOpportunity:
-    "Reliable-core median annual revenue potential: 4BR $101,065, 5BR $160,603, 3BR $69,663 (Phase 2 benchmarks). 4BR P90 reaches $137,300; 5BR P90 reaches $216,961.",
+    "Reliable-core median annual revenue potential: 4BR $101,065, 5BR $160,603, 3BR $69,663. 4BR P90 reaches $137,300; 5BR P90 reaches $216,961.",
   demandDrivers:
     "Pool-centered outdoor experience, family and celebration/group travel, and beach proximity by a reasonable drive are the recurring demand signals across manually reviewed listings and structured guest-tag data.",
   characteristics:

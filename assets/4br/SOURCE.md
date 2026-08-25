@@ -131,6 +131,72 @@ Source PNG copied, not moved, and re-encoded to WebP (quality 82, no
 upscaling, original 1200×675 dimensions preserved, already under the 1600px
 long-edge cap) following the same convention as the rest of this directory.
 
+## Comp-Set Visual Comparison — Mid Tier additions (Pool & Backyard Execution + Interior & Branding, added 2026-08-25)
+
+**⚠ Unknown attribution**, same status as the "Unattributed visual reference"
+section above. All three images were supplied by the user directly in
+`rafid/Clearwater_Buy_Box_4BR/midtier/` (which also contains a fourth image,
+`game-room.avif`, not yet placed on the page) with no accompanying listing
+information. Copied, not moved; not re-encoded (already AVIF, well under the
+1600px long-edge budget at 58–85KB).
+
+| Webpage file | Original file | Property / ID | Role | Visible subject | Approved caption | Caution / prohibited claim |
+| --- | --- | --- | --- | --- | --- | --- |
+| midtier-additions/firepit.avif | Clearwater_Buy_Box_4BR/midtier/firepit.avif | **UNKNOWN — attribution pending.** | Comp-Set Visual Comparison — "Pool & Backyard Execution," Mid tier | Backyard firepit with seating | "A firepit and seating area — a low-cost gathering feature." | Do not attach an Airbnb link, property ID, revenue figure, or revenue tier. Do not use as proof of revenue, ROI, market location, or amenity causality. |
+| midtier-additions/corn-hole.avif | Clearwater_Buy_Box_4BR/midtier/corn-hole.avif | **UNKNOWN — attribution pending.** | Comp-Set Visual Comparison — "Pool & Backyard Execution," Mid tier | Cornhole boards set up in a backyard | "A cornhole setup — an inexpensive, portable backyard activity." | Same caution as above. |
+| midtier-additions/interior-branding-living-room.avif | Clearwater_Buy_Box_4BR/midtier/interior-and-branding-livingroom.avif | **UNKNOWN — attribution pending.** | Comp-Set Visual Comparison — "Interior & Branding," Mid tier | Living room interior | "A living room with some styling, but a less coordinated identity than the top tier." | Do not attach an Airbnb link, property ID, revenue figure, or revenue tier. Do not use as proof of revenue, ROI, market location, or amenity causality. |
+
+## Comp-Set Visual Comparison — High Tier swap (Pool & Backyard Execution, added 2026-08-25)
+
+**⚠ Unknown attribution**, same status as the Mid/Low Tier additions above.
+Supplied by the user directly in `rafid/Clearwater_Buy_Box_4BR/hightier/`
+(which also contains `backyard.jpeg`, not yet placed on the page) with no
+accompanying listing information. This image **replaces** Pink Paradise's
+`pink-paradise-aerial-pool-backyard.jpg` in this one card only — Pink
+Paradise's photo is untouched everywhere else it's used on the page (Revenue
+Tiers at a Glance, Design Playbook). Copied, not moved; not re-encoded
+(already under the 1600px long-edge cap at 173KB).
+
+| Webpage file | Original file | Property / ID | Role | Visible subject | Approved caption | Caution / prohibited claim |
+| --- | --- | --- | --- | --- | --- | --- |
+| hightier-additions/nice-pool.jpeg | Clearwater_Buy_Box_4BR/hightier/nice-pool.jpeg | **UNKNOWN — attribution pending.** | Comp-Set Visual Comparison — "Pool & Backyard Execution," High tier (replaces the Pink Paradise image in this card only) | Backyard pool | "A well-presented pool and deck area." | Do not attach an Airbnb link, property ID, revenue figure, or revenue tier. Do not use as proof of revenue, ROI, market location, or amenity causality. Do not attribute to Pink Paradise. |
+
+## Experience & Design Playbook — "Pool-centered gathering" swap (added 2026-08-25)
+
+**⚠ Unknown attribution**, same status as above. Also supplied by the user in
+`rafid/Clearwater_Buy_Box_4BR/hightier/` with no accompanying listing
+information. This image **replaces** Clearwater GLAM's
+`clearwater-glam-pool-centered-gathering.webp` in the Design Playbook's
+"Pool-centered gathering" mechanism card only — Clearwater GLAM's photo is
+untouched everywhere else it's used on the page, including the Comp-Set
+Visual Comparison's Pool & Backyard High tier. The mechanism card's
+`property`/`url` fields were removed since attribution is unverified for the
+replacement. Copied, not moved; not re-encoded (already AVIF, under the
+1600px long-edge cap at 120KB).
+
+| Webpage file | Original file | Property / ID | Role | Visible subject | Approved caption | Caution / prohibited claim |
+| --- | --- | --- | --- | --- | --- | --- |
+| hightier-additions/sun-lounger.avif | Clearwater_Buy_Box_4BR/hightier/sun-lounger.avif | **UNKNOWN — attribution pending.** | Experience & Design Playbook — "Pool-centered gathering" mechanism (replaces the Clearwater GLAM image in this card only) | Covered cabana with group-scale seating beside a pool | "A covered cabana with group-scale seating extends the pool area into a comfortable outdoor living zone." | Do not attach an Airbnb link, property ID, revenue figure, or revenue tier. Do not use as proof of revenue, ROI, market location, or amenity causality. Do not attribute to Clearwater GLAM. |
+
+## Comp-Set Visual Comparison — Low Tier additions (Pool & Backyard Execution, added 2026-08-25)
+
+**⚠ Unknown attribution**, same status as the Mid Tier additions above. All
+three images were supplied by the user directly in
+`rafid/Clearwater_Buy_Box_4BR/lowtier/` with no accompanying listing
+information. Copied, not moved; not re-encoded (already AVIF, well under the
+1600px long-edge budget at 34–146KB). Note: `lowtier/firepit.avif` is a
+distinct file from `midtier/firepit.avif` above (different source folder,
+different content) — copied here under the same `firepit.avif` filename but
+into `lowtier-additions/` to avoid collision. `lowtierbackyard1-cornhole.avif`
+was renamed to `corn-hole.avif` on copy for naming consistency with the Mid
+Tier file of the same role.
+
+| Webpage file | Original file | Property / ID | Role | Visible subject | Approved caption | Caution / prohibited claim |
+| --- | --- | --- | --- | --- | --- | --- |
+| lowtier-additions/dining.avif | Clearwater_Buy_Box_4BR/lowtier/dining.avif | **UNKNOWN — attribution pending.** | Comp-Set Visual Comparison — "Pool & Backyard Execution," Low tier | Backyard dining area | "A basic outdoor dining setup." | Do not attach an Airbnb link, property ID, revenue figure, or revenue tier. Do not use as proof of revenue, ROI, market location, or amenity causality. |
+| lowtier-additions/firepit.avif | Clearwater_Buy_Box_4BR/lowtier/firepit.avif | **UNKNOWN — attribution pending.** | Comp-Set Visual Comparison — "Pool & Backyard Execution," Low tier | Backyard firepit with seating | "A plain firepit and seating area." | Same caution as above. |
+| lowtier-additions/corn-hole.avif | Clearwater_Buy_Box_4BR/lowtier/lowtierbackyard1-cornhole.avif | **UNKNOWN — attribution pending.** | Comp-Set Visual Comparison — "Pool & Backyard Execution," Low tier | Cornhole boards set up in a backyard | "A cornhole setup with minimal staging." | Same caution as above. |
+
 ## General rules carried over from the source verification documents
 
 - No image on this page may be used to assert a specific revenue figure, ADR, occupancy rate, or ROI — those come only from the dataset/comp tables.
