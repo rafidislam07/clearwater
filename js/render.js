@@ -1053,8 +1053,55 @@ function acquisitionV2Block(box) {
     });
     sec.appendChild(list);
   }
+  // Top Acquisition Candidates — Manual Review (currently 4BR only) folded into
+  // this same Purchase Price card, immediately below the Zillow screening summary,
+  // so the two flow as one continuous section rather than two separate cards.
+  if (box.acquisitionCandidates && box.acquisitionCandidates.length) {
+    sec.appendChild(el("h5", "bb2-amenity-heading", "Top Acquisition Candidates — Manual Review"));
+    const grid = el("div", "bb2-tier-preview-grid");
+    box.acquisitionCandidates.forEach((c) => grid.appendChild(acquisitionCandidateCard(c)));
+    sec.appendChild(grid);
+  }
   sec.appendChild(el("p", "bb2-next-step", "<strong>Next step:</strong> " + acq.nextStep));
   return sec;
+}
+
+// Card for one Top Acquisition Candidate — Manual Review. Reuses the "Revenue
+// Tiers at a Glance" card pattern (tier label, bold title, subtitle, bold stat
+// line, description) plus a pros/cons list. Folded directly into the Purchase
+// Price card by acquisitionV2Block above (currently 4BR only) so the two read
+// as one continuous section rather than two separate cards.
+function acquisitionCandidateCard(c) {
+  const card = el("div", "bb2-tier-preview-card");
+  const body = el("div", "bb2-tier-preview-card__body");
+  let html =
+    "<span class='bb2-tier-preview-card__tier'>" + c.label + "</span>" +
+    "<h6>" + c.title + "</h6>" +
+    "<p class='bb2-tier-preview-card__title'>" + c.subtitle + "</p>" +
+    "<p class='bb2-tier-preview-card__revenue'>" + c.price + "</p>" +
+    "<p class='bb2-tier-preview-card__takeaway'>" + c.description + "</p>";
+  body.innerHTML = html;
+  if (c.pros && c.pros.length) {
+    body.appendChild(el("p", "bb2-pros-cons__label bb2-pros-cons__label--pros", "Pros"));
+    const prosList = el("ul", "bb2-pros-cons bb2-pros-cons--pros");
+    c.pros.forEach((p) => prosList.appendChild(el("li", null, p)));
+    body.appendChild(prosList);
+  }
+  if (c.cons && c.cons.length) {
+    body.appendChild(el("p", "bb2-pros-cons__label bb2-pros-cons__label--cons", "Cons"));
+    const consList = el("ul", "bb2-pros-cons bb2-pros-cons--cons");
+    c.cons.forEach((x) => consList.appendChild(el("li", null, x)));
+    body.appendChild(consList);
+  }
+  if (c.url) {
+    const link = el("a", "comp-card__link", "View on Zillow ↗");
+    link.href = c.url;
+    link.target = "_blank";
+    link.rel = "noopener";
+    body.appendChild(link);
+  }
+  card.appendChild(body);
+  return card;
 }
 
 const NARRATIVE_BLOCKS = {

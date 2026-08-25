@@ -656,6 +656,77 @@ const BUY_BOXES = [
       revenueCompSetUrl: "https://alexandria.strsearch.com/compsets?market=9&tag=193f1605-4a65-430e-9da8-5f622af041f4&tab=view",
     },
 
+    // 15. Top Acquisition Candidates — Manual Review (2026-08-25). Three specific
+    // Zillow listings that went through a manual capex/backyard/geography review,
+    // shown in the same card pattern as the Revenue Tiers at a Glance row above
+    // (label, bold title, subtitle, bold stat line, description, pros/cons, link).
+    // These are manually reviewed acquisition candidates, not underwritten offers.
+    acquisitionCandidates: [
+      {
+        label: "TOP PICK — BEST CAPEX",
+        title: "2034 58th Lane N",
+        subtitle: "Clearwater 33760 · 4BR/3BA",
+        price: "$587,500",
+        description:
+          "Strongest capex story in the entire review — new roof, new AC, impact windows, insulation, plus a heated saltwater pool with a built shade-sail lounge already in place.",
+        pros: [
+          "Newest systems of any candidate reviewed",
+          "Heated saltwater pool (4 yrs old)",
+          "Built lounge zone",
+          "3 full baths",
+        ],
+        cons: [
+          "Highest price of the three",
+          "Smallest lot (7,501 sqft)",
+          "Capex claims unverified against permits",
+          "Outside 33764",
+        ],
+        url: "https://www.zillow.com/homedetails/2034-58th-Ln-N-Clearwater-FL-33760/47249163_zpid/",
+      },
+      {
+        label: "STRONG ALTERNATE — BEST BACKYARD",
+        title: "309 Gatewood Drive",
+        subtitle: "Largo · 3BR/3BA + Bonus Room",
+        price: "$535,000",
+        description:
+          "The only backyard in the whole project with both a real dining zone and a separate lounge zone already built under one screened lanai.",
+        pros: [
+          "Lowest price of the three",
+          "True 3BR/3BA + easy bedroom-conversion room",
+          "Best-built backyard reviewed",
+          "No price cuts",
+        ],
+        cons: [
+          "Largo is untested geography",
+          "One dated bathroom",
+          "No disclosed system ages",
+          "Conversion work still needed",
+        ],
+        url: "https://www.zillow.com/homedetails/309-Gatewood-Dr-Largo-FL-33770/47255506_zpid/",
+      },
+      {
+        label: "PRIMARY GEOGRAPHY PICK",
+        title: "8532 Kumquat Avenue",
+        subtitle: "Seminole 33777 · 4BR/3BA",
+        price: "$589,000",
+        description:
+          "Two private primary suites and a two-zone backyard, in Seminole — the buy box's named primary market.",
+        pros: [
+          "Primary geography",
+          "Two primary suites (differentiator)",
+          "Two-zone backyard",
+          "Move-in-ready interior",
+        ],
+        cons: [
+          "Highest $/sqft of the three",
+          "1-car garage",
+          "Unexplained 2025 fallen-through sale",
+          "Smallest lot",
+        ],
+        url: "https://www.zillow.com/homedetails/8532-Kumquat-Ave-Seminole-FL-33777/47167743_zpid/",
+      },
+    ],
+
     // Ordered section flow, structurally aligned with 3BR's legacy A-N sequence
     // (Summary, Architectural Style, Bedrooms & Bathrooms, Ideal Sleep Count,
     // Backyard Size & Usability, Must-Have Amenities, Nice-to-Have Amenities,
@@ -1138,7 +1209,7 @@ const BUY_BOXES = [
 
     alexandria: {
       designCompSetUrl: null,
-      revenueCompSetUrl: null,
+      revenueCompSetUrl: "https://alexandria.strsearch.com/compsets?market=9&tag=7d3ca951-7112-460e-a987-1c66db836210&tab=view",
     },
 
     // Ordered section flow - mirrors the 4BR narrative flow's structure, with 5BR-specific

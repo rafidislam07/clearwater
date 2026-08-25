@@ -80,6 +80,8 @@ a { color: var(--color-primary-light); }
    ============================================================ */
 .site-header { position: sticky; top: 0; z-index: 50; background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
 .site-header__inner { max-width: var(--max-width); margin: 0 auto; padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; }
+.site-header__brand { display: flex; align-items: center; gap: 0.625rem; }
+.site-header__logo { height: 36px; width: auto; display: block; }
 .site-header__title { font-weight: 700; color: var(--color-primary); font-size: 1rem; }
 .site-header__title span { font-weight: 400; color: var(--color-text-muted); }
 .site-nav { display: flex; gap: 1.1rem; flex-wrap: wrap; }
@@ -394,6 +396,12 @@ a { color: var(--color-primary-light); }
 .bb2-tier-preview-card__title { font-size: 0.8rem; color: var(--color-text-muted); margin: 0 0 0.3rem; }
 .bb2-tier-preview-card__revenue { font-size: 0.95rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.3rem; }
 .bb2-tier-preview-card__takeaway { font-size: 0.85rem; color: var(--color-text-muted); margin: 0 0 0.5rem; }
+
+.bb2-pros-cons__label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; margin: 0.4rem 0 0.2rem; }
+.bb2-pros-cons__label--pros { color: var(--color-primary); }
+.bb2-pros-cons__label--cons { color: var(--color-danger); }
+.bb2-pros-cons { padding-left: 1.1rem; margin: 0 0 0.3rem; font-size: 0.85rem; color: var(--color-text-muted); }
+.bb2-pros-cons li { margin-bottom: 0.2rem; }
 
 .bb2-comp-table-wrap { overflow-x: auto; margin-top: 0.5rem; max-width: 100%; }
 .bb2-comp-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
