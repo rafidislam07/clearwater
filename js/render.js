@@ -499,11 +499,14 @@ function bb2BedroomsBathroomsBlock(box) {
 // 4. Ideal Sleep Count.
 function bb2SleepCountBlock(box) {
   const s = box.sleepCount;
-  return ddBlock("Ideal Sleep Count", [
+  const sec = ddBlock("Ideal Sleep Count", [
     ["Comfortable capacity", "<strong>" + s.comfortableCapacity + "</strong>"],
     ["Preferred configuration", s.preferredConfiguration],
     ["Capacity-coherence requirement", s.coherenceRequirement],
-  ], s.images);
+  ]);
+  sec.classList.add("bb2-sleep-count-block");
+  if (s.images && s.images.length) sec.appendChild(renderImageGrid(s.images, { small: s.imagesSmall }));
+  return sec;
 }
 
 // 5. Backyard Size & Usability.
@@ -629,15 +632,39 @@ function bb2DesignDirectionBlock(box) {
   return sec;
 }
 
-// Revenue Potential (5BR-specific) - no buy-box-specific comp set was supplied, so this
-// shows only the project's existing market-wide 5BR benchmark, explicitly labeled as such,
-// plus a pending badge and the Alexandria placeholder (pending, same as every other box's
-// missing link).
+// Generic small data table, shared by the 5BR CompTiers sections below (revenue-tier
+// summary, amenity-combination evidence, comp-set geography) - reuses the same
+// `.bb2-comp-table-wrap`/`.bb2-comp-table` classes bb2CompTable already established for
+// 4BR's comp roster table, just with caller-supplied headers/rows instead of a fixed shape.
+function bb2SimpleTable(headers, rows) {
+  const wrap = el("div", "bb2-comp-table-wrap");
+  const table = el("table", "bb2-comp-table");
+  table.innerHTML = "<thead><tr>" + headers.map((h) => "<th>" + h + "</th>").join("") + "</tr></thead>";
+  const tbody = document.createElement("tbody");
+  rows.forEach((row) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = row.map((cell) => "<td>" + cell + "</td>").join("");
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  wrap.appendChild(table);
+  return wrap;
+}
+
+// Revenue Potential (5BR-specific) - COMPLETED 2026-08-25 with the CompTiers 10-comp
+// Premium revenue comp set (see webpage/js/data.js's revenueMarketBenchmark comment and
+// webpage/assets/5br/SOURCE.md). Replaces the earlier market-wide-benchmark-only version.
 function bb2RevenueMarketBenchmarkBlock(box) {
   const r = box.revenueMarketBenchmark;
   const sec = el("section", "dd-block dd-block--pending-price");
   sec.appendChild(el("h4", "dd-block__title", "Revenue Potential"));
-  sec.appendChild(pendingBadge(r.status));
+  sec.appendChild(el("p", "dd-block__note", r.scopeNote));
+  sec.appendChild(bb2SimpleTable(
+    ["Tier", "N", "Revenue Range", "Median Revenue", "ADR", "Occupancy"],
+    r.tiers.map((t) => [t.tier, t.n, t.range, fmtCurrency(t.median), "$" + t.adr, t.occ + "%"])
+  ));
+  sec.appendChild(el("p", null, r.keyRead));
+  if (r.charts && r.charts.length) sec.appendChild(renderImageGrid(r.charts));
   const stats = el("div", "bb2-stat-row bb2-stat-row--3");
   [
     ["Median (market-wide 5BR)", fmtCurrency(r.marketWide.median)],
@@ -655,6 +682,95 @@ function bb2RevenueMarketBenchmarkBlock(box) {
   return sec;
 }
 
+// Amenity Combination Evidence (5BR-specific, new) - purely additive supporting evidence;
+// does not change the Must-Have/AUTO/Nice-to-Have sections rendered earlier.
+function bb2AmenityEvidenceBlock(box) {
+  const a = box.amenityEvidence;
+  const sec = el("section", "dd-block");
+  sec.appendChild(el("h4", "dd-block__title", "Amenity Combination Evidence"));
+  sec.appendChild(el("p", null, a.intro));
+  const chips = el("div", "bb2-chip-row");
+  a.tableStakes.forEach((t) => chips.appendChild(el("span", "bb2-chip bb2-chip--optional", t)));
+  sec.appendChild(el("p", "dd-block__note", "Table stakes across all 10 comps (100% - do not separate performance):"));
+  sec.appendChild(chips);
+  sec.appendChild(bb2SimpleTable(
+    ["Combination", "N", "Mean Revenue", "Mean ADR"],
+    a.combinations.map((c) => [c.combo, c.n, fmtCurrency(c.revenue), "$" + c.adr])
+  ));
+  sec.appendChild(el("p", null, a.combinationRead));
+  const stats = el("div", "bb2-stat-row bb2-stat-row--3");
+  [
+    ["Pickleball prevalence (Low)", a.pickleballPrevalence.low + "%"],
+    ["Pickleball prevalence (Mid)", a.pickleballPrevalence.mid + "%"],
+    ["Pickleball prevalence (High)", a.pickleballPrevalence.high + "%"],
+  ].forEach(([label, value]) => {
+    const stat = el("div", "bb2-stat");
+    stat.innerHTML = "<span class='bb2-stat__value'>" + value + "</span><span class='bb2-stat__label'>" + label + "</span>";
+    stats.appendChild(stat);
+  });
+  sec.appendChild(stats);
+  sec.appendChild(el("p", null, "Amenity density (of 10): Low " + a.amenityDensity.low + " · Mid " + a.amenityDensity.mid + " · High " + a.amenityDensity.high));
+  sec.appendChild(el("p", null, a.densityRead));
+  sec.appendChild(el("p", "deep-dive__why-it-works", "<strong>Multi-use note:</strong> " + a.multiUseNote));
+  if (a.charts && a.charts.length) sec.appendChild(renderImageGrid(a.charts));
+  return sec;
+}
+
+// 5BR Comp-Set Geography (new) - scoped to the 10-comp Premium comp set only; does not
+// touch the market-wide Location Analysis map/section or geographicConsiderations/idealLocations.
+function bb2CompSetGeographyBlock(box) {
+  const g = box.compSetGeography;
+  const sec = el("section", "dd-block");
+  sec.appendChild(el("h4", "dd-block__title", "5BR Comp-Set Geography"));
+  sec.appendChild(el("p", null, g.intro));
+  sec.appendChild(bb2SimpleTable(
+    ["City", "N", "Revenue Range", "Tiers Present"],
+    g.byCity.map((c) => [c.city, c.n, c.range, c.tiers])
+  ));
+  if (g.chart) sec.appendChild(renderImageGrid([g.chart]));
+  sec.appendChild(el("p", "dd-block__note", g.mapLegend));
+  const btn = el("a", "btn btn--alexandria");
+  btn.href = g.mapUrl;
+  btn.target = "_blank";
+  btn.rel = "noopener";
+  btn.textContent = "Open Interactive 5BR Comp Map ↗";
+  sec.appendChild(btn);
+  return sec;
+}
+
+// Comp-Set Visual Comparison (new) - Top(High)/Mid/Low photo columns per category. Each
+// tier column stacks its property groups vertically (per-property images render as a
+// small wrapped grid rather than one full-width image per row, so a property with many
+// photos - e.g. Games' Top tier - doesn't force an unreadably tall column).
+function bb2TierCompareColumn(tierKey, tierLabel, properties) {
+  const col = el("div", "bb2-tier-compare__col");
+  col.appendChild(el("div", "bb2-tier-compare__col-label bb2-tier-compare__col-label--" + tierKey, tierLabel));
+  properties.forEach((prop) => {
+    const propWrap = el("div", "bb2-tier-compare__property");
+    propWrap.appendChild(renderImageGrid(prop.images, { small: true }));
+    col.appendChild(propWrap);
+  });
+  return col;
+}
+function bb2CompSetVisualComparisonBlock(box) {
+  const v = box.compSetVisualComparison;
+  const sec = el("section", "dd-block dd-block--notes");
+  sec.appendChild(el("h4", "dd-block__title", "Comp-Set Visual Comparison"));
+  sec.appendChild(el("p", null, v.intro));
+  v.categories.forEach((cat) => {
+    const catSec = el("div", "bb2-tier-compare__category");
+    catSec.appendChild(el("h5", null, cat.title));
+    catSec.appendChild(el("p", "dd-block__note", cat.interpretation));
+    const grid = el("div", "bb2-tier-compare__grid");
+    grid.appendChild(bb2TierCompareColumn("high", "Top (High Tier)", cat.tiers.high));
+    grid.appendChild(bb2TierCompareColumn("mid", "Mid Tier", cat.tiers.mid));
+    grid.appendChild(bb2TierCompareColumn("low", "Low Tier", cat.tiers.low));
+    catSec.appendChild(grid);
+    sec.appendChild(catSec);
+  });
+  return sec;
+}
+
 // 6. Must-Have Amenities — compact checklist cards, not long prose per item.
 function bb2MustHaveAmenitiesBlock(box) {
   const m = box.mustHaveAmenities;
@@ -663,6 +779,7 @@ function bb2MustHaveAmenitiesBlock(box) {
   const list = el("ul", "bb2-checklist bb2-checklist--grid bb2-checklist--check");
   m.items.forEach((item) => list.appendChild(el("li", null, item)));
   sec.appendChild(list);
+  if (m.images && m.images.length) sec.appendChild(renderImageGrid(m.images, { small: true }));
   const strip = el("div", "bb2-evidence-strip");
   strip.appendChild(el("span", "bb2-evidence-strip__label", m.evidenceNote.label));
   strip.appendChild(el("span", "bb2-evidence-strip__stats", m.evidenceNote.stats));
@@ -818,8 +935,6 @@ function bb2TierPreviewCard(t) {
   body.innerHTML = html;
   if (t.reviewStatus === "provisional") {
     body.appendChild(pendingBadge("Dataset-only — provisional"));
-  } else if (t.reviewStatus === "validated") {
-    body.appendChild(el("span", "badge bb2-badge--validated", "Manually reviewed"));
   }
   card.appendChild(body);
   return card;
@@ -921,12 +1036,23 @@ function bb2RegulationsBlock(box) {
 }
 
 // 14. Acquisition / Purchase-Price Guidance (concise, no long checklist).
+// `acq.zillowCandidates` (currently 5BR only) is optional and purely additive - 4BR's
+// acquisition object has no such field, so its output is unchanged.
 function acquisitionV2Block(box) {
   const acq = box.acquisition;
   const sec = el("section", "dd-block dd-block--pending-price");
   sec.appendChild(el("h4", "dd-block__title", "Purchase Price"));
   sec.appendChild(pendingBadge(acq.status));
   sec.appendChild(el("p", null, acq.zillowSummary));
+  if (acq.zillowCandidates && acq.zillowCandidates.length) {
+    const list = el("ul", "bb2-zillow-candidates");
+    acq.zillowCandidates.forEach((c) => {
+      const li = document.createElement("li");
+      li.innerHTML = '<a href="' + c.url + '" target="_blank" rel="noopener">' + c.address + " ↗</a>";
+      list.appendChild(li);
+    });
+    sec.appendChild(list);
+  }
   sec.appendChild(el("p", "bb2-next-step", "<strong>Next step:</strong> " + acq.nextStep));
   return sec;
 }
@@ -954,6 +1080,9 @@ const NARRATIVE_BLOCKS = {
   niceToHaveRanked: bb2NiceToHaveRankedBlock,
   designDirection: bb2DesignDirectionBlock,
   revenueMarketBenchmark: bb2RevenueMarketBenchmarkBlock,
+  compSetVisualComparison: bb2CompSetVisualComparisonBlock,
+  compSetGeography: bb2CompSetGeographyBlock,
+  amenityEvidence: bb2AmenityEvidenceBlock,
 };
 
 function renderDeepDive(box) {

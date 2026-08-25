@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_255182cd279cb3c7d42d6cae20b18bd8 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; bottom: 24px; left: 24px; z-index:9999; background:#fcfcfb;
+     border:1px solid #c3c2b7; border-radius:8px; padding:10px 14px; font-family:system-ui,sans-serif; font-size:12.5px; color:#0b0b0b;">
+  <b>Tier (darker = stronger revenue within tier)</b><br>
+  <span style="display:inline-block;width:12px;height:12px;background:#0b7a0b;border-radius:50%;margin-right:5px;"></span>High &nbsp;
+  <span style="display:inline-block;width:12px;height:12px;background:#a86e00;border-radius:50%;margin-right:5px;"></span>Mid &nbsp;
+  <span style="display:inline-block;width:12px;height:12px;background:#a3201d;border-radius:50%;margin-right:5px;"></span>Low
+</div>
+    
+            <div class="folium-map" id="map_255182cd279cb3c7d42d6cae20b18bd8" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_255182cd279cb3c7d42d6cae20b18bd8 = L.map(
+                "map_255182cd279cb3c7d42d6cae20b18bd8",
+                {
+                    center: [27.884393999999997, -82.801798],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+
+            
+
+        
+    
+            var tile_layer_5b3cd7ef6b8de55ad2857c7f44495bc9 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5b3cd7ef6b8de55ad2857c7f44495bc9.addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var tile_layer_b1505853b61585dbdc82410f3cf2717f = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b1505853b61585dbdc82410f3cf2717f.addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var circle_4ceebb56304b03e02b1561c635c76dee = L.circle(
+                [27.93983333333333, -82.77056666666667],
+                {"bubblingMouseEvents": true, "color": "#898781", "dashArray": "4,4", "dashOffset": null, "fill": false, "fillColor": "#898781", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 900, "stroke": true, "weight": 1}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var marker_b0945b569b582b7f065006fb3573d9ec = L.marker(
+                [27.94583333333333, -82.77056666666667],
+                {
+}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var div_icon_bda98889b704c513f812e38432767bca = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:10px;color:#52514e;font-weight:600;\"\u003eZIP 33756\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_b0945b569b582b7f065006fb3573d9ec.setIcon(div_icon_bda98889b704c513f812e38432767bca);
+            
+    
+            var circle_41b3af3370cccca165ef82bb62b373d7 = L.circle(
+                [27.9155, -82.7668],
+                {"bubblingMouseEvents": true, "color": "#898781", "dashArray": "4,4", "dashOffset": null, "fill": false, "fillColor": "#898781", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 900, "stroke": true, "weight": 1}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var marker_6dd14ba83c10083ab5c8f1013c40e506 = L.marker(
+                [27.9215, -82.7668],
+                {
+}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var div_icon_19bd8f3fdc1af830459eeff65c4a35fa = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:10px;color:#52514e;font-weight:600;\"\u003eZIP 33771\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_6dd14ba83c10083ab5c8f1013c40e506.setIcon(div_icon_19bd8f3fdc1af830459eeff65c4a35fa);
+            
+    
+            var circle_ccf5a625800c304e8c099867a9e83bb0 = L.circle(
+                [27.845100000000002, -82.80875],
+                {"bubblingMouseEvents": true, "color": "#898781", "dashArray": "4,4", "dashOffset": null, "fill": false, "fillColor": "#898781", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 900, "stroke": true, "weight": 1}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var marker_c400c2ba7fa3e79b5501c60ffee2f1b0 = L.marker(
+                [27.851100000000002, -82.80875],
+                {
+}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var div_icon_ad57ad076cd9af987a383667b8ab9c2e = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:10px;color:#52514e;font-weight:600;\"\u003eZIP 33772\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_c400c2ba7fa3e79b5501c60ffee2f1b0.setIcon(div_icon_ad57ad076cd9af987a383667b8ab9c2e);
+            
+    
+            var circle_44558f5f2aa56f076137722a8ee41b6f = L.circle(
+                [27.8661, -82.8244],
+                {"bubblingMouseEvents": true, "color": "#898781", "dashArray": "4,4", "dashOffset": null, "fill": false, "fillColor": "#898781", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 900, "stroke": true, "weight": 1}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var marker_5592a1553fa91a45bbf73ea50d11c2cd = L.marker(
+                [27.8721, -82.8244],
+                {
+}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var div_icon_2d9e925e584afd08ae0f4c4067512bf6 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:10px;color:#52514e;font-weight:600;\"\u003eZIP 33774\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_5592a1553fa91a45bbf73ea50d11c2cd.setIcon(div_icon_2d9e925e584afd08ae0f4c4067512bf6);
+            
+    
+            var circle_f9c0e9d571525ccb3d9a7bbeee74b0c6 = L.circle(
+                [27.85088, -82.83252666666665],
+                {"bubblingMouseEvents": true, "color": "#898781", "dashArray": "4,4", "dashOffset": null, "fill": false, "fillColor": "#898781", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 900, "stroke": true, "weight": 1}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var marker_a623155b181e0311d8ae5b4fafc2054d = L.marker(
+                [27.85688, -82.83252666666665],
+                {
+}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+            var div_icon_22753b11862b3b8edc3c203d40864fc1 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size:10px;color:#52514e;font-weight:600;\"\u003eZIP 33776\u003c/div\u003e",
+  "className": "empty",
+});
+        
+    
+                marker_a623155b181e0311d8ae5b4fafc2054d.setIcon(div_icon_22753b11862b3b8edc3c203d40864fc1);
+            
+    
+            var circle_marker_0c873d41a07b84e17bdba14ca059f735 = L.circleMarker(
+                [27.9549, -82.7644],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#f6c3c1", "fillOpacity": 0.92, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+        var popup_feba3ce397eea8d2014aefe2978e6711 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_3f2f3fdaa3df35023705217f613c6725 = $(`<div id="html_3f2f3fdaa3df35023705217f613c6725" style="width: 100.0%; height: 100.0%;">     <div style="font-family:system-ui,sans-serif; font-size:13px; width:250px;">       <b style="font-size:14px;">C10 — Low tier</b><br>       <span style="color:#52514e;">5BR Clearwater Resort | Heated Pool, Bowling, Golf</span><hr style="margin:4px 0;">       <b>City / ZIP:</b> Clearwater, FL 33756<br>       <b>Revenue:</b> $154,425<br>       <b>ADR:</b> $592 &nbsp; <b>Occupancy:</b> 71.1%<br>       <b>Sleeps:</b> 16 &nbsp; <b>Baths:</b> 2<br>       <b>Rating:</b> 4.80 ★ (139 reviews)<br>       <a href="https://www.airbnb.com/rooms/1046657780930814652" target="_blank">View on Airbnb ↗</a>     </div>     </div>`)[0];
+                popup_feba3ce397eea8d2014aefe2978e6711.setContent(html_3f2f3fdaa3df35023705217f613c6725);
+            
+        
+
+        circle_marker_0c873d41a07b84e17bdba14ca059f735.bindPopup(popup_feba3ce397eea8d2014aefe2978e6711)
+        ;
+
+        
+    
+    
+            circle_marker_0c873d41a07b84e17bdba14ca059f735.bindTooltip(
+                `<div>
+                     C10 — Low — $154,425
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3106a162bf730073a9932e79f5280b9f = L.circleMarker(
+                [27.84682, -82.83599],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#da8d8a", "fillOpacity": 0.92, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+        var popup_b97ea9dbb5f199e571d341f3cffed83a = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_0e05246004e6508c6616f9e8af2c9325 = $(`<div id="html_0e05246004e6508c6616f9e8af2c9325" style="width: 100.0%; height: 100.0%;">     <div style="font-family:system-ui,sans-serif; font-size:13px; width:250px;">       <b style="font-size:14px;">C09 — Low tier</b><br>       <span style="color:#52514e;">5BR Clearwater Villa | Heated Pool, Golf, Fire Pit</span><hr style="margin:4px 0;">       <b>City / ZIP:</b> Seminole, FL 33776<br>       <b>Revenue:</b> $168,541<br>       <b>ADR:</b> $592 &nbsp; <b>Occupancy:</b> 76.1%<br>       <b>Sleeps:</b> 14 &nbsp; <b>Baths:</b> 3<br>       <b>Rating:</b> 4.85 ★ (151 reviews)<br>       <a href="https://www.airbnb.com/rooms/891031850020927452" target="_blank">View on Airbnb ↗</a>     </div>     </div>`)[0];
+                popup_b97ea9dbb5f199e571d341f3cffed83a.setContent(html_0e05246004e6508c6616f9e8af2c9325);
+            
+        
+
+        circle_marker_3106a162bf730073a9932e79f5280b9f.bindPopup(popup_b97ea9dbb5f199e571d341f3cffed83a)
+        ;
+
+        
+    
+    
+            circle_marker_3106a162bf730073a9932e79f5280b9f.bindTooltip(
+                `<div>
+                     C09 — Low — $168,541
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_919fe6a8286e272d4522b26ad5943ab0 = L.circleMarker(
+                [27.85052, -82.83379],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#bf5654", "fillOpacity": 0.92, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+        var popup_73d25a5fa721f72de8be2e97648dc4bd = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_3d1a5b6625f698253388ed24e1f772a9 = $(`<div id="html_3d1a5b6625f698253388ed24e1f772a9" style="width: 100.0%; height: 100.0%;">     <div style="font-family:system-ui,sans-serif; font-size:13px; width:250px;">       <b style="font-size:14px;">C08 — Low tier</b><br>       <span style="color:#52514e;">Clearwater Game House | Heated Pool, Mini Golf</span><hr style="margin:4px 0;">       <b>City / ZIP:</b> Seminole, FL 33776<br>       <b>Revenue:</b> $171,172<br>       <b>ADR:</b> $616 &nbsp; <b>Occupancy:</b> 76.6%<br>       <b>Sleeps:</b> 16 &nbsp; <b>Baths:</b> 3<br>       <b>Rating:</b> 4.80 ★ (140 reviews)<br>       <a href="https://www.airbnb.com/rooms/1051787996242552082" target="_blank">View on Airbnb ↗</a>     </div>     </div>`)[0];
+                popup_73d25a5fa721f72de8be2e97648dc4bd.setContent(html_3d1a5b6625f698253388ed24e1f772a9);
+            
+        
+
+        circle_marker_919fe6a8286e272d4522b26ad5943ab0.bindPopup(popup_73d25a5fa721f72de8be2e97648dc4bd)
+        ;
+
+        
+    
+    
+            circle_marker_919fe6a8286e272d4522b26ad5943ab0.bindTooltip(
+                `<div>
+                     C08 — Low — $171,172
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_aa42f7f91a6d334b407997020ad885da = L.circleMarker(
+                [27.9311, -82.7718],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#a3201d", "fillOpacity": 0.92, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+        var popup_8a9e3a9c16bb4cfcb9edc952d64e6e13 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_9f359397e0e619a686bca063d620c289 = $(`<div id="html_9f359397e0e619a686bca063d620c289" style="width: 100.0%; height: 100.0%;">     <div style="font-family:system-ui,sans-serif; font-size:13px; width:250px;">       <b style="font-size:14px;">C07 — Low tier</b><br>       <span style="color:#52514e;">Clearwater Game Heaven! Pickleball, Golf, Bowling</span><hr style="margin:4px 0;">       <b>City / ZIP:</b> Clearwater, FL 33756<br>       <b>Revenue:</b> $175,343<br>       <b>ADR:</b> $612 &nbsp; <b>Occupancy:</b> 78.7%<br>       <b>Sleeps:</b> 16 &nbsp; <b>Baths:</b> 2<br>       <b>Rating:</b> 4.85 ★ (84 reviews)<br>       <a href="https://www.airbnb.com/rooms/1260543716151866689" target="_blank">View on Airbnb ↗</a>     </div>     </div>`)[0];
+                popup_8a9e3a9c16bb4cfcb9edc952d64e6e13.setContent(html_9f359397e0e619a686bca063d620c289);
+            
+        
+
+        circle_marker_aa42f7f91a6d334b407997020ad885da.bindPopup(popup_8a9e3a9c16bb4cfcb9edc952d64e6e13)
+        ;
+
+        
+    
+    
+            circle_marker_aa42f7f91a6d334b407997020ad885da.bindTooltip(
+                `<div>
+                     C07 — Low — $175,343
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_02d81eb3ac68759eabe2020aee2f3fa5 = L.circleMarker(
+                [27.8519, -82.8089],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffe4a8", "fillOpacity": 0.92, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+        var popup_e405dae1fcd654ac12f2185e3f01f0a0 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_ec58c1fb2cb3fd8f5a709a757c885b65 = $(`<div id="html_ec58c1fb2cb3fd8f5a709a757c885b65" style="width: 100.0%; height: 100.0%;">     <div style="font-family:system-ui,sans-serif; font-size:13px; width:250px;">       <b style="font-size:14px;">C06 — Mid tier</b><br>       <span style="color:#52514e;">Heated Pool, Pickleball, Bowling, Mini Golf, Bball</span><hr style="margin:4px 0;">       <b>City / ZIP:</b> Seminole, FL 33772<br>       <b>Revenue:</b> $203,058<br>       <b>ADR:</b> $706 &nbsp; <b>Occupancy:</b> 78.5%<br>       <b>Sleeps:</b> 10 &nbsp; <b>Baths:</b> 2<br>       <b>Rating:</b> 4.85 ★ (113 reviews)<br>       <a href="https://www.airbnb.com/rooms/1197121016684238742" target="_blank">View on Airbnb ↗</a>     </div>     </div>`)[0];
+                popup_e405dae1fcd654ac12f2185e3f01f0a0.setContent(html_ec58c1fb2cb3fd8f5a709a757c885b65);
+            
+        
+
+        circle_marker_02d81eb3ac68759eabe2020aee2f3fa5.bindPopup(popup_e405dae1fcd654ac12f2185e3f01f0a0)
+        ;
+
+        
+    
+    
+            circle_marker_02d81eb3ac68759eabe2020aee2f3fa5.bindTooltip(
+                `<div>
+                     C06 — Mid — $203,058
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4b9f96c6971e5982ba5a7ed0485e917b = L.circleMarker(
+                [27.8553, -82.8278],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#e2bd70", "fillOpacity": 0.92, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+        var popup_3cb5842bbfedb8288755a6e2f38c2b29 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_6e93f695276a32b6d0fa32f4eb41a230 = $(`<div id="html_6e93f695276a32b6d0fa32f4eb41a230" style="width: 100.0%; height: 100.0%;">     <div style="font-family:system-ui,sans-serif; font-size:13px; width:250px;">       <b style="font-size:14px;">C05 — Mid tier</b><br>       <span style="color:#52514e;">Tropic Vibes | Basketball, Mini Golf, Heated Pool!</span><hr style="margin:4px 0;">       <b>City / ZIP:</b> Seminole, FL 33776<br>       <b>Revenue:</b> $205,238<br>       <b>ADR:</b> $671 &nbsp; <b>Occupancy:</b> 84.6%<br>       <b>Sleeps:</b> 14 &nbsp; <b>Baths:</b> 2<br>       <b>Rating:</b> 4.85 ★ (141 reviews)<br>       <a href="https://www.airbnb.com/rooms/1109674092898403354" target="_blank">View on Airbnb ↗</a>     </div>     </div>`)[0];
+                popup_3cb5842bbfedb8288755a6e2f38c2b29.setContent(html_6e93f695276a32b6d0fa32f4eb41a230);
+            
+        
+
+        circle_marker_4b9f96c6971e5982ba5a7ed0485e917b.bindPopup(popup_3cb5842bbfedb8288755a6e2f38c2b29)
+        ;
+
+        
+    
+    
+            circle_marker_4b9f96c6971e5982ba5a7ed0485e917b.bindTooltip(
+                `<div>
+                     C05 — Mid — $205,238
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_958ff31f6a60ec4907242bfa9ec381de = L.circleMarker(
+                [27.9335, -82.7755],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#c59538", "fillOpacity": 0.92, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 15.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+        var popup_adf5aae33413504bc9b7a8c1ba99b5e2 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_1fb4eff6a9eb9878de36e098c42a32a6 = $(`<div id="html_1fb4eff6a9eb9878de36e098c42a32a6" style="width: 100.0%; height: 100.0%;">     <div style="font-family:system-ui,sans-serif; font-size:13px; width:250px;">       <b style="font-size:14px;">C04 — Mid tier</b><br>       <span style="color:#52514e;">Clearwater Dream! Singles Pickleball, Heated Pool</span><hr style="margin:4px 0;">       <b>City / ZIP:</b> Clearwater, FL 33756<br>       <b>Revenue:</b> $206,763<br>       <b>ADR:</b> $705 &nbsp; <b>Occupancy:</b> 80.3%<br>       <b>Sleeps:</b> 16 &nbsp; <b>Baths:</b> 2<br>       <b>Rating:</b> 4.80 ★ (52 reviews)<br>       <a href="https://www.airbnb.com/rooms/1398111070548061989" target="_blank">View on Airbnb ↗</a>     </div>     </div>`)[0];
+                popup_adf5aae33413504bc9b7a8c1ba99b5e2.setContent(html_1fb4eff6a9eb9878de36e098c42a32a6);
+            
+        
+
+        circle_marker_958ff31f6a60ec4907242bfa9ec381de.bindPopup(popup_adf5aae33413504bc9b7a8c1ba99b5e2)
+        ;
+
+        
+    
+    
+            circle_marker_958ff31f6a60ec4907242bfa9ec381de.bindTooltip(
+                `<div>
+                     C04 — Mid — $206,763
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_22dc4f6a97f04295ad4aa4c34ce22186 = L.circleMarker(
+                [27.8661, -82.8244],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#a86e00", "fillOpacity": 0.92, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+        var popup_bf72192c9563d366cae847c727c0ab7d = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_1aac18a18aada8ebc3b4e999732c3eb7 = $(`<div id="html_1aac18a18aada8ebc3b4e999732c3eb7" style="width: 100.0%; height: 100.0%;">     <div style="font-family:system-ui,sans-serif; font-size:13px; width:250px;">       <b style="font-size:14px;">C03 — Mid tier</b><br>       <span style="color:#52514e;">OMG Dream Resort! Heated Pool, Volleyball, Bball</span><hr style="margin:4px 0;">       <b>City / ZIP:</b> Largo, FL 33774<br>       <b>Revenue:</b> $209,350<br>       <b>ADR:</b> $783 &nbsp; <b>Occupancy:</b> 73.3%<br>       <b>Sleeps:</b> 16 &nbsp; <b>Baths:</b> 2<br>       <b>Rating:</b> 4.90 ★ (57 reviews)<br>       <a href="https://www.airbnb.com/rooms/1296765246436430535" target="_blank">View on Airbnb ↗</a>     </div>     </div>`)[0];
+                popup_bf72192c9563d366cae847c727c0ab7d.setContent(html_1aac18a18aada8ebc3b4e999732c3eb7);
+            
+        
+
+        circle_marker_22dc4f6a97f04295ad4aa4c34ce22186.bindPopup(popup_bf72192c9563d366cae847c727c0ab7d)
+        ;
+
+        
+    
+    
+            circle_marker_22dc4f6a97f04295ad4aa4c34ce22186.bindTooltip(
+                `<div>
+                     C03 — Mid — $209,350
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dd7d47dc51d67c6396169d68845e8254 = L.circleMarker(
+                [27.8383, -82.8086],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#a8e6a1", "fillOpacity": 0.92, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+        var popup_e0c780b76d64f7a35954315cd853af7f = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_02414b0a55b13ff8460faf1a96766a3b = $(`<div id="html_02414b0a55b13ff8460faf1a96766a3b" style="width: 100.0%; height: 100.0%;">     <div style="font-family:system-ui,sans-serif; font-size:13px; width:250px;">       <b style="font-size:14px;">C02 — High tier</b><br>       <span style="color:#52514e;">WOW Clearwater Resort! Heated Pool, Pickleball</span><hr style="margin:4px 0;">       <b>City / ZIP:</b> Seminole, FL 33772<br>       <b>Revenue:</b> $226,815<br>       <b>ADR:</b> $755 &nbsp; <b>Occupancy:</b> 82.9%<br>       <b>Sleeps:</b> 16 &nbsp; <b>Baths:</b> 3<br>       <b>Rating:</b> 4.90 ★ (138 reviews)<br>       <a href="https://www.airbnb.com/rooms/1056764099810950855" target="_blank">View on Airbnb ↗</a>     </div>     </div>`)[0];
+                popup_e0c780b76d64f7a35954315cd853af7f.setContent(html_02414b0a55b13ff8460faf1a96766a3b);
+            
+        
+
+        circle_marker_dd7d47dc51d67c6396169d68845e8254.bindPopup(popup_e0c780b76d64f7a35954315cd853af7f)
+        ;
+
+        
+    
+    
+            circle_marker_dd7d47dc51d67c6396169d68845e8254.bindTooltip(
+                `<div>
+                     C02 — High — $226,815
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_652b7e453b14aba783281b343027bef2 = L.circleMarker(
+                [27.9155, -82.7668],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#0b7a0b", "fillOpacity": 0.92, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 17.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+        
+    
+        var popup_c4db0f690699be1816defc9f2fee1396 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_8fe82940dd90f191005c3a13490aed2c = $(`<div id="html_8fe82940dd90f191005c3a13490aed2c" style="width: 100.0%; height: 100.0%;">     <div style="font-family:system-ui,sans-serif; font-size:13px; width:250px;">       <b style="font-size:14px;">C01 — High tier</b><br>       <span style="color:#52514e;">THE BEST Clearwater Private Resort | Heated Pool</span><hr style="margin:4px 0;">       <b>City / ZIP:</b> Largo, FL 33771<br>       <b>Revenue:</b> $231,129<br>       <b>ADR:</b> $792 &nbsp; <b>Occupancy:</b> 80.6%<br>       <b>Sleeps:</b> 16 &nbsp; <b>Baths:</b> 3<br>       <b>Rating:</b> 5.00 ★ (69 reviews)<br>       <a href="https://www.airbnb.com/rooms/1324104961165761899" target="_blank">View on Airbnb ↗</a>     </div>     </div>`)[0];
+                popup_c4db0f690699be1816defc9f2fee1396.setContent(html_8fe82940dd90f191005c3a13490aed2c);
+            
+        
+
+        circle_marker_652b7e453b14aba783281b343027bef2.bindPopup(popup_c4db0f690699be1816defc9f2fee1396)
+        ;
+
+        
+    
+    
+            circle_marker_652b7e453b14aba783281b343027bef2.bindTooltip(
+                `<div>
+                     C01 — High — $231,129
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var layer_control_69c2d528a767972c09b59213ecae69c3_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_5b3cd7ef6b8de55ad2857c7f44495bc9,
+                    "OpenStreetMap" : tile_layer_b1505853b61585dbdc82410f3cf2717f,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_69c2d528a767972c09b59213ecae69c3 = L.control.layers(
+                layer_control_69c2d528a767972c09b59213ecae69c3_layers.base_layers,
+                layer_control_69c2d528a767972c09b59213ecae69c3_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_255182cd279cb3c7d42d6cae20b18bd8);
+
+        
+</script>
+</html>

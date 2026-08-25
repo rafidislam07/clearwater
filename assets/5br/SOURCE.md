@@ -74,3 +74,79 @@ Note: `design-01-classic-design.jpg` and `must-have/backyard/backyard-03-aerial-
 depict the same property/angle (both supplied from the source package, one filed under
 `DesignBackYard/`, one under `MustHave/BackYard/`) — captioned differently per section,
 not duplicated in error.
+
+## CompTiers package (integrated 2026-08-25)
+
+A second package, `~/repos/clearwater/ifraham/BuyBox_5BR/CompTiers/`, supplied a 10-comp
+Premium revenue comp set (`Compset Analysis/Compset Analysis.ipynb`, its `assets/` charts
+and CSVs, and `BuyBoxSupportingDocx.pdf`) plus four qualitative Top/Mid/Low comp-photo
+folders (`AerialView/`, `BunkBedRooms/`, `Games/`, `OutdoorChill/`). This completed the
+5BR Revenue Potential section (previously market-wide-benchmark-only, comp set pending)
+and added a new Top/Mid/Low visual-comparison section and Zillow candidates. Nothing else
+in the 5BR section (Summary, Architectural Style, Bedrooms & Bathrooms, Sleep Count, Pool,
+Backyard, Game Room, Automatically Add, Nice to Have — Ranked, Design Direction,
+Geographic Considerations, Ideal Locations, Traveler ICP) was changed. Per the source
+prompt, Low/Mid/High describe performance only within this 10-comp selected Premium set,
+findings are directional (N=10), and no property nicknames, addresses, or Airbnb URLs were
+supplied for any of the 10 comps (C01–C10) — they are cited by anonymous ID only.
+
+Chart images (`webpage/assets/5br/compset-analysis/`) are unedited copies of six of the
+notebook's ten prepared chart PNGs (the most load-bearing ones for the sections built from
+them; the rest — capacity-by-tier, traveler-profile, listing-signals, final-scorecard —
+were not needed for the compact version built here):
+
+| Webpage file | Original file |
+| --- | --- |
+| compset-analysis/01-revenue-by-property.png | Compset Analysis/assets/01_revenue_by_property.png |
+| compset-analysis/02-adr-occ-decomposition.png | Compset Analysis/assets/02_adr_occ_decomposition.png |
+| compset-analysis/04-single-amenity-evidence.png | Compset Analysis/assets/04_single_amenity_evidence.png |
+| compset-analysis/05-amenity-prevalence-heatmap.png | Compset Analysis/assets/05_amenity_prevalence_heatmap.png |
+| compset-analysis/06-amenity-density.png | Compset Analysis/assets/06_amenity_density.png |
+| compset-analysis/07-geography-scatter.png | Compset Analysis/assets/07_geography_scatter.png |
+| compset-analysis/clearwater-5br-compset-map.html | Compset Analysis/clearwater_5br_compset_map.html (unedited copy; a self-contained Folium/Leaflet map that loads Leaflet/jQuery/Bootstrap from public CDNs — requires internet access to render, same as when supplied) |
+
+The revenue-tier figures, amenity-combination table, and geography summary shown on the
+website are transcribed directly from `assets/tier_summary.csv`, `amenity_combinations.csv`,
+and `geography_by_city.csv`/`geography_by_zip.csv` (cross-checked against
+`BuyBoxSupportingDocx.pdf`'s own tables) — not re-derived from the raw notebook.
+
+Comp-tier photos (`webpage/assets/5br/comp-tiers/`) are unedited copies, renamed only to
+encode tier + property index (per `BuyBoxSupportingDocx.pdf`'s naming key: Top = High tier,
+Middle = Mid tier, Low/Bottom = Low tier; the trailing number is the property index within
+that tier — e.g. `Top2` = the second High-tier property). `Bottom1` (OutdoorChill folder)
+and `Low1` (same folder) are grouped as the same first Low-tier property, per the source
+prompt's explicit "Low1 / Bottom1 = first property in Low tier" instruction — both filename
+conventions were used interchangeably in the supplied package for that one property.
+
+| Webpage file | Original file |
+| --- | --- |
+| comp-tiers/aerial/high-1.avif | AerialView/Top1.avif |
+| comp-tiers/aerial/high-2.avif | AerialView/Top2.avif |
+| comp-tiers/aerial/mid-1.avif | AerialView/Middle1.avif |
+| comp-tiers/aerial/mid-2.avif | AerialView/Middle2.avif |
+| comp-tiers/aerial/low-1.jpeg | AerialView/Low1.jpeg |
+| comp-tiers/bunk-rooms/high-1-a.jpeg | BunkBedRooms/Top1.jpeg |
+| comp-tiers/bunk-rooms/high-1-b-queen-theme.avif | BunkBedRooms/Top1QueenBedTheme.avif |
+| comp-tiers/bunk-rooms/high-2.avif | BunkBedRooms/Top2.avif |
+| comp-tiers/bunk-rooms/mid-1.avif | BunkBedRooms/Middle1.avif |
+| comp-tiers/bunk-rooms/mid-2.avif | BunkBedRooms/Middle2.avif |
+| comp-tiers/bunk-rooms/low-1.avif | BunkBedRooms/Bottom1.avif |
+| comp-tiers/bunk-rooms/low-2.avif | BunkBedRooms/Bottom2.avif |
+| comp-tiers/games/high-1-*.avif/webp (11 files) | Games/Top1*.avif/webp |
+| comp-tiers/games/mid-1-*.avif/webp (4 files) | Games/Middle1*.avif/webp |
+| comp-tiers/games/low-1-*.avif (5 files) | Games/Low1*.avif |
+| comp-tiers/dining-social/high-2-dining.avif | OutdoorChill/Top2Dining.avif |
+| comp-tiers/dining-social/mid-1-firepit.avif | OutdoorChill/Middle1Firepit.avif |
+| comp-tiers/dining-social/mid-1-outdoor-lounge-beach-chair.avif | OutdoorChill/Middle1OutdoorLounge+BeachChair.avif |
+| comp-tiers/dining-social/low-1-poolside-sitting-outdoor-sitting.jpeg | OutdoorChill/Bottom1PoolSideSitting+OutdoorSitting.jpeg |
+| comp-tiers/dining-social/low-1-dining.avif | OutdoorChill/Low1Dining.avif |
+| comp-tiers/dining-social/low-1-firepit.avif | OutdoorChill/Low1Firepi.avif |
+| comp-tiers/dining-social/low-1-indoor-living-room.webp | OutdoorChill/Low1IndoorLivingRoom.webp |
+| comp-tiers/dining-social/low-2-dining.avif | OutdoorChill/Low2Dining.avif |
+| comp-tiers/dining-social/low-2-outdoor-pool.avif | OutdoorChill/Low2OutdoorPool.avif |
+| comp-tiers/dining-social/low-2-outdoor-sitting.avif | OutdoorChill/Low2OutdoorSitting.avif |
+
+The two Zillow candidates shown under Purchase Price (2995 Exeter Dr, Clearwater;
+7519 Harbor View Way, Seminole) come directly from `BuyBoxSupportingDocx.pdf`'s "Zillow
+Acquisition Candidates" list — shown as clickable address links only, with no invented
+purchase price, CapEx, or underwriting.

@@ -377,8 +377,11 @@ const BUY_BOXES = [
       comfortableCapacity: "Sleeps 10-13",
       preferredConfiguration: "Underwrite to credible real-bed capacity — do not pad capacity using living-room sofa beds.",
       coherenceRequirement: "Indoor gathering and dining capacity must remain coherent with sleep capacity.",
+      imagesSmall: true,
       images: [
         photo("4br/core-comp-set/lost-in-paradise/lost-in-paradise-real-bed-capacity.jpg", "Jungle-themed bunk and twin bedroom with real beds at Lost in Paradise", "Dedicated real beds, not padded advertised capacity — Lost in Paradise."),
+        photo("4br/sleep-count/pink-twin-bedroom.avif", "Twin bedroom with matching pink upholstered headboards, teal linens, and floral wallpaper", "Two real, matching beds in a coordinated room - credible capacity, not a sofa-bed substitute."),
+        photo("4br/sleep-count/wooden-bunk-beds.avif", "Room with two wooden twin bunk beds and coordinated bedding", "Real, solid bunk beds - built-in capacity for kids or groups without padding the sleep count."),
       ],
     },
 
@@ -408,6 +411,13 @@ const BUY_BOXES = [
         "Pack 'n Play or crib",
         "Coherent, photographable design identity",
         "Zoned backyard experience rather than disconnected amenities",
+      ],
+      images: [
+        photo("4br/must-have/pool-aerial-lounge.avif", "Screened pool with lounge chairs and a small playhouse beside the deck", "A screened, heated pool with full lounge seating and a shaded play structure just steps away."),
+        photo("4br/must-have/pool-night-accent-lighting.avif", "Pool deck at night lit with purple accent lighting", "Color-changing accent lighting extends the pool's usability and photographability into the evening."),
+        photo("4br/must-have/game-room-arcade-lounge.avif", "Game room with a stone media wall, racing-style gaming recliners, board games, and a standalone arcade cabinet", "A dedicated game room anchored by a big screen, gaming recliners, an arcade cabinet, and board games."),
+        photo("4br/must-have/pool-branded-sunset-lounge.avif", "Pool at dusk in front of a sunburst-branded exterior wall, with a tiki-thatched pergola, string lighting, and wooden lounge chairs", "A branded dusk pool scene - sunburst mural, tiki pergola, string lighting, and full lounge seating create one coherent, photographable identity."),
+        photo("4br/must-have/playground-slide-cornhole.avif", "Backyard playhouse with a covered roof and a slide, alongside cornhole boards and a ring-toss game on turf", "A dedicated kids' play structure with a slide, alongside cornhole and ring-toss - built-in family entertainment beyond the pool."),
       ],
       evidenceNote: {
         label: "Top-20 4BR pattern",
@@ -468,12 +478,6 @@ const BUY_BOXES = [
           url: "https://www.airbnb.com/rooms/748850360966059896",
           image: photo("4br/core-comp-set/clearwater-glam/clearwater-glam-pool-centered-gathering.webp", "Twilight pool with tiger and ring floats beside a covered, curtained lanai with dining and lounge seating", "The pool functions as the property's social center, surrounded by covered lounging, dining, additional seating, cohesive branding, and photographable pool styling."),
         },
-        {
-          title: "Real sleeping capacity",
-          property: "Lost in Paradise",
-          url: "https://www.airbnb.com/rooms/1503669407717600557",
-          image: photo("4br/core-comp-set/lost-in-paradise/lost-in-paradise-real-bed-capacity.jpg", "Jungle-themed bunk and twin bedroom with real beds", "Dedicated real beds, not padded advertised capacity."),
-        },
         // Source property is genuinely unknown for this image (2026-08-24) - no
         // Airbnb link, property ID, revenue, or revenue tier is attached, and it
         // is not part of the 11-comp revenue set. Demonstrates backyard zoning /
@@ -481,8 +485,11 @@ const BUY_BOXES = [
         // location, or amenity causality. See webpage/assets/4br/SOURCE.md.
         {
           title: "Multi-zone backyard experience",
-          provenanceLabel: "Visual reference — property attribution pending",
           image: photo("4br/design-playbook/multi-zone-backyard-experience.webp", "Nighttime aerial view of a backyard with a screened pool, a multi-sport court, a mini-golf green, firepit seating, and a covered dining pavilion connected by lit pathways", "A coordinated backyard layout combines a screened pool, multi-use sport court, mini-golf area, firepit seating, covered dining, lighting, privacy fencing, and clear circulation between activity zones."),
+        },
+        {
+          title: "Bold branded exterior",
+          image: photo("4br/design-playbook/branded-exterior-sunburst-mural.avif", "Ranch house at dusk with a full sunburst mural across the exterior wall, a pool, striped lounge chairs, and an outdoor movie screen", "A full-facade sunburst mural turns an ordinary ranch exterior into the property's identity, carried through to the pool deck, lounge seating, and an outdoor movie screen."),
         },
         {
           title: "One photographable hero moment",
@@ -543,7 +550,7 @@ const BUY_BOXES = [
       conservative: "$77K-$85K", base: "$118K-$125K", strong: "$135K-$140K", upside: "$150K-$165K",
       min: 77057, median: 120212, max: 163383,
       count: 11, high: 4, mid: 4, low: 3,
-      validatedCount: 7, provisionalCount: 4,
+      validatedCount: 11, provisionalCount: 0,
       source: "ALEXANDRIA_CORE_4BR_REVENUE_COMP_SET.md",
       note: "Do not automatically underwrite every candidate to the upside range.",
     },
@@ -605,12 +612,12 @@ const BUY_BOXES = [
       { tier: "high", propertyId: "abnb_1245706281749944819", nickname: "Movie Oasis", title: "Movie Oasis | Heated Pool - Hot tub - Game Room", url: "https://www.airbnb.com/rooms/1245706281749944819", city: "Clearwater", zip: "33764", sleeps: 12, baths: 2, revenue: 149881, reviewStatus: "validated" },
       { tier: "high", propertyId: "abnb_1503669407717600557", nickname: "Lost in Paradise", title: "Lost In Paradise - Heated Pool, Spa, MiniGolf", url: "https://www.airbnb.com/rooms/1503669407717600557", city: "Seminole", zip: "33776", sleeps: 10, baths: 2.5, revenue: 138322, reviewStatus: "validated" },
       { tier: "high", propertyId: "abnb_748850360966059896", nickname: "Clearwater GLAM", title: "Clearwater GLAM | Pool, Games, Hot Pink Oasis!", url: "https://www.airbnb.com/rooms/748850360966059896", city: "Clearwater", zip: "33756", sleeps: 10, baths: 3, revenue: 136285, reviewStatus: "validated" },
-      { tier: "mid", propertyId: "abnb_1024311140202045123", nickname: "Golf Sim / Clearwater Dream", title: "Golf Sim, Heated Pool, Games | Clearwater Dream!", url: "https://www.airbnb.com/rooms/1024311140202045123", city: "Clearwater", zip: "33764", sleeps: 10, baths: 2, revenue: 124378, reviewStatus: "provisional" },
-      { tier: "mid", propertyId: "abnb_1067471228665034482", nickname: "Gameroom / King Beds", title: "Heated pool 12 min to beach w/ Gameroom, king beds", url: "https://www.airbnb.com/rooms/1067471228665034482", city: "Clearwater", zip: "33756", sleeps: 10, baths: 2, revenue: 120212, reviewStatus: "provisional" },
+      { tier: "mid", propertyId: "abnb_1024311140202045123", nickname: "Golf Sim / Clearwater Dream", title: "Golf Sim, Heated Pool, Games | Clearwater Dream!", url: "https://www.airbnb.com/rooms/1024311140202045123", city: "Clearwater", zip: "33764", sleeps: 10, baths: 2, revenue: 124378, reviewStatus: "validated" },
+      { tier: "mid", propertyId: "abnb_1067471228665034482", nickname: "Gameroom / King Beds", title: "Heated pool 12 min to beach w/ Gameroom, king beds", url: "https://www.airbnb.com/rooms/1067471228665034482", city: "Clearwater", zip: "33756", sleeps: 10, baths: 2, revenue: 120212, reviewStatus: "validated" },
       { tier: "mid", propertyId: "abnb_937434515864957441", nickname: "Flamingo Oasis", title: "The Flamingo Oasis | Bowling, Heated Pool, Hot Tub", url: "https://www.airbnb.com/rooms/937434515864957441", city: "Seminole", zip: "33776", sleeps: 10, baths: 2, revenue: 118328, reviewStatus: "validated" },
       { tier: "mid", propertyId: "abnb_892437841513061414", nickname: "Tropical Family Villa", title: "Clearwater LUXE! Tropical Family Beach Villa", url: "https://www.airbnb.com/rooms/892437841513061414", city: "Seminole", zip: "33776", sleeps: 10, baths: 2, revenue: 118202, reviewStatus: "validated" },
-      { tier: "low", propertyId: "abnb_1129680913684900317", nickname: "Mermaid Cove", title: "Heated Pool, Game Room, MiniGolf @ Mermaid Cove", url: "https://www.airbnb.com/rooms/1129680913684900317", city: "Largo", zip: "33774", sleeps: 10, baths: 2, revenue: 85122, reviewStatus: "provisional" },
-      { tier: "low", propertyId: "abnb_1134378693882688252", nickname: "Clearwater Heated Pool Family-Friendly", title: "Clearwater Heated Pool Family-Friendly. Near Beach", url: "https://www.airbnb.com/rooms/1134378693882688252", city: "Clearwater", zip: "33764", sleeps: 10, baths: 2, revenue: 83837, reviewStatus: "provisional" },
+      { tier: "low", propertyId: "abnb_1129680913684900317", nickname: "Mermaid Cove", title: "Heated Pool, Game Room, MiniGolf @ Mermaid Cove", url: "https://www.airbnb.com/rooms/1129680913684900317", city: "Largo", zip: "33774", sleeps: 10, baths: 2, revenue: 85122, reviewStatus: "validated" },
+      { tier: "low", propertyId: "abnb_1134378693882688252", nickname: "Clearwater Heated Pool Family-Friendly", title: "Clearwater Heated Pool Family-Friendly. Near Beach", url: "https://www.airbnb.com/rooms/1134378693882688252", city: "Clearwater", zip: "33764", sleeps: 10, baths: 2, revenue: 83837, reviewStatus: "validated" },
       { tier: "low", propertyId: "abnb_1323179023346269133", nickname: "Seminole Pool House", title: "Heated Pool | Game Room | Fire Pit | 8 Min to IRB", url: "https://www.airbnb.com/rooms/1323179023346269133", city: "Seminole", zip: "33776", sleeps: 10, baths: 2, revenue: 77057, reviewStatus: "validated" },
     ],
 
@@ -887,6 +894,123 @@ const BUY_BOXES = [
       ],
     },
 
+    // Comp-Set Visual Comparison (new, from the CompTiers workstream) - a Top/Mid/Low
+    // qualitative photo comparison, additive to (and separate from) the Design Direction
+    // section above. Every image is anonymized pattern/reference evidence (see
+    // webpage/assets/5br/SOURCE.md) - none of these photos are claimed to be one of the
+    // 10 lettered comps (C01-C10) used in the Revenue Potential section. These are
+    // qualitative image observations, not causal conclusions.
+    compSetVisualComparison: {
+      intro: "A Top (High tier) / Mid / Low photo comparison across four categories, using the supplied comp-tier photography. These are qualitative image observations, not causal conclusions.",
+      categories: [
+        {
+          key: "aerial",
+          title: "Aerial View",
+          interpretation: "Higher-performing properties generally present the full resort package more effectively from above. Professional aerial photography is especially important for heavily amenitized 5BR properties because it shows the backyard scale and amenity layout in one image.",
+          tiers: {
+            high: [
+              { images: [photo("5br/comp-tiers/aerial/high-1.avif", "Aerial view of a high-performing-tier property's backyard resort layout", "Top-tier example: the full amenity layout reads clearly in one aerial frame.")] },
+              { images: [photo("5br/comp-tiers/aerial/high-2.avif", "Aerial view of a second high-performing-tier property's backyard resort layout", "A second Top-tier aerial example.")] },
+            ],
+            mid: [
+              { images: [photo("5br/comp-tiers/aerial/mid-1.avif", "Aerial view of a mid-tier property's backyard layout", "Mid-tier example: a strong but somewhat less complete aerial presentation.")] },
+              { images: [photo("5br/comp-tiers/aerial/mid-2.avif", "Aerial view of a second mid-tier property's backyard layout", "A second Mid-tier aerial example.")] },
+            ],
+            low: [
+              { images: [photo("5br/comp-tiers/aerial/low-1.jpeg", "Ground-level or weaker aerial view of a low-tier property's backyard", "Low-tier example: a weaker or lower aerial presentation of the amenity package.")] },
+            ],
+          },
+        },
+        {
+          key: "bunk",
+          title: "Bunk Rooms",
+          interpretation: "Higher-performing examples generally show stronger theming, color, finish, and presentation. A slide itself is not the differentiator because slides appear across tiers.",
+          tiers: {
+            high: [
+              { images: [
+                photo("5br/comp-tiers/bunk-rooms/high-1-a.jpeg", "Themed bunk room in a high-performing-tier property", "Top-tier example: strongly themed, polished bunk-room presentation."),
+                photo("5br/comp-tiers/bunk-rooms/high-1-b-queen-theme.avif", "A second, coordinated queen-bed-themed room in the same high-performing-tier property", "The same Top-tier property's coordinated queen-themed room."),
+              ] },
+              { images: [photo("5br/comp-tiers/bunk-rooms/high-2.avif", "Themed bunk room in a second high-performing-tier property", "A second Top-tier bunk-room example.")] },
+            ],
+            mid: [
+              { images: [photo("5br/comp-tiers/bunk-rooms/mid-1.avif", "Bunk room in a mid-tier property", "Mid-tier example: solid theming, less elaborate than the Top tier.")] },
+              { images: [photo("5br/comp-tiers/bunk-rooms/mid-2.avif", "Bunk room in a second mid-tier property", "A second Mid-tier bunk-room example.")] },
+            ],
+            low: [
+              { images: [photo("5br/comp-tiers/bunk-rooms/low-1.avif", "Bunk room in a low-tier property", "Low-tier example: functional but visually simpler bunk-room presentation.")] },
+              { images: [photo("5br/comp-tiers/bunk-rooms/low-2.avif", "Bunk room in a second low-tier property", "A second Low-tier bunk-room example.")] },
+            ],
+          },
+        },
+        {
+          key: "games",
+          title: "Games & Activities",
+          interpretation: "Stronger properties generally present a fuller indoor/outdoor activity experience. Focus on the overall activity package rather than one individual game.",
+          tiers: {
+            high: [
+              { images: [
+                photo("5br/comp-tiers/games/high-1-pickleball-basketball.avif", "Pickleball/basketball multi-use court at a high-performing-tier property", "Top-tier example: a multi-use pickleball/basketball court."),
+                photo("5br/comp-tiers/games/high-1-volleyball.avif", "Volleyball court at the same high-performing-tier property", "Sand volleyball court, same Top-tier property."),
+                photo("5br/comp-tiers/games/high-1-bowling-playground.avif", "Backyard bowling lane and playground at the same property", "Backyard bowling lane plus playground, same Top-tier property."),
+                photo("5br/comp-tiers/games/high-1-pool-arcade.webp", "Arcade room with a pool table at the same property", "Full arcade/pool-table room, same Top-tier property."),
+                photo("5br/comp-tiers/games/high-1-airhockey-fussball-bunkbed.avif", "Air hockey and foosball combined with a bunk bed at the same property", "Air hockey and foosball sharing a room with a bunk bed."),
+                photo("5br/comp-tiers/games/high-1-fussball-bunkbed.avif", "Foosball table beside a bunk bed at the same property", "Foosball table beside a themed bunk bed."),
+                photo("5br/comp-tiers/games/high-1-firepit-live.avif", "Fire pit and evening social area at the same property", "Fire pit and evening social zone, same Top-tier property."),
+                photo("5br/comp-tiers/games/high-1-outdoor-lounge.avif", "Outdoor lounge seating at the same property", "Outdoor lounge seating, same Top-tier property."),
+                photo("5br/comp-tiers/games/high-1-outdoor-dining-sitting-shade.avif", "Shaded outdoor dining and seating at the same property", "Shaded group dining and seating, same Top-tier property."),
+                photo("5br/comp-tiers/games/high-1-poolside-chairs-firepit-sitting.webp", "Poolside chairs and fire-pit seating at the same property", "Poolside chairs plus fire-pit seating, same Top-tier property."),
+                photo("5br/comp-tiers/games/high-1-indoor-sitting.avif", "Indoor social seating area at the same property", "Indoor social seating area, same Top-tier property."),
+              ] },
+            ],
+            mid: [
+              { images: [
+                photo("5br/comp-tiers/games/mid-1-aerial-golf-bowling-basketball.avif", "Aerial view of mini golf, bowling, and basketball at a mid-tier property", "Mid-tier example: mini golf, bowling, and basketball zones from above."),
+                photo("5br/comp-tiers/games/mid-1-golf.avif", "Mini-golf green at the same mid-tier property", "Mini-golf green, same Mid-tier property."),
+                photo("5br/comp-tiers/games/mid-1-bowling.webp", "Backyard bowling lane at the same mid-tier property", "Backyard bowling lane, same Mid-tier property."),
+                photo("5br/comp-tiers/games/mid-1-basketball.webp", "Basketball court at the same mid-tier property", "Basketball court, same Mid-tier property."),
+              ] },
+            ],
+            low: [
+              { images: [
+                photo("5br/comp-tiers/games/low-1-golf-bowling.avif", "Mini golf and bowling lane at a low-tier property", "Low-tier example: mini golf and a bowling lane, presented more simply."),
+                photo("5br/comp-tiers/games/low-1-pool-table.avif", "Pool table at the same low-tier property", "Pool table, same Low-tier property."),
+                photo("5br/comp-tiers/games/low-1-arcade.avif", "Arcade machines at the same low-tier property", "Arcade machines, same Low-tier property."),
+                photo("5br/comp-tiers/games/low-1-airhockey-bunk.avif", "Air hockey table beside a bunk room at the same property", "Air hockey beside a bunk room, same Low-tier property."),
+                photo("5br/comp-tiers/games/low-1-playground-firepit.avif", "Playground and fire pit at the same low-tier property", "Playground and fire pit, same Low-tier property."),
+              ] },
+            ],
+          },
+        },
+        {
+          key: "dining",
+          title: "Dining / Seating / Social Spaces",
+          interpretation: "Stronger properties generally present group-sized dining, poolside seating, lounge, and social areas more intentionally.",
+          tiers: {
+            high: [
+              { images: [photo("5br/comp-tiers/dining-social/high-2-dining.avif", "Outdoor group dining area at a high-performing-tier property", "Top-tier example: covered, group-sized outdoor dining.")] },
+            ],
+            mid: [
+              { images: [photo("5br/comp-tiers/dining-social/mid-1-firepit.avif", "Fire-pit social area at a mid-tier property", "Mid-tier example: a fire-pit social zone."), photo("5br/comp-tiers/dining-social/mid-1-outdoor-lounge-beach-chair.avif", "Outdoor lounge and beach-chair seating at the same mid-tier property", "Outdoor lounge and beach-chair seating, same Mid-tier property.")] },
+            ],
+            low: [
+              { images: [
+                photo("5br/comp-tiers/dining-social/low-1-poolside-sitting-outdoor-sitting.jpeg", "Poolside and outdoor sitting area at a low-tier property", "Low-tier example: functional poolside and outdoor seating."),
+                photo("5br/comp-tiers/dining-social/low-1-dining.avif", "Dining area at the same low-tier property", "Dining area, same Low-tier property."),
+                photo("5br/comp-tiers/dining-social/low-1-firepit.avif", "Fire pit at the same low-tier property", "Fire pit, same Low-tier property."),
+                photo("5br/comp-tiers/dining-social/low-1-indoor-living-room.webp", "Indoor living room at the same low-tier property", "Indoor living room, same Low-tier property."),
+              ] },
+              { images: [
+                photo("5br/comp-tiers/dining-social/low-2-dining.avif", "Dining area at a second low-tier property", "A second Low-tier property's dining area."),
+                photo("5br/comp-tiers/dining-social/low-2-outdoor-pool.avif", "Pool area at the same second low-tier property", "The same property's pool area."),
+                photo("5br/comp-tiers/dining-social/low-2-outdoor-sitting.avif", "Outdoor sitting area at the same second low-tier property", "The same property's outdoor sitting area."),
+              ] },
+            ],
+          },
+        },
+      ],
+    },
+
     // 8. Geographic Considerations.
     geographicConsiderations: {
       views: "Views are not a priority for this buy box; group capacity and the amenity package matter more.",
@@ -905,26 +1029,88 @@ const BUY_BOXES = [
       secondary: "Families with kids: the required bunk room is explicitly designed to work for both large groups and families with children simultaneously.",
     },
 
-    // 12. Analyst Notes.
+    // 5BR Comp-Set Geography (new, from the CompTiers workstream) - scoped to the 10-comp
+    // Premium comp set only; does NOT change the market-wide Location Analysis (Section 4)
+    // or the geographicConsiderations/idealLocations guidance above.
+    compSetGeography: {
+      intro: "Geography does not clearly separate performance within these 10 selected comps - multiple tiers occur inside the same cities and ZIP codes.",
+      byCity: [
+        { city: "Clearwater", n: 3, range: "$154K-$207K", tiers: "Low, Mid" },
+        { city: "Largo", n: 2, range: "$209K-$231K", tiers: "Mid, High" },
+        { city: "Seminole", n: 5, range: "$169K-$227K", tiers: "Low, Mid, High" },
+      ],
+      chart: photo("5br/compset-analysis/07-geography-scatter.png", "Scatter map of the 10 comps' latitude/longitude, colored by tier, bubble size by revenue", "A tight geographic cluster with tiers interleaved - Low, Mid, and High comps sit near each other rather than in separate areas."),
+      mapUrl: "assets/5br/compset-analysis/clearwater-5br-compset-map.html",
+      mapLegend: "Interactive map color key: Low = red, Mid = yellow, High = green; a darker shade means stronger revenue within that tier.",
+    },
+
+    // 12. Analyst Notes. Updated 2026-08-25 with the CompTiers 10-comp Premium comp set -
+    // the two notes that previously said the revenue comp set was pending are replaced;
+    // every other note (Pool Table/AUTO, Hot Tub, thin-data amenities, architectural style)
+    // is unchanged from the original Ifraham workstream.
     analystNotes: [
+      "Pricing power (ADR), not occupancy, is the clearest separator between Low/Mid/High performers in the 10-comp Premium set - occupancy sits in a comparatively narrow 75.6%-81.8% band across tiers.",
+      "Buy the physical platform first: 5BR, Sleeps 14-16, Pool, 2+ Baths, Game Room capacity, and a large private backyard capable of 5+ major amenity/activity zones.",
+      "Pickleball is the clearest variable amenity signal (25% -> 75% -> 100% prevalence Low to High) and works well as a multi-use sports court - the same footprint can also host basketball, volleyball, and other games.",
+      "Once the core resort package is already in place, amenity density stops explaining performance (9.0-10.0 of 10 across all three tiers, only a one-point spread) - design, execution, staging, and listing presentation become the more likely differentiators.",
+      "Professional aerial photography is particularly important for highly amenitized 5BR properties - it is the single clearest visual differentiator between the Top and Low tiers in the supplied comp photos.",
+      "Geography does not clearly separate performance within the 10 selected comps - multiple tiers occur inside the same cities and ZIP codes, so geography is descriptive here, not a standalone acquisition thesis.",
       "Pool Table has the highest Premium amenity-importance score, but it is AUTO, not Must-Have - the room is the hard-to-add acquisition requirement, the table is easy to add after closing.",
       "Hot Tub shows a negative revenue/P90+ association in this Premium sample (-3.6% / -11.2%, N=7) - treat it as an additional luxury, not a core acquisition target, once stronger structural configurations are already in place.",
       "Movie Theater, Sauna, and Golf Simulator all have insufficient sample size (N<4) for a reliable importance score - shown as thin-data/exploratory rather than removed.",
       "The property does not need one specific architectural style; what matters is whether the house and lot can support the pool/backyard-zoning and game-room transformation.",
-      "No revenue comp set, design-comp property roster, or purchase-price candidate was supplied with this workstream - do not treat the market-wide 5BR benchmark below as a buy-box-specific validated figure.",
     ],
 
-    // 13. Revenue Potential - no 5BR-specific comp set was supplied; shows the project's
-    // existing market-wide 5BR benchmark only, clearly labeled as such.
+    // 13. Revenue Potential - COMPLETED 2026-08-25 with a 10-comp Premium revenue comp set
+    // supplied via the Ifraham CompTiers workstream (Compset Analysis.ipynb / tier_summary.csv
+    // / BuyBoxSupportingDocx.pdf - see webpage/assets/5br/SOURCE.md). Replaces the earlier
+    // market-wide-benchmark-only, comp-set-pending version of this section.
     revenueMarketBenchmark: {
-      status: "Pending - no 5BR-specific revenue comp set or property roster has been supplied yet",
+      scopeNote:
+        "Low / Mid / High describe performance only within this selected 10-comp Premium comp set (C01-C10), not market-wide 5BR tiers. Findings are directional because N=10 - treat them as directional evidence, not causal conclusions.",
+      tiers: [
+        { tier: "Low", n: 4, range: "$154K-$175K", median: 169857, adr: 603, occ: 75.6 },
+        { tier: "Mid", n: 4, range: "$203K-$209K", median: 206001, adr: 716, occ: 79.2 },
+        { tier: "High", n: 2, range: "$227K-$231K", median: 228972, adr: 773, occ: 81.8 },
+      ],
+      keyRead:
+        "Revenue increases are driven mainly by ADR/pricing power, not occupancy - occupancy sits in a comparatively narrow 75.6%-81.8% band across all three tiers, and sleeps/bed count do not explain the tier split. Keep the existing 2+ bathroom Buy Box requirement; the data does not support making 3 bathrooms a requirement.",
+      charts: [
+        photo("5br/compset-analysis/01-revenue-by-property.png", "Bar chart of revenue by property, sorted and colored by tier", "Revenue by property across the 10-comp Premium set - a clean Low/Mid/High separation, darker shade = stronger within its tier."),
+        photo("5br/compset-analysis/02-adr-occ-decomposition.png", "Two charts: ADR and occupancy index by tier, and the share of the Low-to-High revenue gap explained by each", "ADR climbs much faster than occupancy across tiers - ADR explains 78% of the Low-to-High revenue gap, occupancy only 22%."),
+      ],
       marketWide: {
         median: 160603,
         p75: 191158,
         p90: 216961,
-        source: "Phase 2 reliable-core 5BR benchmark (n=45), market-wide across all 5BR listings - not a buy-box-specific comp set.",
+        source: "Phase 2 reliable-core 5BR benchmark (n=45), market-wide across all 5BR listings - shown for context only; the Premium comp-set tiers above are this buy box's own evidence, not this market-wide figure.",
       },
-      note: "No 5BR revenue comp set, design-comp property roster, or Alexandria link was supplied with the Ifraham workstream. The figures above are the project's existing market-wide 5BR benchmarks (Section 2/6), not validated comps for this buy box.",
+      note: "This 10-comp Premium comp set (C01-C10) has no supplied property nicknames or Airbnb URLs - every figure above is anonymized comp-tier evidence, not a linkable identified listing. No Alexandria revenue-comp-set link has been supplied yet either.",
+    },
+
+    // Amenity Combination Evidence (new, from the CompTiers workstream) - does NOT change
+    // the existing Must-Have / AUTO / Nice-to-Have classifications above; purely additive
+    // supporting evidence for the completed Revenue Potential section.
+    amenityEvidence: {
+      intro:
+        "Eight amenities are already table stakes across all 10 Premium comps (Pool, Pool Heater, Mini Golf, Game Room, Pool Table, Fire Pit, Outdoor Dining Area, Pack-n-Play), so they don't separate performance. Within what's left, pickleball is the clearest variable signal; playground shows no separation once amenity density is already this saturated.",
+      tableStakes: ["Pool", "Pool Heater", "Mini Golf", "Game Room", "Pool Table", "Fire Pit", "Outdoor Dining Area", "Pack-n-Play"],
+      combinations: [
+        { combo: "Pickleball + Playground", n: 4, revenue: 210659, adr: 735 },
+        { combo: "Pickleball only", n: 2, revenue: 204911, adr: 706 },
+        { combo: "Playground only", n: 3, revenue: 176068, adr: 618 },
+        { combo: "Neither", n: 1, revenue: 171172, adr: 616 },
+      ],
+      combinationRead: "The pattern points more strongly toward pickleball than playground as a directional revenue signal.",
+      pickleballPrevalence: { low: 25, mid: 75, high: 100 },
+      amenityDensity: { low: 9.0, mid: 9.25, high: 10.0 },
+      densityRead: "Amenity density is already close to saturated (a one-point spread from Low to High) - once the core resort package exists, simply adding another amenity does not fully explain higher performance.",
+      multiUseNote: "A pickleball court is also valuable as a multi-use sports court: the same hardscape footprint can support pickleball, basketball, volleyball, and other compatible games - an efficient use of a large backyard, not a single-purpose amenity.",
+      charts: [
+        photo("5br/compset-analysis/04-single-amenity-evidence.png", "Two bar charts comparing mean revenue with vs. without pickleball, and with vs. without a playground", "Pickleball separates mean revenue ($209K vs. $175K); playground does not ($196K vs. $194K)."),
+        photo("5br/compset-analysis/05-amenity-prevalence-heatmap.png", "Heatmap of amenity presence across the 10 comps, sorted High to Low tier", "17 of 19 tracked amenities never vary across the set - pickleball and playground are the only two that do."),
+        photo("5br/compset-analysis/06-amenity-density.png", "Bar chart of mean amenity density by tier, and a scatter of density vs. revenue", "Density climbs only from 9.0 to 10.0 across tiers - most of the High tier's revenue separation is not explained by adding more amenities."),
+      ],
     },
 
     // STR Regulations - same market-wide deferred pattern as 3BR/4BR.
@@ -936,11 +1122,18 @@ const BUY_BOXES = [
       investorNotes: "Regulatory diligence deferred to the acquisition-screening phase (market-wide policy for this project - see Section 3).",
     },
 
-    // 14. Purchase Price.
+    // 14. Purchase Price. Updated 2026-08-25 with two Zillow candidates supplied via the
+    // CompTiers workstream (BuyBoxSupportingDocx.pdf's "Zillow Acquisition Candidates").
+    // No purchase price, CapEx, or underwriting was supplied alongside them - these are
+    // acquisition-screening candidates only, not underwritten recommendations.
     acquisition: {
-      status: "Pending - no property-level underwriting or Zillow screening yet for 5BR",
-      zillowSummary: "No Zillow candidate screen has been run for the 5BR workstream yet.",
-      nextStep: "Identify and validate a 5BR revenue/design comp set, then begin candidate screening, once the Ifraham workstream's comp evidence is available.",
+      status: "Candidates supplied - property-level underwriting not yet started",
+      zillowSummary: "Two Zillow candidates have been supplied for 5BR acquisition screening against the Premium Buy Box.",
+      zillowCandidates: [
+        { address: "2995 Exeter Dr, Clearwater, FL 33761", url: "https://www.zillow.com/homedetails/2995-Exeter-Dr-Clearwater-FL-33761/47096163_zpid/" },
+        { address: "7519 Harbor View Way, Seminole, FL 33776", url: "https://www.zillow.com/homedetails/7519-Harbor-View-Way-Seminole-FL-33776/47223653_zpid/" },
+      ],
+      nextStep: "Screen both candidates against the Premium Buy Box (5BR, sleeps 14-16, pool, 2+ baths, game-room capacity, large private backyard), then begin full underwriting (purchase price, CapEx, cash-on-cash return) on whichever advances.",
     },
 
     alexandria: {
@@ -951,7 +1144,10 @@ const BUY_BOXES = [
     // Ordered section flow - mirrors the 4BR narrative flow's structure, with 5BR-specific
     // sections (mustHavePool, mustHaveGameRoom, autoAdd, niceToHaveRanked, designDirection,
     // revenueMarketBenchmark) replacing the 4BR sections that require an identified comp
-    // roster this package does not supply (designPlaybook, projections). See
+    // roster this package does not supply (designPlaybook, projections). compSetVisualComparison,
+    // compSetGeography, and amenityEvidence were added 2026-08-25 from the Ifraham CompTiers
+    // workstream (see webpage/assets/5br/SOURCE.md); revenueMarketBenchmark and acquisition's
+    // zillowCandidates were completed from pending using the same workstream. See
     // renderDeepDive/NARRATIVE_BLOCKS in render.js.
     buyBoxSections: [
       "overview",
@@ -964,11 +1160,14 @@ const BUY_BOXES = [
       "autoAdd",
       "niceToHaveRanked",
       "designDirection",
+      "compSetVisualComparison",
       "geographicConsiderations",
       "idealLocations",
       "travelerICP",
+      "compSetGeography",
       "analystNotesV2",
       "revenueMarketBenchmark",
+      "amenityEvidence",
       "regulations",
       "acquisitionV2",
     ],

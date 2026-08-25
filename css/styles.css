@@ -394,7 +394,6 @@ a { color: var(--color-primary-light); }
 .bb2-tier-preview-card__title { font-size: 0.8rem; color: var(--color-text-muted); margin: 0 0 0.3rem; }
 .bb2-tier-preview-card__revenue { font-size: 0.95rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.3rem; }
 .bb2-tier-preview-card__takeaway { font-size: 0.85rem; color: var(--color-text-muted); margin: 0 0 0.5rem; }
-.bb2-badge--validated { background: var(--brand-surface); color: var(--color-primary); align-self: flex-start; margin-top: 0.4rem; }
 
 .bb2-comp-table-wrap { overflow-x: auto; margin-top: 0.5rem; max-width: 100%; }
 .bb2-comp-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
@@ -430,8 +429,30 @@ a { color: var(--color-primary-light); }
 .bb2-rank-item .photo-figure--small { max-width: none; }
 .bb2-rank-item .img-placeholder--small { width: 160px; height: 90px; margin-top: 0.75rem; }
 
+/* ============================================================
+   5BR CompTiers workstream (2026-08-25): Comp-Set Visual Comparison
+   (Top/Mid/Low columns) + Zillow candidate list. Additive only - no
+   existing 3BR/4BR/5BR class above is redefined here.
+   ============================================================ */
+.bb2-tier-compare__category { margin-top: 1.75rem; }
+.bb2-tier-compare__category:first-of-type { margin-top: 1.25rem; }
+.bb2-tier-compare__category h5 { margin: 0 0 0.3rem; font-size: 1.05rem; color: var(--color-primary); }
+.bb2-tier-compare__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0.75rem; }
+.bb2-tier-compare__col { display: flex; flex-direction: column; gap: 0.6rem; min-width: 0; }
+.bb2-tier-compare__col-label { text-align: center; font-weight: 700; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.04em; padding: 0.4rem; border-radius: 6px; }
+.bb2-tier-compare__col-label--high { background: color-mix(in srgb, #1f7a6c 18%, white); color: #1f7a6c; }
+.bb2-tier-compare__col-label--mid { background: color-mix(in srgb, var(--brand-gold-dark) 20%, white); color: var(--brand-gold-dark); }
+.bb2-tier-compare__col-label--low { background: color-mix(in srgb, var(--color-danger) 16%, white); color: var(--color-danger); }
+.bb2-tier-compare__property { border: 1px dashed var(--color-border); border-radius: 8px; padding: 0.5rem; }
+.bb2-tier-compare__property .dd-block__images { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 0.4rem; margin-top: 0; }
+.bb2-tier-compare__property .photo-figure--small { max-width: none; }
+
+.bb2-zillow-candidates { list-style: none; margin: 0.5rem 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.bb2-zillow-candidates a { font-weight: 600; }
+
 @media (max-width: 960px) {
   .bb2-playbook-grid--auto { grid-template-columns: repeat(2, 1fr); }
+  .bb2-tier-compare__grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
@@ -468,6 +489,11 @@ a { color: var(--color-primary-light); }
 .dd-block__images { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
 .photo-figure { margin: 0; display: flex; flex-direction: column; background: var(--brand-surface); border-radius: 8px; overflow: hidden; border: 1px solid var(--color-border); }
 .photo-figure--small { max-width: 220px; }
+/* Ideal Sleep Count's bed photos use the `--small` treatment but read a little
+   cramped at the default small cap, so this scoped override (added when a third
+   bunk-bed photo joined the row) sizes them up slightly without touching every
+   other `--small` gallery on the page (Must-Have Amenities strips, etc.). */
+.bb2-sleep-count-block .photo-figure--small { max-width: 280px; }
 /* A lone image in an image row (e.g. Ideal Sleep Count's single bed photo) would
    otherwise stretch to the full row width and, with the fixed 4:3 aspect ratio
    above, become disproportionately tall. Scoped to `.bb2` only - 3BR's own
